@@ -10,6 +10,5 @@
         public string Area { get; set; }
         public int RequestCount { get; set; }
         public int ViewsCount { get; set; }
-
     }
 }
