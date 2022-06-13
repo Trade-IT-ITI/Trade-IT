@@ -6,5 +6,8 @@ namespace DatabaseLayer.Models
         public int AdID { get; set; }
         public AdLevel Level { get; set; }
         public DateTime ExpireDate { get; set; }
+
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
     }
 }

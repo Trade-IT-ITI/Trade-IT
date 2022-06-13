@@ -10,5 +10,22 @@
         public string Area { get; set; }
         public int RequestCount { get; set; }
         public int ViewsCount { get; set; }
+
+        public ICollection<Notification> Notifications { get; set; }
+
+        public ICollection<Favourite> Favourites { get; set; }
+
+        public ICollection<ProductImage> ProductImages { get; set; }
+
+        public Status Status { get; set; }
+        public int StatusId { get; set; }
+
+        public Subcategory Subcategory { get; set; }
+        public int SubcategoryId { get; set; }
+
+        public User Owner { get; set; }
+        public int UserId { get; set; }
+
+        public ICollection<ProductBuyOption> ProductBuyOptions { get; set; }
     }
 }
