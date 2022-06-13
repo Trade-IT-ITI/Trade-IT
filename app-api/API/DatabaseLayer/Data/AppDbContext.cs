@@ -14,10 +14,6 @@ namespace DatabaseLayer.Data
         {
 
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("server=.;database=TradeIt;trusted_connection=true;");
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AdConfiguration());
