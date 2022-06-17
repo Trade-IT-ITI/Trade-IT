@@ -1,0 +1,9 @@
+.nav-link {
+  color: var(--linksColor);
+  border-radius: 5px;
+  user-select: none;
+}
+.nav-link:hover {
+  color: white;
+  background-color: var(--linksColor);
+}

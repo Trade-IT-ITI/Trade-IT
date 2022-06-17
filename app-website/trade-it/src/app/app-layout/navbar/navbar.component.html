@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-md bg-light row p-0">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img
+        src="../../../assets/images/logo.jpeg"
+        style="border-radius: 50%"
+        width="60"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="categoriesToggle = false"
+    >
+      <span class="fa-solid fa-bars text-dark"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link px-3 dropdown-toggle cursor-pointer"
+            (click)="categoriesToggle = !categoriesToggle"
+            >Categories</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">Adminstration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div
+  [style]="{
+    display: categoriesToggle ? 'block' : 'none'
+  }"
+>
+  <app-navbar-categories></app-navbar-categories>
+</div>

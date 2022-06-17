@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --linksColor: rgb(10, 78, 131);
+  --mainColor: rgb(5, 63, 108);
+  --secondColor: rgb(5, 28, 46);
+}
+* {
+  font-family: "calibri";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: black;
+}
