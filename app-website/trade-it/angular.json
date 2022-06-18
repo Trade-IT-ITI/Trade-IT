@@ -96,5 +96,8 @@
       }
     }
   },
-  "defaultProject": "trade-it"
+  "defaultProject": "trade-it",
+  "cli": {
+    "analytics": false
+  }
 }

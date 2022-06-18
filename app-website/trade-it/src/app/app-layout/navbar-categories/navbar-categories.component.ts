@@ -10,10 +10,12 @@ import { CategoyService } from '../../services/categoy.service';
 })
 export class NavbarCategoriesComponent implements OnInit {
   categories: category[] = [];
-  constructor(private categoryService: CategoyService) { }
+  constructor(private categoryService: CategoyService) {
+
+    this.categories = this.categoryService.getall();
+  }
 
   ngOnInit(): void {
-    this.categories = this.categoryService.getall();
   }
 
 }
