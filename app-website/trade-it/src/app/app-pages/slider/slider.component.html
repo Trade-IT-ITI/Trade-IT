@@ -1,12 +1,74 @@
-<!-- <ngb-carousel #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
-    <ng-template ngbSlide *ngFor="let img of images; index as i">
-      <div class="carousel-caption">
-        <h3>My slide {{i + 1}} title</h3>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+  <div class="carousel-indicators my-0">
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img
+        src="../../../assets/images/{{ images[0].name }}"
+        class="d-block w-100"
+        height="150"
+      />
+      <div class="carousel-caption d-none d-md-block p-0">
+        <p class="m-0">{{ images[0].sliderText }}</p>
       </div>
-      <a href="https://www.google.fr/?q=Number+{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
-        <div class="picsum-img-wrapper">
-          <img [src]="img" alt="My image {{i + 1}} description">
-        </div>
-      </a>
-    </ng-template>
-  </ngb-carousel> -->
+    </div>
+    <div class="carousel-item">
+      <img
+        src="../../../assets/images/{{ images[1].name }}"
+        class="d-block w-100"
+        height="150"
+      />
+      <div class="carousel-caption d-none d-md-block p-0">
+        <p class="m-0">{{ images[1].sliderText }}</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img
+        src="../../../assets/images/{{ images[2].name }}"
+        class="d-block w-100"
+        height="150"
+      />
+      <div class="carousel-caption d-none d-md-block p-0">
+        <p class="m-0">{{ images[2].sliderText }}</p>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev justify-content-start"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next justify-content-end"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
