@@ -1,5 +1,5 @@
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-  <div class="carousel-indicators my-0">
+  <div class="carousel-indicators my-1 mx-auto">
     <button
       type="button"
       data-bs-target="#carouselExampleCaptions"
@@ -22,31 +22,34 @@
     ></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
+    <div
+      class="carousel-item active"
+      style="overflow: auto; height: fit-content"
+    >
       <img
         src="../../../assets/images/{{ images[0].name }}"
-        class="d-block w-100"
-        height="150"
+        class="d-block"
+        style="width: 100%"
       />
       <div class="carousel-caption d-none d-md-block p-0">
         <p class="m-0">{{ images[0].sliderText }}</p>
       </div>
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" style="overflow: auto; height: fit-content">
       <img
         src="../../../assets/images/{{ images[1].name }}"
-        class="d-block w-100"
-        height="150"
+        class="d-block"
+        style="width: 100%"
       />
       <div class="carousel-caption d-none d-md-block p-0">
         <p class="m-0">{{ images[1].sliderText }}</p>
       </div>
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" style="overflow: auto; height: fit-content">
       <img
         src="../../../assets/images/{{ images[2].name }}"
-        class="d-block w-100"
-        height="150"
+        class="d-block"
+        style="width: 100%"
       />
       <div class="carousel-caption d-none d-md-block p-0">
         <p class="m-0">{{ images[2].sliderText }}</p>

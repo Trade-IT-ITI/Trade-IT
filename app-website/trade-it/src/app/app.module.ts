@@ -7,6 +7,8 @@ import { NavbarCategoriesComponent } from './app-layout/navbar-categories/navbar
 import { HomeComponent } from './app-pages/home/home.component';
 import { SliderComponent } from './app-pages/slider/slider.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductsComponent } from './app-pages/products/products.component';
+import { DurationPipe } from './pipes/duration.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     NavbarCategoriesComponent,
     HomeComponent,
-    SliderComponent
+    SliderComponent,
+    ProductsComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,

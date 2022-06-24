@@ -1,0 +1,18 @@
+<div class="row p-2">
+  <div *ngFor="let product of products" class="col-6 col-md-3 p-1">
+    <div class="card" style="font-size: smaller">
+      <img
+        style="width: 100%; height: 120px; object-fit: cover"
+        src="../../../assets/images/{{ product.productImages[0].name }}"
+      />
+      <div class="card-body">
+        <b class="card-text">{{ product.title }}</b>
+        <h5 class="card-title">
+          <b>{{ product.price | currency: "":"":"1.2-5" }} </b>EGP
+        </h5>
+        <p>{{ product.area }}, {{ product.city }}</p>
+        <p>{{ product.postDateTime | duration }}</p>
+      </div>
+    </div>
+  </div>
+</div>
