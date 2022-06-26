@@ -1,7 +1,7 @@
 <div class="mb-4">
   <nav class="navbar navbar-expand-md bg-light p-0">
-    <div class="container">
-      <a class="navbar-brand" href="#">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">
         <img
           src="../../../assets/images/logo.jpeg"
           style="border-radius: 50%"
@@ -23,7 +23,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link px-3" href="#">Home</a>
+            <a class="nav-link px-3" routerLink="/">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -33,20 +33,21 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link px-3" href="#">Search</a>
+            <a class="nav-link px-3" routerLink="/search">Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-3" href="#">Adminstration</a>
+            <a class="nav-link px-3" routerLink="/adminstration"
+              >Adminstration</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link px-3" href="#">Login</a>
+            <a class="nav-link px-3" routerLink="/login">Login</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <div
-    class="position-relative"
     [style]="{
       display: categoriesToggle ? 'block' : 'none'
     }"

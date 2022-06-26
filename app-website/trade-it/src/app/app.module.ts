@@ -9,6 +9,12 @@ import { SliderComponent } from './app-pages/slider/slider.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsComponent } from './app-pages/products/products.component';
 import { DurationPipe } from './pipes/duration.pipe';
+import { FooterComponent } from './app-layout/footer/footer.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent }
+]
 
 @NgModule({
   declarations: [
@@ -18,11 +24,14 @@ import { DurationPipe } from './pipes/duration.pipe';
     HomeComponent,
     SliderComponent,
     ProductsComponent,
-    DurationPipe
+    DurationPipe,
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

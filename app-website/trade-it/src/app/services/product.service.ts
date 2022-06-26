@@ -15,7 +15,7 @@ export class ProductService {
     Stellar videocalls with FHD camera, Dolby Atmos®, & up-firing speakers
     Ideal for creative professionals & gamers alike
     Super-secure login: fingerprint reader integrated with power button`,
-    postDateTime: new Date(new Date('June 24 2022, 01:50:00')),
+    postDateTime: new Date(new Date('June 25 2022, 12:50:00')),
     city: 'Egypt',
     area: 'Cairo',
     price: 10500,
