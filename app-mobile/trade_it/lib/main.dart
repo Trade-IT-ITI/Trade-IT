@@ -13,7 +13,7 @@ class TradeITApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/onboard',
+      initialRoute: '/home',
       routes: {
         '/onboard': (context) => const Onboard(),
         '/home': (context) => const HomePage(),
