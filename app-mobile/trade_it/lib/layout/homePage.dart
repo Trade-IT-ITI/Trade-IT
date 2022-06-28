@@ -1,9 +1,9 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:trade_it/layout/faviorate.dart';
-import 'package:trade_it/layout/home.dart';
-import 'package:trade_it/layout/profile.dart';
-import 'layout/notifications.dart';
+import 'package:trade_it/screens/faviorate/faviorate.dart';
+import 'package:trade_it/screens/home/home.dart';
+import 'package:trade_it/screens/profile/profile.dart';
+import '../screens/notification/notifications.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,15 +29,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 236, 236, 236),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: widgetList[_bottomNavIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        activeColor: Colors.blue,
+        activeColor: Theme.of(context).colorScheme.primary,
         iconSize: 35,
         icons: iconList,
         activeIndex: _bottomNavIndex,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'layout/onboardPage.dart';
+import 'onboardPage.dart';
 
 class Onboard extends StatefulWidget {
   const Onboard({Key? key}) : super(key: key);
@@ -15,25 +15,25 @@ class _OnboardState extends State<Onboard> {
       title: "Do you Have Items You Don't Need ?",
       description:
           "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
-      img: "assets/1.png",
+      img: "assets/images/1.png",
     ),
     const OnboardPage(
       title: "Do you Have Items You Don't Need ?",
       description:
           "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
-      img: "assets/2.png",
+      img: "assets/images/2.png",
     ),
     const OnboardPage(
       title: "Do you Have Items You Don't Need ?",
       description:
           "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
-      img: "assets/3.png",
+      img: "assets/images/3.png",
     ),
     const OnboardPage(
       title: "Do you Have Items You Don't Need ?",
       description:
           "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
-      img: "assets/4.png",
+      img: "assets/images/4.png",
     ),
   ];
   late PageController _pageController;
@@ -89,10 +89,14 @@ class _OnboardState extends State<Onboard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _pageController.nextPage(
-            duration: const Duration(seconds: 1),
-            curve: Curves.decelerate,
-          );
+          if(_pageIndex == pages.length-1){
+            Navigator.pushNamed(context, "/home");
+          }else{
+            _pageController.nextPage(
+              duration: const Duration(seconds: 1),
+              curve: Curves.decelerate,
+            );
+          }
         },
         child: const Icon(
           Icons.arrow_right_alt,
