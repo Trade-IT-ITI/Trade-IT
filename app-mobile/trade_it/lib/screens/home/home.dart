@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trade_it/layout/product.dart';
 
 class Home extends StatefulWidget {
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
   ];
   @override
   Widget build(BuildContext context) {
-    int gridCount =  MediaQuery.of(context).size.width > 500 ? 3 : 2;
+    int gridCount = MediaQuery.of(context).size.width > 500 ? 3 : 2;
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -38,22 +39,53 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              width: MediaQuery.of(context).size.width * .9,
-              child:  TextField(
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .8,
+                    child: Card(
+                      elevation: 5,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 231, 229, 229),
+                                width: 2.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.secondary,
+                                width: 1.0),
+                          ),
+                          hintText: 'Search',
+                          prefixIcon: const Icon(Icons.search),
+                        ),
+                      ),
+                    ),
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2.0),
+                  Card(
+                    elevation: 5,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.secondary,
+                          width: 1.0,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const FaIcon(FontAwesomeIcons.sliders),
+                        color: Theme.of(context).colorScheme.secondary,
+                        iconSize: 35,
+                      ),
+                    ),
                   ),
-                  hintText: 'Search',
-
-
-                  prefixIcon:const Icon(Icons.search),
-                  suffixIcon:const Icon(Icons.sort),
-                ),
+                ],
               ),
             ),
             const SizedBox(
@@ -82,17 +114,19 @@ class _HomeState extends State<Home> {
                       ))
                   .toList(),
             ),
-            SizedBox(height: 15,),
+            const SizedBox(
+              height: 15,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: gridCount,
-                    crossAxisSpacing: 5,
+                    crossAxisSpacing: 0,
                     mainAxisSpacing: 5,
-                    childAspectRatio: 1/1.5,
+                    childAspectRatio: 1 / 2,
                   ),
                   itemCount: 16,
                   itemBuilder: (BuildContext context, int index) {
