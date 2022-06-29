@@ -5,6 +5,7 @@ using DatabaseLayer.Models;
 using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using API_Layer.QueryParameters;
 
 namespace API_Layer.Controllers
 {
@@ -19,10 +20,9 @@ namespace API_Layer.Controllers
         }
         //getAll
         [HttpGet]
-       
-        public async Task<List<Product>> get()
+        public async Task<IActionResult> get([FromQuery]ProductQueryParameters queryParameters)
         {
-            return await _productRepository.GetAll();
+            return Ok(await _productRepository.GetAll(queryParameters));
         }
     }
 }

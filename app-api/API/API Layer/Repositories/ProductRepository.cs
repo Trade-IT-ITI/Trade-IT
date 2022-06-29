@@ -2,6 +2,8 @@
 using DatabaseLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using API_Layer.Repositories.Interfaces;
+using API_Layer.QueryParameters;
+using API_Layer.Helper;
 
 namespace API_Layer.Repositories
 {
@@ -14,14 +16,31 @@ namespace API_Layer.Repositories
             _context = context;
         }
 
-        public async Task<List<Product>> GetAll()
-        { 
+        public async Task<List<Product>> GetAll(ProductQueryParameters queryParameters)
+        {
+            DbSet<Product> Products;
+            if (queryParameters != null)
+            {
+                Products = _context.Products;
 
-            var Products = await _context.Products.ToListAsync<Product>();
-             Products.ForEach(p =>_context.Entry(p).Reference(p=>p.Owner).Load());
-             Products.ForEach(p =>_context.Entry(p).Collection(p=>p.Notifications).Load());
-            return Products;
+                if (queryParameters.expand != null && queryParameters.expand.Length != 0)
+                {
+                    Products.Expand(queryParameters.expand);
+                }
+            }
+            else
+                Products = _context.Products;
+
+
+            return await Products.ToListAsync();
         }
-        
     }
 }
+
+//foreach (string expandProp in queryParameters.expand)
+//{
+//if (expandProp.EndsWith('s'))
+//    Products.ForEach(p => _context.Entry(p).Collection(expandProp).Load());
+//else
+//    Products.ForEach(p => _context.Entry(p).Reference(expandProp).Load());
+//}
