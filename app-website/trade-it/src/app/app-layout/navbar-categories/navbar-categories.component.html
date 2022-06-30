@@ -1,0 +1,15 @@
+<div
+  class="nav-categories position-absolute w-100 overflow-auto row m-0 flex-column px-3 py-2"
+>
+  <!--col-md-3-->
+  <div *ngFor="let cat of categories" class="col-4 col-md-2 p-2">
+    <b
+      ><a href="">{{ cat.name }}</a></b
+    >
+    <div class="d-flex flex-column">
+      <a *ngFor="let subcat of cat.subcategories" href="">{{ subcat.name }}</a>
+    </div>
+  </div>
+</div>
+<!--   class="d-flex flex-column justify-content-start align-content-start row overflow-auto p-2 m-0"
+ -->

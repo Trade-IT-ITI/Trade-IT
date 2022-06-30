@@ -1,0 +1,23 @@
+* {
+  font-size: 14px;
+}
+.nav-categories {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.7);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 5;
+  height: 400px;
+}
+a {
+  color: var(--linksColor);
+  text-decoration: none;
+  width: fit-content;
+}
+a:hover {
+  text-decoration: underline;
+}
+b {
+  text-transform: uppercase;
+}

@@ -1,0 +1,23 @@
+footer {
+  background-color: var(--mainColor);
+}
+a {
+  color: white;
+  font-size: smaller;
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+}
+a:hover {
+  text-decoration: underline;
+}
+i {
+  color: white;
+  font-size: 20px;
+}
+img {
+  width: 100%;
+}
+button {
+  width: 150px;
+}
