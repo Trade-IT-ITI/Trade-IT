@@ -19,7 +19,7 @@ namespace API_Layer.Repositories
             _context = context;
         }
 
-        public async Task<List<Product>> GetAll(ProductQueryParameters queryParameters)
+        public async Task<List<Product>> GetAll(QueryParameter queryParameters)
         {
             IQueryable<Product> Products;
             if (queryParameters != null)

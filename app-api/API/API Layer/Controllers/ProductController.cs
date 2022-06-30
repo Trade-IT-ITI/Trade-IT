@@ -20,7 +20,7 @@ namespace API_Layer.Controllers
         }
         //getAll
         [HttpGet]
-        public async Task<IActionResult> get([FromQuery]ProductQueryParameters queryParameters)
+        public async Task<IActionResult> get([FromQuery]QueryParameter queryParameters)
         {
             return Ok(await _productRepository.GetAll(queryParameters));
         }
