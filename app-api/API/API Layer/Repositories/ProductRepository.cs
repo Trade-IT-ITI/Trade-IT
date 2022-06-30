@@ -26,11 +26,20 @@ namespace API_Layer.Repositories
             {
                 Products = _context.Products;
 
+                //paginagtion
+                if (queryParameters.pageNumber != null && queryParameters.pageCapacity != null)
+                {
+                    int skipValue = ((queryParameters.pageNumber - 1) * queryParameters.pageCapacity).Value;
+                    Products = Products.Skip(skipValue).Take(queryParameters.pageCapacity.Value);
+                }
+
+                //sorting
                 if (!string.IsNullOrWhiteSpace(queryParameters.orderBy))
                 {
                     Products = Products.Sort(queryParameters.orderBy , queryParameters.orderType ?? SortType.asc.ToString());
                 }
 
+                //expanding
                 if (queryParameters.expand != null && queryParameters.expand.Length != 0)
                 {
                     Products.Expand(queryParameters.expand);
