@@ -11,7 +11,6 @@ namespace DatabaseLayer
             builder.HasKey(ci => new { ci.CategoryId , ci.InsturctionId });
             builder.HasOne(ci => ci.Category).WithMany(c => c.CategoryInstructions).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(ci => ci.Instruction).WithMany(i => i.CategoryInstructions).OnDelete(DeleteBehavior.Restrict);
-
         }
     }
 }
