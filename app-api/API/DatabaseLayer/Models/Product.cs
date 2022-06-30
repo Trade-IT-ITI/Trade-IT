@@ -1,4 +1,6 @@
-﻿namespace DatabaseLayer.Models
+﻿using System.Reflection;
+
+namespace DatabaseLayer.Models
 {
     public class Product
     {
@@ -8,6 +10,7 @@
         public DateTime PostDateTime { get; set; }
         public string City { get; set; }
         public string Area { get; set; }
+        public double Price { get; set; }
         public int RequestCount { get; set; }
         public int ViewsCount { get; set; }
 
@@ -26,5 +29,10 @@
         public int UserId { get; set; }
 
         public ICollection<ProductBuyOption> ProductBuyOptions { get; set; }
+
+        public Type this[string propertyName]
+        {
+            get { return typeof(Product).GetProperty(propertyName).GetType(); }
+        }
     }
 }

@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using API_Layer.Repositories.Interfaces;
 using API_Layer.QueryParameters;
 using API_Layer.Helper;
+using System.Linq.Expressions;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace API_Layer.Repositories
 {
@@ -18,10 +21,15 @@ namespace API_Layer.Repositories
 
         public async Task<List<Product>> GetAll(ProductQueryParameters queryParameters)
         {
-            DbSet<Product> Products;
+            IQueryable<Product> Products;
             if (queryParameters != null)
             {
                 Products = _context.Products;
+
+                if (!string.IsNullOrWhiteSpace(queryParameters.orderBy))
+                {
+                    Products = Products.Sort(queryParameters.orderBy , queryParameters.orderType ?? SortType.asc.ToString());
+                }
 
                 if (queryParameters.expand != null && queryParameters.expand.Length != 0)
                 {
@@ -31,16 +39,7 @@ namespace API_Layer.Repositories
             else
                 Products = _context.Products;
 
-
             return await Products.ToListAsync();
         }
     }
 }
-
-//foreach (string expandProp in queryParameters.expand)
-//{
-//if (expandProp.EndsWith('s'))
-//    Products.ForEach(p => _context.Entry(p).Collection(expandProp).Load());
-//else
-//    Products.ForEach(p => _context.Entry(p).Reference(expandProp).Load());
-//}
