@@ -8,21 +8,21 @@ namespace API_Layer.Repositories
 {
     public class CategoryRepository : IRepository<Category>
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext context;
 
         public CategoryRepository(AppDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
         public async Task<List<Category>> GetAll(QueryParameter queryParameters)
         {
-             IQueryable<Category> categories = _context.Categories.Include(c => c.Subcategories);
+             IQueryable<Category> categories = context.Categories.Include(c => c.Subcategories);
             return await categories.ToListAsync();
         }
         public async Task Add(Category category)
         {
-            await _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
+            await context.AddAsync(category);
+            await context.SaveChangesAsync();
            
         }
     }
