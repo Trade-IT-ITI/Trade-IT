@@ -25,6 +25,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
 builder.Services.AddScoped<IRepository<Category>, CategoryRepository>();
 builder.Services.AddScoped<IRepository<Subcategory>, SubcategoryRepository>();
+builder.Services.AddScoped<IRepository<Instruction>, InstructionRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(Cors,
