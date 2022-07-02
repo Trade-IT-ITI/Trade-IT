@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace DatabaseLayer.Models
+﻿namespace DatabaseLayer.Models
 {
     public class Product
     {
@@ -13,7 +11,6 @@ namespace DatabaseLayer.Models
         public double Price { get; set; }
         public int RequestCount { get; set; }
         public int ViewsCount { get; set; }
-
 
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<Favourite> Favourites { get; set; }

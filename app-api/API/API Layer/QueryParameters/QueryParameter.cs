@@ -3,10 +3,14 @@
 {
     public class QueryParameter
     {
-        public string[]? expand { get; set; }
+        //search
+        public string? searchText { get; set; }
+        
+        //sorting
         public string? orderBy { get; set; }
-        public string? orderType { get; set; }
+        public bool? asc { get; set; }
 
+        //paginagtion
         private int? _pageNumber;
         public int? pageNumber
         {
@@ -27,5 +31,7 @@
             }
         }
 
+        //expanding related data
+        public string[]? expand { get; set; }        
     }
 }

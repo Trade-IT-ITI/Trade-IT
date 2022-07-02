@@ -21,10 +21,25 @@ namespace API_Layer.Repositories
 
         public async Task<List<Product>> GetAll(QueryParameter queryParameters)
         {
-            IQueryable<Product> Products;
+            IQueryable<Product> Products = _context.Products;
+
             if (queryParameters != null)
             {
-                Products = _context.Products;
+                //search
+                if (!string.IsNullOrEmpty(queryParameters.searchText))
+                {
+                    IQueryable<Product> result;
+                    result = Products.Where(p => p.Title.Contains(queryParameters.searchText))
+                        .Concat(Products.Where(p => p.Descrioption.Contains(queryParameters.searchText)));
+
+                    Products = result.Distinct();
+                }
+
+                //sorting
+                if (!string.IsNullOrWhiteSpace(queryParameters.orderBy))
+                {
+                    Products = Products.Sort(queryParameters.orderBy , queryParameters.asc ?? true);
+                }
 
                 //paginagtion
                 if (queryParameters.pageNumber != null && queryParameters.pageCapacity != null)
@@ -33,21 +48,12 @@ namespace API_Layer.Repositories
                     Products = Products.Skip(skipValue).Take(queryParameters.pageCapacity.Value);
                 }
 
-                //sorting
-                if (!string.IsNullOrWhiteSpace(queryParameters.orderBy))
-                {
-                    Products = Products.Sort(queryParameters.orderBy , queryParameters.orderType ?? SortType.asc.ToString());
-                }
-
-                //expanding
+                //expanding related data
                 if (queryParameters.expand != null && queryParameters.expand.Length != 0)
                 {
-                    Products.Expand(queryParameters.expand);
+                    Products = Products.Expand(queryParameters.expand);
                 }
             }
-            else
-                Products = _context.Products;
-
             return await Products.ToListAsync();
         }
     }
