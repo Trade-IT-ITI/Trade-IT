@@ -19,6 +19,12 @@ namespace API_Layer.Repositories
              IQueryable<Category> categories = _context.Categories.Include(c => c.Subcategories);
             return await categories.ToListAsync();
         }
+        public async Task Add(Category category)
+        {
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+           
+        }
     }
 }
 

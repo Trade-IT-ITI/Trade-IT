@@ -16,6 +16,12 @@ namespace API_Layer.Repositories
             _context = context;
         }
 
+        public Task Add(Product Model)
+        {
+            //add product
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Product>> GetAll(QueryParameter queryParameters)
         {
             IQueryable<Product> Products;

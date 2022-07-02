@@ -20,5 +20,20 @@ namespace API_Layer.Controllers
         {
             return Ok(await repository.GetAll(queryParameters));
         }
+
+        //add new category
+        [HttpPost]
+        public async Task<IActionResult> post([FromBody] Category category)
+        {
+            try
+            {
+            await repository.Add(category);
+            return Created("url", category);
+            }catch
+            {
+                return BadRequest();
+            }
+        }
+        
     }
 }
