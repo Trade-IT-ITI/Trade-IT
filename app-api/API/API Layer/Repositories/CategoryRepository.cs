@@ -5,7 +5,7 @@ using API_Layer.Repositories.Interfaces;
 
 namespace API_Layer.Repositories
 {
-    public class CategoryRepository : IRepository<Category>, ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly AppDbContext context;
 

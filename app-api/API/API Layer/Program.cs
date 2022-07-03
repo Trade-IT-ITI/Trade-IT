@@ -27,6 +27,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
 builder.Services.AddScoped<IInstructionRepository, InstructionRepository>();
+builder.Services.AddScoped<IFavouriteRepository, FavouriteRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(Cors,
