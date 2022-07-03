@@ -2,11 +2,10 @@
 using DatabaseLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using API_Layer.Repositories.Interfaces;
-using API_Layer.QueryParameters;
 
 namespace API_Layer.Repositories
 {
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : IRepository<Category>, ICategoryRepository
     {
         private readonly AppDbContext context;
 
@@ -14,7 +13,7 @@ namespace API_Layer.Repositories
         {
             this.context = context;
         }
-        public async Task<List<Category>> GetAll(QueryParameter queryParameters)
+        public async Task<List<Category>> GetAll( )
         {
              IQueryable<Category> categories = context.Categories.Include(c => c.Subcategories);
             return await categories.ToListAsync();

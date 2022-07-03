@@ -5,7 +5,7 @@ using DatabaseLayer.Models;
 
 namespace API_Layer.Repositories
 {
-    public class SubcategoryRepository:IRepository<Subcategory>
+    public class SubcategoryRepository:ISubcategoryRepository
     {
         private readonly AppDbContext context;
 
@@ -20,7 +20,7 @@ namespace API_Layer.Repositories
             await context.SaveChangesAsync();
         }
 
-        public Task<List<Subcategory>> GetAll(QueryParameter queryParameters)
+        public Task<List<Subcategory>> GetAll()
         {
             throw new NotImplementedException();
         }

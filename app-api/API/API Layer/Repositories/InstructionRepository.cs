@@ -5,7 +5,7 @@ using DatabaseLayer.Models;
 
 namespace API_Layer.Repositories
 {
-    public class InstructionRepository : IRepository<Instruction>
+    public class InstructionRepository : IInstructionRepository
     {
         private readonly AppDbContext context;
 
@@ -20,7 +20,7 @@ namespace API_Layer.Repositories
             await context.SaveChangesAsync();
         }
 
-        public Task<List<Instruction>> GetAll(QueryParameter queryParameters)
+        public Task<List<Instruction>> GetAll()
         {
             throw new NotImplementedException();
         }

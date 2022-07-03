@@ -9,9 +9,9 @@ namespace API_Layer.Controllers
     [ApiController]
     public class InstructionController : ControllerBase
     {
-        private readonly IRepository<Instruction> instructionRepository;
+        private readonly IInstructionRepository instructionRepository;
 
-        public InstructionController(IRepository<Instruction> instructionRepository)
+        public InstructionController(IInstructionRepository instructionRepository)
         {
             this.instructionRepository = instructionRepository;
         }

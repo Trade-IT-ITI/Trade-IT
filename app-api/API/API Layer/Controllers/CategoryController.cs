@@ -9,16 +9,16 @@ namespace API_Layer.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly IRepository<Category> repository ;
-        public CategoryController(IRepository<Category> repository)
+        private readonly ICategoryRepository repository ;
+        public CategoryController(ICategoryRepository repository)
         {
             this.repository = repository;
         }
         //getAll
         [HttpGet]
-        public async Task<IActionResult> get([FromQuery] QueryParameter queryParameters)
+        public async Task<IActionResult> get()
         {
-            return Ok(await repository.GetAll(queryParameters));
+            return Ok(await repository.GetAll());
         }
 
         //add new category

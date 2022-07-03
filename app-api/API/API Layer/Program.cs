@@ -23,9 +23,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("app-connection"));
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IRepository<Category>, CategoryRepository>();
-builder.Services.AddScoped<IRepository<Subcategory>, SubcategoryRepository>();
-builder.Services.AddScoped<IRepository<Instruction>, InstructionRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
+builder.Services.AddScoped<IInstructionRepository, InstructionRepository>();
 
 builder.Services.AddCors(options =>
 {

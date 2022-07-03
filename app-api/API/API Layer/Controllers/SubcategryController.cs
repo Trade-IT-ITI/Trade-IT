@@ -10,8 +10,8 @@ namespace API_Layer.Controllers
     [ApiController]
     public class SubcategryController : ControllerBase
     {
-        private readonly IRepository<Subcategory> subcategoryRepository;
-        public SubcategryController(IRepository<Subcategory> subcategoryRepository)
+        private readonly ISubcategoryRepository subcategoryRepository;
+        public SubcategryController(ISubcategoryRepository subcategoryRepository)
         {
             this.subcategoryRepository = subcategoryRepository;
         }
