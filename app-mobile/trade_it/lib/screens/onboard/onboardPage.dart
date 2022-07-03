@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class OnboardPage extends StatelessWidget {
   const OnboardPage({
     Key? key,
@@ -9,22 +8,22 @@ class OnboardPage extends StatelessWidget {
     required this.description,
   }) : super(key: key);
 
-
   final String img, title, description;
-
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 100,),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .02,
+        ),
         Image.asset(img),
         const SizedBox(
-          height: 70,
+          height: 30,
         ),
-         Text(
+        Text(
           title,
-          style:const TextStyle(
+          style: const TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
@@ -35,7 +34,7 @@ class OnboardPage extends StatelessWidget {
         ),
         Text(
           description,
-          style:const TextStyle(
+          style: const TextStyle(
             fontSize: 17,
           ),
           textAlign: TextAlign.center,

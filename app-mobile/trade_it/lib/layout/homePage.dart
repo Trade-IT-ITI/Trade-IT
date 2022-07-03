@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trade_it/screens/faviorate/faviorate.dart';
 import 'package:trade_it/screens/home/home.dart';
 import 'package:trade_it/screens/profile/profile.dart';
+
 import '../screens/notification/notifications.dart';
 
 class HomePage extends StatefulWidget {
@@ -42,6 +43,8 @@ class _HomePageState extends State<HomePage> {
         iconSize: 35,
         icons: iconList,
         activeIndex: _bottomNavIndex,
+        leftCornerRadius: 10,
+        rightCornerRadius: 10,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.softEdge,
         onTap: (index) => setState(() => _bottomNavIndex = index),

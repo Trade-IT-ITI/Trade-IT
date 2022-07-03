@@ -22,119 +22,113 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     int gridCount = MediaQuery.of(context).size.width > 500 ? 3 : 2;
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          const Text(
+            "Discover",
+            style: TextStyle(
+              fontSize: 30,
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w700,
             ),
-            const Text(
-              "Discover",
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .8,
-                    child: Card(
-                      elevation: 5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 231, 229, 229),
-                                width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.secondary,
-                                width: 1.0),
-                          ),
-                          hintText: 'Search',
-                          prefixIcon: const Icon(Icons.search),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * .8,
+                  height: 55,
+                  child: Card(
+                    elevation: 2,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 231, 229, 229),
+                              width: 2.0),
                         ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.secondary,
+                              width: 1.0),
+                        ),
+                        prefixIcon: const Icon(Icons.search),
+                        labelText: "Search",
                       ),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.secondary,
-                          width: 1.0,
-                          style: BorderStyle.solid,
-                        ),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const FaIcon(FontAwesomeIcons.sliders),
-                        color: Theme.of(context).colorScheme.secondary,
-                        iconSize: 35,
-                      ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const FaIcon(FontAwesomeIcons.sliders),
+                  color: Theme.of(context).colorScheme.secondary,
+                  iconSize: 32,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    options: CarouselOptions(
+                      viewportFraction: .95,
+                      enlargeCenterPage: true,
+                      height: 200,
+                      enableInfiniteScroll: false,
+                      autoPlay: true,
                     ),
+                    items: imageList
+                        .map((img) => ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: <Widget>[
+                                  Image.asset(
+                                    img,
+                                    fit: BoxFit.cover,
+                                  )
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: gridCount,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 5,
+                          childAspectRatio: 1 / 2.2,
+                        ),
+                        itemCount: 16,
+                        itemBuilder: (BuildContext context, int index) {
+                          return const Product();
+                        }),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            CarouselSlider(
-              options: CarouselOptions(
-                viewportFraction: .95,
-                enlargeCenterPage: true,
-                height: 200,
-                enableInfiniteScroll: false,
-                autoPlay: true,
-              ),
-              items: imageList
-                  .map((img) => ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            Image.asset(
-                              img,
-                              fit: BoxFit.cover,
-                            )
-                          ],
-                        ),
-                      ))
-                  .toList(),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: gridCount,
-                    crossAxisSpacing: 0,
-                    mainAxisSpacing: 5,
-                    childAspectRatio: 1 / 2,
-                  ),
-                  itemCount: 16,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const Product();
-                  }),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

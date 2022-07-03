@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trade_it/layout/theme.dart';
+import 'package:trade_it/screens/ProductDetails/productDetails.dart';
 
 import 'layout/homePage.dart';
 import 'screens/onboard/onboard.dart';
@@ -15,10 +16,11 @@ class TradeITApp extends StatelessWidget {
     return MaterialApp(
       theme: themeData,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      initialRoute: '/onboard',
       routes: {
         '/onboard': (context) => const Onboard(),
         '/home': (context) => const HomePage(),
+        '/details': (context) => const ProductDetails(),
       },
     );
   }
