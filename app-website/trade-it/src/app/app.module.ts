@@ -11,6 +11,7 @@ import { ProductsComponent } from './app-pages/products/products.component';
 import { DurationPipe } from './pipes/duration.pipe';
 import { FooterComponent } from './app-layout/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
+import { SearchComponent } from './app-pages/search/search/search.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }
@@ -26,6 +27,7 @@ const routes: Routes = [
     ProductsComponent,
     DurationPipe,
     FooterComponent,
+    SearchComponent,
 
   ],
   imports: [
