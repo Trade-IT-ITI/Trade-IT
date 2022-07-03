@@ -4,9 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using API_Layer.Repositories.Interfaces;
 using API_Layer.QueryParameters;
 using API_Layer.Helper;
-using System.Linq.Expressions;
-using System.ComponentModel;
-using System.Reflection;
 
 namespace API_Layer.Repositories
 {
@@ -17,6 +14,12 @@ namespace API_Layer.Repositories
         public ProductRepository(AppDbContext context)
         {
             _context = context;
+        }
+
+        public Task Add(Product Model)
+        {
+            //add product
+            throw new NotImplementedException();
         }
 
         public async Task<List<Product>> GetAll(QueryParameter queryParameters)

@@ -4,5 +4,6 @@ namespace API_Layer.Repositories.Interfaces
     public interface IRepository<T>
     {
         Task<List<T>> GetAll(QueryParameter queryParameters);
+        Task Add(T Model );
     }
 }
