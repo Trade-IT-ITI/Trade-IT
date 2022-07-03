@@ -18,9 +18,26 @@ namespace API_Layer.Controllers
         }
         //getAll
         [HttpGet]
-        public async Task<IActionResult> get([FromQuery]ProductQueryParameter queryParameters)
+        public async Task<IActionResult> get([FromQuery] ProductQueryParameter queryParameters)
         {
             return Ok(await _productRepository.GetAll(queryParameters));
+        }
+
+        //add new Product 
+        [HttpPost]
+        public async Task<IActionResult> Add([FromForm] Product product ,IFormFile image )
+        {
+            try
+            {
+                await _productRepository.Add(product, image);
+                return Created("url", product);
+            }catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+
+
+
         }
     }
 }

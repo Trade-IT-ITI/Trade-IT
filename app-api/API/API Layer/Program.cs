@@ -2,6 +2,7 @@ using API_Layer.Repositories;
 using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Data;
 using DatabaseLayer.Models;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -26,7 +27,6 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
 builder.Services.AddScoped<IInstructionRepository, InstructionRepository>();
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(Cors,
@@ -49,5 +49,5 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.UseCors(Cors);
 app.MapControllers();
-
+app.UseStaticFiles();
 app.Run();

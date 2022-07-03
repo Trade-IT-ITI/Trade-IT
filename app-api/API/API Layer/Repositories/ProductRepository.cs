@@ -16,11 +16,38 @@ namespace API_Layer.Repositories
             _context = context;
         }
 
-        public Task Add(Product Model)
+        public async Task Add(Product product, IFormFile image)
         {
-            //add product
-            throw new NotImplementedException();
+
+            if (image.Length > 0)
+            {
+                await _context.AddAsync(product);
+                await _context.SaveChangesAsync();
+
+                var folderName = Path.Combine("Resources", "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var fileName = $"{ Path.GetFileName(product.ProductId.ToString())}{Path.GetExtension(image.FileName)}";
+                var fullPath = Path.Combine(pathToSave, fileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+                ProductImage productImage = new ProductImage();
+                productImage.Name = fileName;
+                productImage.ProductId = product.ProductId;
+                await _context.AddAsync(productImage);
+                await _context.SaveChangesAsync();
+                product.ProductImages.Add(productImage);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Image Required");
+            }
+
         }
+
+
 
         public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)
         {
@@ -64,7 +91,7 @@ namespace API_Layer.Repositories
                 //sorting
                 if (!string.IsNullOrWhiteSpace(queryParameters.orderBy))
                 {
-                    Products = Products.Sort(queryParameters.orderBy , queryParameters.asc ?? true);
+                    Products = Products.Sort(queryParameters.orderBy, queryParameters.asc ?? true);
                 }
 
                 //paginagtion
