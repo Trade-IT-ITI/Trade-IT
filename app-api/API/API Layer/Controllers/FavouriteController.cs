@@ -21,11 +21,12 @@ namespace API_Layer.Controllers
         {
             try
             {
-            await favouriteRepository.Add(favourite);
+                await favouriteRepository.Add(favourite);
                 return Created("url", favourite);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                return BadRequest(ex.Message);  
+                return BadRequest(ex.Message);
             }
 
         }

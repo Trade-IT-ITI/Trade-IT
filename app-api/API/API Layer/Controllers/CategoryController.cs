@@ -9,7 +9,7 @@ namespace API_Layer.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepository repository ;
+        private readonly ICategoryRepository repository;
         public CategoryController(ICategoryRepository repository)
         {
             this.repository = repository;
@@ -23,17 +23,18 @@ namespace API_Layer.Controllers
 
         //add new category
         [HttpPost]
-        public async Task<IActionResult> post([FromBody] Category category)
+        public async Task<IActionResult> Add([FromBody] Category category)
         {
             try
             {
-            await repository.Add(category);
-            return Created("url", category);
-            }catch
+                await repository.Add(category);
+                return Created("url", category);
+            }
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
-        
+
     }
 }

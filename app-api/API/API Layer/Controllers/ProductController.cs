@@ -25,15 +25,16 @@ namespace API_Layer.Controllers
 
         //add new Product 
         [HttpPost]
-        public async Task<IActionResult> Add([FromForm] Product product ,IFormFile image )
+        public async Task<IActionResult> Add([FromForm] Product product, IFormFile image)
         {
             try
             {
                 await _productRepository.Add(product, image);
                 return Created("url", product);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex}");
+                return BadRequest(ex.Message);
             }
 
 

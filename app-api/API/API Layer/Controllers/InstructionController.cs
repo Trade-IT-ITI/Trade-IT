@@ -23,9 +23,9 @@ namespace API_Layer.Controllers
                 await instructionRepository.Add(instruction);
                 return Created("url", instruction);
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }

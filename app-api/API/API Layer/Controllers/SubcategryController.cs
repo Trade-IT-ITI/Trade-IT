@@ -21,12 +21,12 @@ namespace API_Layer.Controllers
         {
             try
             {
-            await subcategoryRepository.Add(subcategory);
-            return Created("url", subcategory);
+                await subcategoryRepository.Add(subcategory);
+                return Created("url", subcategory);
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }
