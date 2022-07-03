@@ -17,7 +17,7 @@ namespace DatabaseLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -46,20 +46,63 @@ namespace DatabaseLayer.Migrations
                     b.ToTable("Ads");
                 });
 
-            modelBuilder.Entity("DatabaseLayer.Models.BuyOption", b =>
+            modelBuilder.Entity("DatabaseLayer.Models.Area", b =>
                 {
-                    b.Property<int>("BuyOptionId")
+                    b.Property<int>("AreaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyOptionId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AreaId"), 1L, 1);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("BuyOptionId");
+                    b.HasKey("AreaId");
 
-                    b.ToTable("BuyOptions");
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Area");
+
+                    b.HasData(
+                        new
+                        {
+                            AreaId = 1,
+                            CityId = 1,
+                            Name = "Ain Shams"
+                        },
+                        new
+                        {
+                            AreaId = 2,
+                            CityId = 1,
+                            Name = "Al Mataryah"
+                        },
+                        new
+                        {
+                            AreaId = 3,
+                            CityId = 2,
+                            Name = "Al Haram"
+                        },
+                        new
+                        {
+                            AreaId = 4,
+                            CityId = 2,
+                            Name = "Imbaba"
+                        },
+                        new
+                        {
+                            AreaId = 5,
+                            CityId = 3,
+                            Name = "Samyah El Gamal St"
+                        },
+                        new
+                        {
+                            AreaId = 6,
+                            CityId = 3,
+                            Name = "AL Sadr Hospital"
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Category", b =>
@@ -76,6 +119,13 @@ namespace DatabaseLayer.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            Name = "Electronics"
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.CategoryInstruction", b =>
@@ -94,6 +144,39 @@ namespace DatabaseLayer.Migrations
                     b.HasIndex("InstructionId");
 
                     b.ToTable("CategoriesInstructions");
+                });
+
+            modelBuilder.Entity("DatabaseLayer.Models.City", b =>
+                {
+                    b.Property<int>("CityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CityId");
+
+                    b.ToTable("City");
+
+                    b.HasData(
+                        new
+                        {
+                            CityId = 1,
+                            Name = "Cairo"
+                        },
+                        new
+                        {
+                            CityId = 2,
+                            Name = "Giza"
+                        },
+                        new
+                        {
+                            CityId = 3,
+                            Name = "Mansoura"
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Favourite", b =>
@@ -162,11 +245,11 @@ namespace DatabaseLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
-                    b.Property<string>("Area")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AreaId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Descrioption")
                         .HasColumnType("nvarchar(max)");
@@ -174,8 +257,13 @@ namespace DatabaseLayer.Migrations
                     b.Property<DateTime>("PostDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int>("RequestCount")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
@@ -190,9 +278,15 @@ namespace DatabaseLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ViewsCount")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("AreaId");
+
+                    b.HasIndex("CityId");
 
                     b.HasIndex("StatusId");
 
@@ -201,32 +295,38 @@ namespace DatabaseLayer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Products");
-                });
 
-            modelBuilder.Entity("DatabaseLayer.Models.ProductBuyOption", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BuyOptionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("SubcategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "BuyOptionId");
-
-                    b.HasIndex("BuyOptionId");
-
-                    b.HasIndex("SubcategoryId");
-
-                    b.ToTable("ProductsBuyOptions");
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            AreaId = 2,
+                            CityId = 1,
+                            Descrioption = "Lenovo Ideapad 330 Laptop, Intel Core i3-7020U, 15.6 Inch, 1TB, 4GB RAM, DOS - Platinum Grey",
+                            PostDateTime = new DateTime(2022, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Price = 8000.0,
+                            RequestCount = 2,
+                            StatusId = 1,
+                            SubcategoryId = 1,
+                            Title = "Lenovo Ideapad 330",
+                            UserId = 2,
+                            ViewsCount = 20
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            AreaId = 1,
+                            CityId = 2,
+                            Descrioption = "Redmi Note 9 is equipped with a high-performance octa-core processor with a maximum clock speed of 3.0GHz, a GPU frequency of 1000MHz, for improved performance to provide you with a seamless gaming experience and implement your ideas.",
+                            PostDateTime = new DateTime(2022, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Price = 3450.0,
+                            RequestCount = 10,
+                            StatusId = 2,
+                            SubcategoryId = 2,
+                            Title = "Redmi note 9",
+                            UserId = 1,
+                            ViewsCount = 88
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.ProductImage", b =>
@@ -248,6 +348,50 @@ namespace DatabaseLayer.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductsImages");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductImageId = 1,
+                            Name = "Lenovo-1.jpeg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            ProductImageId = 2,
+                            Name = "Lenovo-2.jpeg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            ProductImageId = 3,
+                            Name = "Lenovo-3.jpeg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            ProductImageId = 4,
+                            Name = "Lenovo-4.jpeg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            ProductImageId = 5,
+                            Name = "RedmiNote9-1.png",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            ProductImageId = 6,
+                            Name = "RedmiNote9-2.png",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            ProductImageId = 7,
+                            Name = "RedmiNote9-3.png",
+                            ProductId = 2
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.SliderImage", b =>
@@ -283,6 +427,18 @@ namespace DatabaseLayer.Migrations
                     b.HasKey("StatusId");
 
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            StatusId = 1,
+                            Name = "Staged"
+                        },
+                        new
+                        {
+                            StatusId = 2,
+                            Name = "Sold"
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Subcategory", b =>
@@ -304,6 +460,20 @@ namespace DatabaseLayer.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Subcategories");
+
+                    b.HasData(
+                        new
+                        {
+                            SubcategoryId = 1,
+                            CategoryId = 1,
+                            Name = "Laptops"
+                        },
+                        new
+                        {
+                            SubcategoryId = 2,
+                            CategoryId = 1,
+                            Name = "Mobiles"
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.User", b =>
@@ -326,6 +496,22 @@ namespace DatabaseLayer.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            FirstName = "Abdelrahman",
+                            LastName = "Ahmed",
+                            Phone = "01155661788"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            FirstName = "Marwan",
+                            LastName = "Sayed",
+                            Phone = "01524556671"
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Ad", b =>
@@ -337,6 +523,17 @@ namespace DatabaseLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DatabaseLayer.Models.Area", b =>
+                {
+                    b.HasOne("DatabaseLayer.Models.City", "City")
+                        .WithMany("Areas")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.CategoryInstruction", b =>
@@ -389,6 +586,18 @@ namespace DatabaseLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.Product", b =>
                 {
+                    b.HasOne("DatabaseLayer.Models.Area", "Area")
+                        .WithMany("Products")
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("DatabaseLayer.Models.City", "City")
+                        .WithMany("Products")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("DatabaseLayer.Models.Status", "Status")
                         .WithMany("Products")
                         .HasForeignKey("StatusId")
@@ -407,34 +616,13 @@ namespace DatabaseLayer.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Area");
+
+                    b.Navigation("City");
+
                     b.Navigation("Owner");
 
                     b.Navigation("Status");
-
-                    b.Navigation("Subcategory");
-                });
-
-            modelBuilder.Entity("DatabaseLayer.Models.ProductBuyOption", b =>
-                {
-                    b.HasOne("DatabaseLayer.Models.BuyOption", "BuyOption")
-                        .WithMany("ProductBuyOptions")
-                        .HasForeignKey("BuyOptionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DatabaseLayer.Models.Product", "Product")
-                        .WithMany("ProductBuyOptions")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DatabaseLayer.Models.Subcategory", "Subcategory")
-                        .WithMany("ProductBuyOptions")
-                        .HasForeignKey("SubcategoryId");
-
-                    b.Navigation("BuyOption");
-
-                    b.Navigation("Product");
 
                     b.Navigation("Subcategory");
                 });
@@ -461,9 +649,9 @@ namespace DatabaseLayer.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("DatabaseLayer.Models.BuyOption", b =>
+            modelBuilder.Entity("DatabaseLayer.Models.Area", b =>
                 {
-                    b.Navigation("ProductBuyOptions");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Category", b =>
@@ -471,6 +659,13 @@ namespace DatabaseLayer.Migrations
                     b.Navigation("CategoryInstructions");
 
                     b.Navigation("Subcategories");
+                });
+
+            modelBuilder.Entity("DatabaseLayer.Models.City", b =>
+                {
+                    b.Navigation("Areas");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Instruction", b =>
@@ -484,8 +679,6 @@ namespace DatabaseLayer.Migrations
 
                     b.Navigation("Notifications");
 
-                    b.Navigation("ProductBuyOptions");
-
                     b.Navigation("ProductImages");
                 });
 
@@ -496,8 +689,6 @@ namespace DatabaseLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.Subcategory", b =>
                 {
-                    b.Navigation("ProductBuyOptions");
-
                     b.Navigation("Products");
                 });
 

@@ -8,6 +8,9 @@ namespace DatabaseLayer
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
+            builder.HasData(
+                new Category() { CategoryId = 1 , Name = "Electronics" }
+                );
         }
     }
 }

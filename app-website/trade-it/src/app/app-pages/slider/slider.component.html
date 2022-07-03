@@ -1,0 +1,77 @@
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+  <div class="carousel-indicators my-1 mx-auto">
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <div
+      class="carousel-item active"
+      style="overflow: auto; height: fit-content"
+    >
+      <img
+        src="../../../assets/images/{{ images[0].name }}"
+        class="d-block"
+        style="width: 100%"
+      />
+      <div class="carousel-caption d-none d-md-block p-0">
+        <p class="m-0">{{ images[0].sliderText }}</p>
+      </div>
+    </div>
+    <div class="carousel-item" style="overflow: auto; height: fit-content">
+      <img
+        src="../../../assets/images/{{ images[1].name }}"
+        class="d-block"
+        style="width: 100%"
+      />
+      <div class="carousel-caption d-none d-md-block p-0">
+        <p class="m-0">{{ images[1].sliderText }}</p>
+      </div>
+    </div>
+    <div class="carousel-item" style="overflow: auto; height: fit-content">
+      <img
+        src="../../../assets/images/{{ images[2].name }}"
+        class="d-block"
+        style="width: 100%"
+      />
+      <div class="carousel-caption d-none d-md-block p-0">
+        <p class="m-0">{{ images[2].sliderText }}</p>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev justify-content-start"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next justify-content-end"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
