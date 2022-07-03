@@ -28,7 +28,5 @@
 
         public User Owner { get; set; }
         public int UserId { get; set; }
-
-        public ICollection<ProductBuyOption> ProductBuyOptions { get; set; }
     }
 }

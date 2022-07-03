@@ -10,7 +10,5 @@
         public int CategoryId { get; set; }
 
         public ICollection<Product> Products { get; set; }
-        public ICollection<ProductBuyOption> ProductBuyOptions { get; set; }
-
     }
 }
