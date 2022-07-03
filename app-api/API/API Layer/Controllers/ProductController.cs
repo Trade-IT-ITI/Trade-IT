@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using API_Layer.Repositories;
-using DatabaseLayer.Models;
 using API_Layer.Repositories.Interfaces;
-using DatabaseLayer.Data;
-using Microsoft.EntityFrameworkCore;
 using API_Layer.QueryParameters;
 
 namespace API_Layer.Controllers
@@ -13,14 +10,14 @@ namespace API_Layer.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IRepository <Product> _productRepository;
-        public ProductController(IRepository<Product> productRepository)
+        private readonly IProductRepository _productRepository;
+        public ProductController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
         //getAll
         [HttpGet]
-        public async Task<IActionResult> get([FromQuery]QueryParameter queryParameters)
+        public async Task<IActionResult> get([FromQuery]ProductQueryParameter queryParameters)
         {
             return Ok(await _productRepository.GetAll(queryParameters));
         }

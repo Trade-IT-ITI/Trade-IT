@@ -32,6 +32,9 @@ namespace DatabaseLayer.Data
             modelBuilder.ApplyConfiguration(new SubcategoryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
+            modelBuilder.ApplyConfiguration(new CityConfiguration());
+            modelBuilder.ApplyConfiguration(new AreaConfiguration());
+
         }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Ad> Ads { get; set; }

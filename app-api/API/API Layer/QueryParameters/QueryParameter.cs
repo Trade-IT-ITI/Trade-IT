@@ -3,35 +3,41 @@
 {
     public class QueryParameter
     {
-        //search
+        //searching
         public string? searchText { get; set; }
-        
+
         //sorting
         public string? orderBy { get; set; }
         public bool? asc { get; set; }
 
         //paginagtion
-        private int? _pageNumber;
+        int? _pageNumber;
         public int? pageNumber
         {
             get { return _pageNumber; }
-            set
-            {
-                _pageNumber = (value != null && value.Value > 0) ? value : null;
-            }
+            set { _pageNumber = (value != null && value.Value > 0) ? value : null; }
         }
 
-        private int? _pageCapacity;
+        int maxCapacity = 50;
+        int? _pageCapacity;
         public int? pageCapacity
         {
             get { return _pageCapacity; }
             set
             {
-                _pageCapacity = (value != null && value.Value > 0) ? value : null;
+                if (value != null && value.Value > 0)
+                {
+                    if (value.Value > maxCapacity)
+                        _pageCapacity = maxCapacity;
+                    else
+                        _pageCapacity = value;
+                }
+                else
+                    _pageCapacity = null;
             }
         }
 
         //expanding related data
-        public string[]? expand { get; set; }        
+        public string[]? expand { get; set; }
     }
 }

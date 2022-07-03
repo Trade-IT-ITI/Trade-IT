@@ -8,6 +8,10 @@ namespace DatabaseLayer
     {
         public void Configure(EntityTypeBuilder<Status> builder)
         {
+            builder.HasData(
+                new Status() { StatusId =1,Name ="Staged"},
+                new Status() { StatusId = 2 , Name = "Sold" }
+                );
         }
     }
 }

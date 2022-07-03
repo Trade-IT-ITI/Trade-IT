@@ -4,13 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using API_Layer.Repositories.Interfaces;
 using API_Layer.QueryParameters;
 using API_Layer.Helper;
-using System.Linq.Expressions;
-using System.ComponentModel;
-using System.Reflection;
+
 
 namespace API_Layer.Repositories
 {
-    public class ProductRepository : IRepository<Product>
+    public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext _context;
 
@@ -19,13 +17,13 @@ namespace API_Layer.Repositories
             _context = context;
         }
 
-        public async Task<List<Product>> GetAll(QueryParameter queryParameters)
+        public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)
         {
             IQueryable<Product> Products = _context.Products;
 
             if (queryParameters != null)
             {
-                //search
+                //searching
                 if (!string.IsNullOrEmpty(queryParameters.searchText))
                 {
                     IQueryable<Product> result;
@@ -34,6 +32,29 @@ namespace API_Layer.Repositories
 
                     Products = result.Distinct();
                 }
+
+                //filteration
+                if (queryParameters.minPrice != null)
+                    Products = Products.Where(p => p.Price >= queryParameters.minPrice.Value);
+
+                if (queryParameters.maxPrice != null)
+                    Products = Products.Where(p => p.CityId <= queryParameters.maxPrice.Value);
+
+                if (queryParameters.city != null)
+                    Products = Products.Where(p => p.CityId == queryParameters.city.Value);
+
+                if (queryParameters.area != null)
+                    Products = Products.Where(p => p.AreaId == queryParameters.area.Value);
+
+                if (queryParameters.category != null)
+                    Products = Products.Where(p => p.Subcategory.CategoryId == queryParameters.category.Value);
+
+                if (queryParameters.subcategory != null)
+                    Products = Products.Where(p => p.SubcategoryId == queryParameters.subcategory.Value);
+
+                if (queryParameters.status != null)
+                    Products = Products.Where(p => p.StatusId == queryParameters.status.Value);
+
 
                 //sorting
                 if (!string.IsNullOrWhiteSpace(queryParameters.orderBy))
