@@ -1,7 +1,6 @@
-﻿namespace API_Layer.Repositories.Interfaces
+namespace API_Layer.Repositories.Interfaces
 {
     public interface IRepository<T>
     {
-        
     }
 }

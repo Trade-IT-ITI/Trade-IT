@@ -5,7 +5,6 @@ using API_Layer.Repositories.Interfaces;
 using API_Layer.QueryParameters;
 using API_Layer.Helper;
 
-
 namespace API_Layer.Repositories
 {
     public class ProductRepository : IProductRepository
@@ -15,6 +14,12 @@ namespace API_Layer.Repositories
         public ProductRepository(AppDbContext context)
         {
             _context = context;
+        }
+
+        public Task Add(Product Model)
+        {
+            //add product
+            throw new NotImplementedException();
         }
 
         public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)

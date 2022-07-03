@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using API_Layer.Repositories;
+using DatabaseLayer.Models;
 using API_Layer.Repositories.Interfaces;
 using API_Layer.QueryParameters;
 
