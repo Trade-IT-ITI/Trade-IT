@@ -4,6 +4,7 @@ using DatabaseLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220703033119_adding-city-area-and-seed-data")]
+    partial class addingcityareaandseeddata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,6 +105,22 @@ namespace DatabaseLayer.Migrations
                             CityId = 3,
                             Name = "AL Sadr Hospital"
                         });
+                });
+
+            modelBuilder.Entity("DatabaseLayer.Models.BuyOption", b =>
+                {
+                    b.Property<int>("BuyOptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyOptionId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BuyOptionId");
+
+                    b.ToTable("BuyOptions");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Category", b =>
@@ -323,6 +341,32 @@ namespace DatabaseLayer.Migrations
                             UserId = 1,
                             ViewsCount = 88
                         });
+                });
+
+            modelBuilder.Entity("DatabaseLayer.Models.ProductBuyOption", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuyOptionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("SubcategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "BuyOptionId");
+
+                    b.HasIndex("BuyOptionId");
+
+                    b.HasIndex("SubcategoryId");
+
+                    b.ToTable("ProductsBuyOptions");
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.ProductImage", b =>
@@ -623,6 +667,31 @@ namespace DatabaseLayer.Migrations
                     b.Navigation("Subcategory");
                 });
 
+            modelBuilder.Entity("DatabaseLayer.Models.ProductBuyOption", b =>
+                {
+                    b.HasOne("DatabaseLayer.Models.BuyOption", "BuyOption")
+                        .WithMany("ProductBuyOptions")
+                        .HasForeignKey("BuyOptionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DatabaseLayer.Models.Product", "Product")
+                        .WithMany("ProductBuyOptions")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DatabaseLayer.Models.Subcategory", "Subcategory")
+                        .WithMany("ProductBuyOptions")
+                        .HasForeignKey("SubcategoryId");
+
+                    b.Navigation("BuyOption");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Subcategory");
+                });
+
             modelBuilder.Entity("DatabaseLayer.Models.ProductImage", b =>
                 {
                     b.HasOne("DatabaseLayer.Models.Product", "Product")
@@ -650,6 +719,11 @@ namespace DatabaseLayer.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("DatabaseLayer.Models.BuyOption", b =>
+                {
+                    b.Navigation("ProductBuyOptions");
+                });
+
             modelBuilder.Entity("DatabaseLayer.Models.Category", b =>
                 {
                     b.Navigation("CategoryInstructions");
@@ -675,6 +749,8 @@ namespace DatabaseLayer.Migrations
 
                     b.Navigation("Notifications");
 
+                    b.Navigation("ProductBuyOptions");
+
                     b.Navigation("ProductImages");
                 });
 
@@ -685,6 +761,8 @@ namespace DatabaseLayer.Migrations
 
             modelBuilder.Entity("DatabaseLayer.Models.Subcategory", b =>
                 {
+                    b.Navigation("ProductBuyOptions");
+
                     b.Navigation("Products");
                 });
 
