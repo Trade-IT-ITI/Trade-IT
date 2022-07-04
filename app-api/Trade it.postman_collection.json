@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "0a6cb048-74b3-4995-ab38-6a5eae6acf99",
+		"name": "Trade it",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/ITI/images for test/3d-number-50-gold-drawings_csp33219038.jpg"
+								},
+								{
+									"key": "title",
+									"value": "qqqq",
+									"type": "text"
+								},
+								{
+									"key": "descrioption",
+									"value": "svrvwv",
+									"type": "text"
+								},
+								{
+									"key": "postDateTime",
+									"value": "1/1/2012",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2232",
+									"type": "text"
+								},
+								{
+									"key": "requestCount",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "viewsCount",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "areaId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "statusId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "subcategoryId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5228/api/Product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5228",
+							"path": [
+								"api",
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5228/api/Product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5228",
+							"path": [
+								"api",
+								"Product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": []
+		},
+		{
+			"name": "Instruction",
+			"item": []
+		},
+		{
+			"name": "Subcategory",
+			"item": []
+		}
+	]
+}
