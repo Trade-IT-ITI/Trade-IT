@@ -1,7 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:trade_it/screens/faviorate/faviorate.dart';
-import 'package:trade_it/screens/home/home.dart';
+import 'package:trade_it/screens/home/home_ui.dart';
 import 'package:trade_it/screens/profile/profile.dart';
 
 import '../screens/notification/notifications.dart';
@@ -21,11 +21,11 @@ class _HomePageState extends State<HomePage> {
     Icons.notifications,
     Icons.person,
   ];
-  List<Widget> widgetList = const [
+  List<Widget> widgetList = [
     Home(),
-    Faviorate(),
-    Notifications(),
-    Profile(),
+    const Faviorate(),
+    const Notifications(),
+    const Profile(),
   ];
   @override
   Widget build(BuildContext context) {
