@@ -46,6 +46,7 @@ namespace DatabaseLayer.Data
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<Subcategory> Subcategories { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Area> Areas { get; set; }
     }
 }

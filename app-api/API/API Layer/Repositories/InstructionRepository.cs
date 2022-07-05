@@ -1,7 +1,9 @@
-﻿using API_Layer.QueryParameters;
+﻿using API_Layer.Helper;
+using API_Layer.QueryParameters;
 using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Data;
 using DatabaseLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_Layer.Repositories
 {
@@ -20,9 +22,19 @@ namespace API_Layer.Repositories
             await context.SaveChangesAsync();
         }
 
-        public Task<List<Instruction>> GetAll()
+        public async Task<List<Instruction>> GetAll(QueryParameter queryParameters)
         {
-            throw new NotImplementedException();
+            IQueryable<Instruction> Instructions = context.Instructions;
+
+            if (queryParameters != null)
+            {
+                //expanding related data
+                if (queryParameters.expand != null && queryParameters.expand.Length != 0)
+                {
+                    Instructions = Instructions.Expand(queryParameters.expand);
+                }
+            }
+            return await Instructions.ToListAsync();
         }
     }
 }

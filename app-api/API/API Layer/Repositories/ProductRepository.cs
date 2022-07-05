@@ -47,8 +47,6 @@ namespace API_Layer.Repositories
 
         }
 
-
-
         public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)
         {
             IQueryable<Product> Products = _context.Products;

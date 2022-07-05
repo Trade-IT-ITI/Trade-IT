@@ -1,6 +1,7 @@
 ﻿namespace API_Layer.QueryParameters
 
 {
+    
     public class QueryParameter
     {
         //searching
