@@ -16,21 +16,30 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers()
    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+
 //builder.Services.AddDbContextPool<AppDbContext>(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("app-connection"));
 });
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
-builder.Services.AddScoped<IInstructionRepository, InstructionRepository>();
-builder.Services.AddScoped<IFavouriteRepository, FavouriteRepository>();
+builder.Services.AddScoped<IProductRepository , ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository , CategoryRepository>();
+builder.Services.AddScoped<ISubcategoryRepository , SubcategoryRepository>();
+builder.Services.AddScoped<IInstructionRepository , InstructionRepository>();
+builder.Services.AddScoped<IFavouriteRepository , FavouriteRepository>();
+builder.Services.AddScoped<ICityRepository , CityRepository>();
+builder.Services.AddScoped<IAreaRepository , AreaRepository>();
+builder.Services.AddScoped<ICategoryInstructionRepository , CategoryInstructionRepository>();
+builder.Services.AddScoped<IStatusRepository , StatusRepository>();
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(Cors,
+    options.AddPolicy(Cors ,
     builder =>
     {
         builder.AllowAnyOrigin();

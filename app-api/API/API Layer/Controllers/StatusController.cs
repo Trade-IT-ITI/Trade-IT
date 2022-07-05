@@ -8,26 +8,28 @@ namespace API_Layer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InstructionController : ControllerBase
+    public class StatusController : ControllerBase
     {
-        private readonly IInstructionRepository instructionRepository;
-
-        public InstructionController(IInstructionRepository instructionRepository)
+        private readonly IStatusRepository repository;
+        public StatusController(IStatusRepository repository)
         {
-            this.instructionRepository = instructionRepository;
+            this.repository = repository;
         }
+        //getAll
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] QueryParameter queryParameters)
         {
-            return Ok(await instructionRepository.GetAll(queryParameters));
+            return Ok(await repository.GetAll(queryParameters));
         }
+
+        //add new area
         [HttpPost]
-        public async Task<IActionResult> Add(Instruction instruction)
+        public async Task<IActionResult> Add([FromBody] Status status)
         {
             try
             {
-                await instructionRepository.Add(instruction);
-                return Created("url", instruction);
+                await repository.Add(status);
+                return Created("url" , status);
             }
             catch (Exception ex)
             {

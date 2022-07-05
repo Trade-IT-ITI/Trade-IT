@@ -1,33 +1,34 @@
 ﻿using API_Layer.QueryParameters;
 using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Layer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InstructionController : ControllerBase
+    public class AreaController : Controller
     {
-        private readonly IInstructionRepository instructionRepository;
-
-        public InstructionController(IInstructionRepository instructionRepository)
+        private readonly IAreaRepository repository;
+        public AreaController(IAreaRepository repository)
         {
-            this.instructionRepository = instructionRepository;
+            this.repository = repository;
         }
+        //getAll
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] QueryParameter queryParameters)
         {
-            return Ok(await instructionRepository.GetAll(queryParameters));
+            return Ok(await repository.GetAll(queryParameters));
         }
+
+        //add new area
         [HttpPost]
-        public async Task<IActionResult> Add(Instruction instruction)
+        public async Task<IActionResult> Add([FromBody] Area area)
         {
             try
             {
-                await instructionRepository.Add(instruction);
-                return Created("url", instruction);
+                await repository.Add(area);
+                return Created("url" , area);
             }
             catch (Exception ex)
             {
