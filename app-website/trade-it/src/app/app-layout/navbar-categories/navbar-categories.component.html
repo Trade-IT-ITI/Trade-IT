@@ -4,10 +4,14 @@
   <!--col-md-3-->
   <div *ngFor="let cat of categories" class="col-4 col-md-2 p-2">
     <b
-      ><a href="">{{ cat.name }}</a></b
+      ><a style="text-transform: uppercase">{{ cat.name }}</a></b
     >
     <div class="d-flex flex-column">
-      <a *ngFor="let subcat of cat.subcategories" href="">{{ subcat.name }}</a>
+      <a
+        *ngFor="let subcat of cat.subcategories"
+        style="text-transform: lowercase"
+        >{{ subcat.name }}</a
+      >
     </div>
   </div>
 </div>

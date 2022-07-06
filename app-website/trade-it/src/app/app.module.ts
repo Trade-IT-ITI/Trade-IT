@@ -11,6 +11,8 @@ import { ProductsComponent } from './app-pages/products/products.component';
 import { DurationPipe } from './pipes/duration.pipe';
 import { FooterComponent } from './app-layout/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { PagesNavComponent } from './app-layout/pages-nav/pages-nav.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }
@@ -26,11 +28,13 @@ const routes: Routes = [
     ProductsComponent,
     DurationPipe,
     FooterComponent,
+    PagesNavComponent,
 
   ],
   imports: [
     BrowserModule,
     NoopAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

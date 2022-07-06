@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { category } from 'src/app/models/category';
 import { CategoyService } from '../../services/categoy.service';
@@ -11,11 +12,14 @@ import { CategoyService } from '../../services/categoy.service';
 export class NavbarCategoriesComponent implements OnInit {
   categories: category[] = [];
   constructor(private categoryService: CategoyService) {
-
-    this.categories = this.categoryService.getall();
   }
 
   ngOnInit(): void {
+    let params: HttpParams = new HttpParams();
+    params = params.append('expand', 'Subcategories');
+    this.categoryService.getall(params).subscribe(data => {
+      this.categories = data
+    });
   }
 
 }

@@ -5,10 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DurationPipe implements PipeTransform {
 
-  transform(date: Date): string {
+  transform(date: string): string {
+    let postDate = new Date(date);
     let currentDate = new Date();
 
-    let difference = (currentDate.getTime() - date.getTime()) / 1000 / 60 / 60 / 24 / 30 / 12;
+    let difference = (currentDate.getTime() - postDate.getTime()) / 1000 / 60 / 60 / 24 / 30 / 12;
 
     if (Math.floor(difference) > 0)
       return `${Math.floor(difference)} year ago`;

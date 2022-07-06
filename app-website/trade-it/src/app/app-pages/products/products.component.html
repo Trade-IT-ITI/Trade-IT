@@ -10,7 +10,7 @@
         <h5 class="card-title">
           <b>{{ product.price | currency: "":"":"1.2-5" }} </b>EGP
         </h5>
-        <p>{{ product.area }}, {{ product.city }}</p>
+        <p>{{ product.area.name }}, {{ product.city.name }}</p>
         <p>{{ product.postDateTime | duration }}</p>
       </div>
     </div>
