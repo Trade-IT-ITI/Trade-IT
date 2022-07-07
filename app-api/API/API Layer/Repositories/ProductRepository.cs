@@ -21,7 +21,7 @@ namespace API_Layer.Repositories
 
             if (image.Length > 0)
             {
-                await _context.AddAsync(product);
+                await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();
 
                 var folderName = Path.Combine("Resources", "Images");
@@ -37,8 +37,8 @@ namespace API_Layer.Repositories
                 productImage.ProductId = product.ProductId;
                 await _context.AddAsync(productImage);
                 await _context.SaveChangesAsync();
-                product.ProductImages.Add(productImage);
-                await _context.SaveChangesAsync();
+                //product.ProductImages.Add(productImage);
+                //await _context.SaveChangesAsync();
             }
             else
             {
