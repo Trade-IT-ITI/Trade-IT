@@ -1,0 +1,75 @@
+<div class="d-flex flex-column flex-shrink-0 p-1 text-white bg-dark" style="height: 100vh"
+  [ngClass]="{ 'min-sidebar': isToggle, 'max-sidebar': !isToggle }">
+  <a class="m-2 fs-5 text-decoration-none text-light" (click)="toggle()"
+    [ngClass]="{ 'text-center': isToggle, 'ms-auto': !isToggle }">
+    <i class="fa-solid fa-bars"></i>
+  </a>
+  <a routerLink="Home" class="text-primary text-center" (click)="active(Home)" style="font-size: xx-large">
+    <i class="fa-regular fa-hospital"></i>
+  </a>
+  <hr />
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item" data-bs-toggle="collapse"role="button" aria-expanded="false" aria-controls="collapseExample">
+      <a routerLink="category" class="nav-link text-white" (click)="active(Home)" id="Home" #Home
+      [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+      <i class="fa-solid fa-table-cells m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Category</span>
+      </a>
+  
+    </li>
+    <li class="nav-item">
+      <a routerLink="Doctors" class="nav-link text-white" (click)="active(Doctors)" id="Doctors" #Doctors
+        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-user-doctor m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Sub Category</span>
+      </a>
+     
+    </li>
+    <li *ngIf="type=='e'" class="nav-item">
+      <a routerLink="Employees" class="nav-link text-white" (click)="active(Employees)" id="Employees" #Employees
+        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-user-gear m1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Employees</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="Appointments" class="nav-link text-white" (click)="active(Appointments)" id="Appointments"
+        #Appointments [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-regular fa-calendar-plus m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Appointments</span>
+      </a>
+    </li>
+    <li *ngIf="type=='p'" class="nav-item">
+      <a routerLink="Patients" class="nav-link text-white" (click)="active(Patients)" id="Patients" #Patients
+        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-hospital-user m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Patients</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="Services" class="nav-link text-white" (click)="active(Services)" id="Services" #Services
+        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-puzzle-piece m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Services</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="Reports" class="nav-link text-white" (click)="active(Reports)" id="Reports" #Reports
+        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-scroll m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Report</span>
+      </a>
+    </li>
+  </ul>
+  <div class="dropdown p-3" [ngClass]="{ 'd-none': isToggle }">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
+      data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="../../../assets/Images/anonymous-user.png" alt="" width="32" height="32" class="rounded-circle me-2"
+        id="userImage" />
+      <strong id="userName"></strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+      <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+    </ul>
+  </div>
+</div>
