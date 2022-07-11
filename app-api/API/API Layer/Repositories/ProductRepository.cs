@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using API_Layer.Repositories.Interfaces;
 using API_Layer.QueryParameters;
 using API_Layer.Helper;
+using API_Layer.DataModels;
 
 namespace API_Layer.Repositories
 {
@@ -16,19 +17,19 @@ namespace API_Layer.Repositories
             _context = context;
         }
 
-        public async Task Add(Product product, IFormFile image)
+        public async Task Add(Product product , IFormFile image)
         {
 
             if (image.Length > 0)
             {
-                await _context.AddAsync(product);
+                await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();
 
-                var folderName = Path.Combine("Resources", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var folderName = Path.Combine("Resources" , "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory() , folderName);
                 var fileName = $"{ Path.GetFileName(product.ProductId.ToString())}{Path.GetExtension(image.FileName)}";
-                var fullPath = Path.Combine(pathToSave, fileName);
-                using (var stream = new FileStream(fullPath, FileMode.Create))
+                var fullPath = Path.Combine(pathToSave , fileName);
+                using (var stream = new FileStream(fullPath , FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
                 }
@@ -37,8 +38,8 @@ namespace API_Layer.Repositories
                 productImage.ProductId = product.ProductId;
                 await _context.AddAsync(productImage);
                 await _context.SaveChangesAsync();
-                product.ProductImages.Add(productImage);
-                await _context.SaveChangesAsync();
+                //product.ProductImages.Add(productImage);
+                //await _context.SaveChangesAsync();
             }
             else
             {
@@ -47,8 +48,10 @@ namespace API_Layer.Repositories
 
         }
 
-        public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)
+        //public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)
+        public async Task<ProductsData> GetAll(ProductQueryParameter queryParameters)
         {
+            ProductsData productsData = new ProductsData();
             IQueryable<Product> Products = _context.Products;
 
             if (queryParameters != null)
@@ -68,7 +71,7 @@ namespace API_Layer.Repositories
                     Products = Products.Where(p => p.Price >= queryParameters.minPrice.Value);
 
                 if (queryParameters.maxPrice != null)
-                    Products = Products.Where(p => p.CityId <= queryParameters.maxPrice.Value);
+                    Products = Products.Where(p => p.Price <= queryParameters.maxPrice.Value);
 
                 if (queryParameters.city != null)
                     Products = Products.Where(p => p.CityId == queryParameters.city.Value);
@@ -85,11 +88,12 @@ namespace API_Layer.Repositories
                 if (queryParameters.status != null)
                     Products = Products.Where(p => p.StatusId == queryParameters.status.Value);
 
+                productsData.ProductsCount = Products.Count();
 
                 //sorting
                 if (!string.IsNullOrWhiteSpace(queryParameters.orderBy))
                 {
-                    Products = Products.Sort(queryParameters.orderBy, queryParameters.asc ?? true);
+                    Products = Products.Sort(queryParameters.orderBy , queryParameters.asc ?? true);
                 }
 
                 //paginagtion
@@ -104,8 +108,10 @@ namespace API_Layer.Repositories
                 {
                     Products = Products.Expand(queryParameters.expand);
                 }
+
+                productsData.Products = await Products.ToListAsync();
             }
-            return await Products.ToListAsync();
+            return productsData;
         }
     }
 }

@@ -2,5 +2,8 @@
 
 <div class="my-4">
   <h1>Latest Posted Products</h1>
-  <app-products></app-products>
+  <app-products
+    [queryParams]="productsQueryParams"
+    [productCol]="{ colLg: 3, colMd: 3, colSm: 4, col: 6 }"
+  ></app-products>
 </div>

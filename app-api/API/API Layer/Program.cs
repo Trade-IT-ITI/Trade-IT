@@ -33,6 +33,7 @@ builder.Services.AddScoped<IInstructionRepository , InstructionRepository>();
 builder.Services.AddScoped<IFavouriteRepository , FavouriteRepository>();
 builder.Services.AddScoped<ICityRepository , CityRepository>();
 builder.Services.AddScoped<IAreaRepository , AreaRepository>();
+builder.Services.AddScoped<IProductsDetailsRepository , ProductsDetailsRepository>();
 builder.Services.AddScoped<ICategoryInstructionRepository , CategoryInstructionRepository>();
 builder.Services.AddScoped<IStatusRepository , StatusRepository>();
 
