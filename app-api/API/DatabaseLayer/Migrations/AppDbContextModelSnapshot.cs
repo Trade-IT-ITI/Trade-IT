@@ -125,6 +125,16 @@ namespace DatabaseLayer.Migrations
                         {
                             CategoryId = 1,
                             Name = "Electronics"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            Name = "Furniture"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            Name = "Clothes"
                         });
                 });
 
@@ -315,7 +325,7 @@ namespace DatabaseLayer.Migrations
                         new
                         {
                             ProductId = 2,
-                            AreaId = 1,
+                            AreaId = 3,
                             CityId = 2,
                             Descrioption = "Redmi Note 9 is equipped with a high-performance octa-core processor with a maximum clock speed of 3.0GHz, a GPU frequency of 1000MHz, for improved performance to provide you with a seamless gaming experience and implement your ideas.",
                             PostDateTime = new DateTime(2022, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -326,6 +336,66 @@ namespace DatabaseLayer.Migrations
                             Title = "Redmi note 9",
                             UserId = 1,
                             ViewsCount = 88
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            AreaId = 5,
+                            CityId = 3,
+                            Descrioption = "new gaming chair 2022 model",
+                            PostDateTime = new DateTime(2022, 5, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Price = 6500.0,
+                            RequestCount = 5,
+                            StatusId = 1,
+                            SubcategoryId = 3,
+                            Title = "Gaming Chair ITop 220",
+                            UserId = 2,
+                            ViewsCount = 60
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            AreaId = 6,
+                            CityId = 3,
+                            Descrioption = "children shirt small and medium sizes",
+                            PostDateTime = new DateTime(2022, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Price = 50.0,
+                            RequestCount = 3,
+                            StatusId = 1,
+                            SubcategoryId = 4,
+                            Title = "children shirt",
+                            UserId = 2,
+                            ViewsCount = 110
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            AreaId = 1,
+                            CityId = 1,
+                            Descrioption = "boys t-shirt medium and large sizes",
+                            PostDateTime = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Price = 100.0,
+                            RequestCount = 1,
+                            StatusId = 2,
+                            SubcategoryId = 7,
+                            Title = "boys t-shirt",
+                            UserId = 1,
+                            ViewsCount = 90
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            AreaId = 4,
+                            CityId = 2,
+                            Descrioption = "girls dress medium and large sizes",
+                            PostDateTime = new DateTime(2021, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Price = 250.0,
+                            RequestCount = 0,
+                            StatusId = 2,
+                            SubcategoryId = 8,
+                            Title = "girls dress",
+                            UserId = 1,
+                            ViewsCount = 5
                         });
                 });
 
@@ -353,44 +423,14 @@ namespace DatabaseLayer.Migrations
                         new
                         {
                             ProductImageId = 1,
-                            Name = "Lenovo-1.jpeg",
+                            Name = "lenovo_x1.jpg",
                             ProductId = 1
                         },
                         new
                         {
                             ProductImageId = 2,
-                            Name = "Lenovo-2.jpeg",
+                            Name = "lenovo_x1_2.jpg",
                             ProductId = 1
-                        },
-                        new
-                        {
-                            ProductImageId = 3,
-                            Name = "Lenovo-3.jpeg",
-                            ProductId = 1
-                        },
-                        new
-                        {
-                            ProductImageId = 4,
-                            Name = "Lenovo-4.jpeg",
-                            ProductId = 1
-                        },
-                        new
-                        {
-                            ProductImageId = 5,
-                            Name = "RedmiNote9-1.png",
-                            ProductId = 2
-                        },
-                        new
-                        {
-                            ProductImageId = 6,
-                            Name = "RedmiNote9-2.png",
-                            ProductId = 2
-                        },
-                        new
-                        {
-                            ProductImageId = 7,
-                            Name = "RedmiNote9-3.png",
-                            ProductId = 2
                         });
                 });
 
@@ -473,6 +513,42 @@ namespace DatabaseLayer.Migrations
                             SubcategoryId = 2,
                             CategoryId = 1,
                             Name = "Mobiles"
+                        },
+                        new
+                        {
+                            SubcategoryId = 3,
+                            CategoryId = 2,
+                            Name = "Chairs"
+                        },
+                        new
+                        {
+                            SubcategoryId = 4,
+                            CategoryId = 3,
+                            Name = "Children"
+                        },
+                        new
+                        {
+                            SubcategoryId = 5,
+                            CategoryId = 3,
+                            Name = "Men"
+                        },
+                        new
+                        {
+                            SubcategoryId = 6,
+                            CategoryId = 3,
+                            Name = "Women"
+                        },
+                        new
+                        {
+                            SubcategoryId = 7,
+                            CategoryId = 3,
+                            Name = "Boys"
+                        },
+                        new
+                        {
+                            SubcategoryId = 8,
+                            CategoryId = 3,
+                            Name = "Girls"
                         });
                 });
 

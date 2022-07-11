@@ -1,20 +1,47 @@
-<div class="row p-2">
-  <div *ngFor="let product of products" class="col-6 col-md-3 p-1">
-    <div class="card" style="font-size: smaller">
-      <img
-        style="width: 100%; height: 120px; object-fit: cover"
-        src="../../../assets/images/{{ product.productImages[0].name }}"
-      />
-      <div class="card-body">
-        <b class="card-text">{{ product.title }}</b>
-        <h5 class="card-title">
-          <b>{{ product.price | currency: "":"":"1.2-5" }} </b>EGP
-        </h5>
-        <p>{{ product.area.name }}, {{ product.city.name }}</p>
-        <p>{{ product.postDateTime | duration }}</p>
+<div class="row">
+  <h1 *ngIf="isLoading; else DataLoaded" class="text-center text-primary">
+    Loading...
+  </h1>
+  <ng-template #DataLoaded>
+    <h1
+      *ngIf="productsData.products.length == 0; else Products"
+      class="text-center text-danger"
+    >
+      No Available Products
+    </h1>
+    <ng-template #Products>
+      <div
+        *ngFor="let product of productsData.products"
+        class="p-1"
+        [class]="productColClass"
+      >
+        <div class="card" style="font-size: smaller">
+          <img style="width: 100%; height: 120px; object-fit: cover" src="" />
+          <div class="card-body">
+            <b class="card-text">{{ product.title }}</b>
+            <h5 class="card-title">
+              <b>{{ product.price | currency: "":"":"1.2-5" }} </b>EGP
+            </h5>
+            <p class="p-0">{{ product.area.name }}, {{ product.city.name }}</p>
+            <p class="col-6 p-0">{{ product.postDateTime | duration }}</p>
+            <div class="d-flex">
+              <div class="mx-1">
+                <i class="fa-solid fa-eye"></i>
+                <span class="mx-1">{{ product.viewsCount }}</span>
+              </div>
+              <div class="mx-1">
+                <i class="fa-solid fa-hand"></i>
+                <span class="mx-1">{{ product.requestCount }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </ng-template>
+  </ng-template>
 </div>
-<app-pages-nav (changePaginagtionEvent)="paginationChanged($event)">
+<app-pages-nav
+  (changePaginagtionEvent)="paginationChanged($event)"
+  [itemsTotalCount]="productsData.productsCount"
+>
 </app-pages-nav>

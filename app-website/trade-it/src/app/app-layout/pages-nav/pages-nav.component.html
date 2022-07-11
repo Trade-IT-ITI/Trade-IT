@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between p-2">
+<div class="d-flex flex-wrap justify-content-between px-1 py-2">
   <nav aria-label="Page navigation">
     <ul class="pagination m-0">
       <li class="page-item">
@@ -16,15 +16,13 @@
       </li>
     </ul>
   </nav>
-  <div class="p-2">
+  <div class="py-2">
     <span class="mx-1">items per page</span>
     <select
       aria-label="Default select"
-      [value]="itemsPerPage"
-      (change)="changeItemsNumber($event.target)"
+      [(ngModel)]="itemsPerPage"
+      (change)="updateNav()"
     >
-      <option value="1">1</option>
-      <option value="2">2</option>
       <option value="10">10</option>
       <option value="25">25</option>
       <option value="50">50</option>

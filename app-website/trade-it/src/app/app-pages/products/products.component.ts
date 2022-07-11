@@ -1,37 +1,57 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ProductsData } from 'src/app/models/productsData';
 import { ProductService } from 'src/app/services/product.service';
-import { ProductsDetailsService } from 'src/app/services/products-details.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnChanges {
 
-  products: Product[] = [];
-  itemsNumber: number = 1;
+  @Input() productCol: { 'colLg': number, 'colMd': number, 'colSm': number, 'col': number } = { colLg: 0, colMd: 0, colSm: 0, col: 0 }
+  @Input() queryParams: HttpParams = new HttpParams();
+
+  productsData: ProductsData = { products: [], productsCount: 0 };
+  itemsNumber: number = 10;
   pageNumber: number = 1;
   productsTotalCount: number = 0;
+
+  isLoading: boolean = false;
+  productColClass: string = '';
   constructor(private productService: ProductService) {
 
   }
 
   ngOnInit(): void {
+    this.productColClass = `col-lg-${this.productCol.colLg} col-md-${this.productCol.colMd} col-sm-${this.productCol.colSm} col-${this.productCol.col}`;
+  }
+
+  ngOnChanges(): void {
     this.loadData()
   }
 
   private loadData() {
-    let params: HttpParams = new HttpParams();
-    params = params.append('expand', 'City');
-    params = params.append('expand', 'Area');
-    params = params.append('expand', 'ProductImages');
-    params = params.append('pageNumber', this.pageNumber);
-    params = params.append('pageCapacity', this.itemsNumber);
-    this.productService.getall(params).subscribe(data => {
-      this.products = data;
+    if (!this.queryParams.has('pageNumber'))
+      this.queryParams = this.queryParams.append('pageNumber', this.pageNumber);
+    else
+      this.queryParams = this.queryParams.set('pageNumber', this.pageNumber);
+
+    if (!this.queryParams.has('pageCapacity'))
+      this.queryParams = this.queryParams.append('pageCapacity', this.itemsNumber);
+    else
+      this.queryParams = this.queryParams.set('pageCapacity', this.itemsNumber);
+
+    this.getData();
+  }
+
+  private getData() {
+    this.isLoading = true;
+    this.productService.getall(this.queryParams).subscribe(data => {
+      this.productsData = data;
+      console.log(data)
+      this.isLoading = false;
     })
   }
 
