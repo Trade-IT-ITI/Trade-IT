@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -16,11 +15,8 @@ import { FooterComponent } from './app-layout/footer/footer.component';
 import { PagesNavComponent } from './app-layout/pages-nav/pages-nav.component';
 import { SearchComponent } from './app-pages/search/search.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'search', component: SearchComponent },
-]
+import { AppRoutingModule } from './app.routing';
+import { NotFoundComponent } from './app-pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +30,7 @@ const routes: Routes = [
     FooterComponent,
     PagesNavComponent,
     SearchComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +38,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     NgxSliderModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
