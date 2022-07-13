@@ -48,7 +48,6 @@ namespace API_Layer.Repositories
 
         }
 
-        //public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)
         public async Task<ProductsData> GetAll(ProductQueryParameter queryParameters)
         {
             ProductsData productsData = new ProductsData();
@@ -59,11 +58,7 @@ namespace API_Layer.Repositories
                 //searching
                 if (!string.IsNullOrEmpty(queryParameters.searchText))
                 {
-                    IQueryable<Product> result;
-                    result = Products.Where(p => p.Title.Contains(queryParameters.searchText))
-                        .Concat(Products.Where(p => p.Descrioption.Contains(queryParameters.searchText)));
-
-                    Products = result.Distinct();
+                    Products = Products.Where(p => p.Title.Contains(queryParameters.searchText));
                 }
 
                 //filteration

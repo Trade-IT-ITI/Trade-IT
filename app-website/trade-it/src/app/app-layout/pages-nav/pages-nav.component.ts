@@ -1,6 +1,4 @@
-import { HttpParams } from '@angular/common/http';
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
-import { ProductsDetailsService } from 'src/app/services/products-details.service';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-pages-nav',
@@ -16,31 +14,41 @@ export class PagesNavComponent implements OnInit, OnChanges {
   pageNumber: number = 1;
   totalPages: number = 1;
 
+  isNextEnable: boolean = true;
+  isPreviousEnable: boolean = true;
+
   constructor() {
   }
 
   ngOnChanges() {
-    if (this.itemsTotalCount > 0)
-      this.updateNav()
+    debugger;
+    if (this.itemsTotalCount > 0) {
+      this.updateNav();
+    }
   }
+
   ngOnInit(): void {
   }
 
   goBack() {
-    if (this.pageNumber > 1) {
+    if (this.isPreviousEnable) {
       this.pageNumber--;
-      this.changePaginagtionEvent.emit({ pageNumber: this.pageNumber, itemsPerPage: this.itemsPerPage });
+      this.isNextEnable = this.pageNumber < this.totalPages;
+      this.isPreviousEnable = this.pageNumber > 1;
+      this.emitChanges();
     }
   }
-  goForword() {
-    if (this.pageNumber < this.totalPages) {
-      this.pageNumber++;
-      this.changePaginagtionEvent.emit({ pageNumber: this.pageNumber, itemsPerPage: this.itemsPerPage });
-    }
-  }
-  updateNav() {
-    debugger;
 
+  goForword() {
+    if (this.isNextEnable) {
+      this.pageNumber++;
+      this.isNextEnable = this.pageNumber < this.totalPages;
+      this.isPreviousEnable = this.pageNumber > 1;
+      this.emitChanges();
+    }
+  }
+
+  updateNav() {
     if (this.itemsTotalCount >= this.itemsPerPage)
       this.totalPages = this.itemsTotalCount / this.itemsPerPage;
     else
@@ -49,7 +57,16 @@ export class PagesNavComponent implements OnInit, OnChanges {
     if (this.pageNumber > this.totalPages) {
       this.pageNumber = this.totalPages;
     }
+    this.isNextEnable = this.pageNumber < this.totalPages;
+    this.isPreviousEnable = this.pageNumber > 1;
+  }
 
+  emitChanges() {
     this.changePaginagtionEvent.emit({ pageNumber: this.pageNumber, itemsPerPage: this.itemsPerPage });
+  }
+
+  onSelectItemsPerPage() {
+    this.updateNav();
+    this.emitChanges();
   }
 }
