@@ -1,0 +1,7 @@
+<form>
+    <div class="mb-3">
+      <label for="instructionText" class="form-label">Instruction</label>
+      <input type="text" [(ngModel)]="instructionText" class="form-control" id="instructionText" name="instructionText" aria-describedby="categoryName">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="addInstruction()">Submit</button>
+  </form>

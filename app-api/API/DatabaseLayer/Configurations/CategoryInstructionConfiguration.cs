@@ -8,7 +8,7 @@ namespace DatabaseLayer
     {
         public void Configure(EntityTypeBuilder<CategoryInstruction> builder)
         {
-            builder.HasKey(ci => new { ci.CategoryId , ci.InsturctionId });
+            builder.HasKey(ci => new { ci.CategoryId , ci.InstructionId });
             builder.HasOne(ci => ci.Category).WithMany(c => c.CategoryInstructions).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(ci => ci.Instruction).WithMany(i => i.CategoryInstructions).OnDelete(DeleteBehavior.Restrict);
         }

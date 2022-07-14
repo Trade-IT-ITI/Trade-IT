@@ -143,13 +143,10 @@ namespace DatabaseLayer.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InsturctionId")
+                    b.Property<int>("InstructionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("InstructionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoryId", "InsturctionId");
+                    b.HasKey("CategoryId", "InstructionId");
 
                     b.HasIndex("InstructionId");
 
@@ -407,6 +404,12 @@ namespace DatabaseLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductImageId"), 1L, 1);
 
+                    b.Property<byte[]>("Bytes")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -623,7 +626,8 @@ namespace DatabaseLayer.Migrations
                     b.HasOne("DatabaseLayer.Models.Instruction", "Instruction")
                         .WithMany("CategoryInstructions")
                         .HasForeignKey("InstructionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
