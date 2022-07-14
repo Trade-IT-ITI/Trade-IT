@@ -28,4 +28,13 @@
     <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Images\10.jpg" />
+    <None Include="wwwroot\Images\3.png" />
+    <None Include="wwwroot\Images\8.jpg" />
+    <None Include="wwwroot\Images\9.jpg" />
+    <None Include="wwwroot\Images\lenovo_x1.jpg" />
+    <None Include="wwwroot\Images\lenovo_x1_2.jpg" />
+  </ItemGroup>
+
 </Project>

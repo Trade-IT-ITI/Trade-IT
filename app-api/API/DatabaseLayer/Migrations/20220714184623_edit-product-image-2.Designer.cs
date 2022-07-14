@@ -4,6 +4,7 @@ using DatabaseLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220714184623_edit-product-image-2")]
+    partial class editproductimage2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,10 +145,13 @@ namespace DatabaseLayer.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstructionId")
+                    b.Property<int>("InsturctionId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoryId", "InstructionId");
+                    b.Property<int?>("InstructionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryId", "InsturctionId");
 
                     b.HasIndex("InstructionId");
 
@@ -626,8 +631,7 @@ namespace DatabaseLayer.Migrations
                     b.HasOne("DatabaseLayer.Models.Instruction", "Instruction")
                         .WithMany("CategoryInstructions")
                         .HasForeignKey("InstructionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Category");
 
