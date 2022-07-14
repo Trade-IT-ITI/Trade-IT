@@ -1,13 +1,26 @@
 import 'package:bloc/bloc.dart';
+import 'package:trade_it/bloc/bloc_state.dart';
+import 'package:trade_it/models/user.dart';
 
-abstract class HomeStates {}
+import 'home_data.dart';
 
-class HomeInitialState extends HomeStates {}
+abstract class HomeEvents {}
 
-class HomeLoadingState extends HomeStates {}
+//class HomeLoadingEvent extends HomeEvents {}
+class HomeGetDataEvent extends HomeEvents {}
 
-class HomeDataState extends HomeStates {}
-
-class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit() : super(HomeInitialState());
+class HomeBloc extends Bloc<HomeEvents, BlocState<List<User>>> {
+  HomeBloc(BlocState<List<User>> initialState) : super(BlocState()) {
+    on<HomeGetDataEvent>((event, emit) async {
+      emit(BlocState(isLoading: true));
+      try {
+        List<User> products = await HomeData().getProducts();
+        print(products);
+        emit(BlocState(hasData: true, data: products));
+      } catch (error) {
+        emit(BlocState(hasError: true, error: error.toString()));
+        print(error);
+      }
+    });
+  }
 }

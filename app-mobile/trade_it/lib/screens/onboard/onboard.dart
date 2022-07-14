@@ -89,9 +89,9 @@ class _OnboardState extends State<Onboard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if(_pageIndex == pages.length-1){
-            Navigator.pushNamed(context, "/home");
-          }else{
+          if (_pageIndex == pages.length - 1) {
+            Navigator.pushNamed(context, "/login");
+          } else {
             _pageController.nextPage(
               duration: const Duration(seconds: 1),
               curve: Curves.decelerate,
@@ -118,8 +118,8 @@ class PageIndicator extends StatelessWidget {
     return Container(
       height: 8,
       width: active ? 30 : 9,
-      decoration:  BoxDecoration(
-        color: active ?Colors.blue : Colors.blueGrey,
+      decoration: BoxDecoration(
+        color: active ? Colors.blue : Colors.blueGrey,
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),

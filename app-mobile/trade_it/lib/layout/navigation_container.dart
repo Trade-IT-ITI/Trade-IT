@@ -6,14 +6,17 @@ import 'package:trade_it/screens/profile/profile.dart';
 
 import '../screens/notification/notifications.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+class NavigationContainer extends StatefulWidget {
+  const NavigationContainer({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+  final int index;
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<NavigationContainer> createState() => _NavigationContainerState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _NavigationContainerState extends State<NavigationContainer> {
   int _bottomNavIndex = 0;
   List<IconData> iconList = [
     Icons.home,
@@ -21,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     Icons.notifications,
     Icons.person,
   ];
+
   List<Widget> widgetList = [
     Home(),
     const Faviorate(),
@@ -28,6 +32,11 @@ class _HomePageState extends State<HomePage> {
     const Profile(),
   ];
   @override
+  void initState() {
+    super.initState();
+    _bottomNavIndex = widget.index;
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

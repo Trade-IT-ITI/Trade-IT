@@ -2,13 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trade_it/bloc/bloc_state.dart';
 import 'package:trade_it/screens/home/home_bloc.dart';
 
 import '../../layout/product.dart';
+import '../../models/user.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
-
+  HomeBloc homeBloc = HomeBloc(BlocState());
   List<String> imageList = [
     "assets/images/banner.jpg",
     "assets/images/banner.jpg",
@@ -18,12 +20,16 @@ class Home extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    homeBloc.add(HomeGetDataEvent());
     int gridCount = MediaQuery.of(context).size.width > 500 ? 3 : 2;
-    return BlocProvider(
-      create: (BuildContext context) => HomeCubit(),
-      child: BlocConsumer<HomeCubit, HomeStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
+    return BlocBuilder<HomeBloc, BlocState<List<User>>>(
+      bloc: homeBloc,
+      builder: (context, state) {
+        if (state.hasError) {
+          return const Center(
+            child: Text("There Was a Problem !"),
+          );
+        } else if (state.hasData) {
           return SafeArea(
             child: Column(
               children: [
@@ -124,8 +130,10 @@ class Home extends StatelessWidget {
                                 mainAxisSpacing: 5,
                                 childAspectRatio: 1 / 2.2,
                               ),
-                              itemCount: 16,
+                              itemCount: state.data!.length,
                               itemBuilder: (BuildContext context, int index) {
+                                print("data");
+                                print(state.data![index].firstName ?? "NULL");
                                 return const Product();
                               }),
                         ),
@@ -136,8 +144,12 @@ class Home extends StatelessWidget {
               ],
             ),
           );
-        },
-      ),
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }
