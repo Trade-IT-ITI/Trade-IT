@@ -23,20 +23,17 @@ namespace API_Layer.Controllers
 
         //add new Product 
         [HttpPost]
-        public async Task<IActionResult> Add([FromForm] Product product, IFormFile image)
+        public async Task<IActionResult> Add([FromForm]Product product, IFormFile image)
         {
             try
             {
-                await _productRepository.Add(product, image);
+                await _productRepository.Add(product , image);
                 return Created("url", product);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
-
-
         }
     }
 }

@@ -9,7 +9,6 @@
         public double Price { get; set; }
         public int? RequestCount { get; set; }
         public int? ViewsCount { get; set; }
-
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Favourite> Favourites { get; set; }
         public virtual ICollection<ProductImage> ProductImages { get; set; }

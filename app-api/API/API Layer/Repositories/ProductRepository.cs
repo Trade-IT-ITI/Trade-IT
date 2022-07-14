@@ -11,22 +11,25 @@ namespace API_Layer.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment hostEnvironment;
 
-        public ProductRepository(AppDbContext context)
+        public ProductRepository(AppDbContext context,IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this.hostEnvironment = hostEnvironment;
         }
 
         public async Task Add(Product product , IFormFile image)
         {
-
             if (image.Length > 0)
-            {
+            {                
                 await _context.Products.AddAsync(product);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();   
 
-                var folderName = Path.Combine("Resources" , "Images");
+                var folderName = Path.Combine(hostEnvironment.WebRootPath , "Images");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory() , folderName);
+                //create folder for product images and it's name equals product id
+                
                 var fileName = $"{ Path.GetFileName(product.ProductId.ToString())}{Path.GetExtension(image.FileName)}";
                 var fullPath = Path.Combine(pathToSave , fileName);
                 using (var stream = new FileStream(fullPath , FileMode.Create))
@@ -36,19 +39,16 @@ namespace API_Layer.Repositories
                 ProductImage productImage = new ProductImage();
                 productImage.Name = fileName;
                 productImage.ProductId = product.ProductId;
+
                 await _context.AddAsync(productImage);
                 await _context.SaveChangesAsync();
-                //product.ProductImages.Add(productImage);
-                //await _context.SaveChangesAsync();
             }
             else
             {
                 throw new Exception("Image Required");
             }
-
         }
 
-        //public async Task<List<Product>> GetAll(ProductQueryParameter queryParameters)
         public async Task<ProductsData> GetAll(ProductQueryParameter queryParameters)
         {
             ProductsData productsData = new ProductsData();
@@ -59,11 +59,7 @@ namespace API_Layer.Repositories
                 //searching
                 if (!string.IsNullOrEmpty(queryParameters.searchText))
                 {
-                    IQueryable<Product> result;
-                    result = Products.Where(p => p.Title.Contains(queryParameters.searchText))
-                        .Concat(Products.Where(p => p.Descrioption.Contains(queryParameters.searchText)));
-
-                    Products = result.Distinct();
+                    Products = Products.Where(p => p.Title.Contains(queryParameters.searchText));
                 }
 
                 //filteration

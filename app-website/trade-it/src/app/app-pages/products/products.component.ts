@@ -50,7 +50,6 @@ export class ProductsComponent implements OnInit, OnChanges {
     this.isLoading = true;
     this.productService.getall(this.queryParams).subscribe(data => {
       this.productsData = data;
-      console.log(data)
       this.isLoading = false;
     })
   }
