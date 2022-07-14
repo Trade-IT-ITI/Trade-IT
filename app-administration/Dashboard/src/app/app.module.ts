@@ -11,6 +11,7 @@ import { AddSubcategoryComponent } from './component/Subcategory/add-subcategory
 import { AddCityComponent } from './component/Location/City/add-city/add-city.component';
 import { AddAreaComponent } from './component/Location/Area/add-area/add-area.component';
 import { AddInstructionComponent } from './component/Instruction/add-instruction/add-instruction.component';
+import { AddStatusComponent } from './component/Status/add-status/add-status.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AddInstructionComponent } from './component/Instruction/add-instruction
     AddSubcategoryComponent,
     AddCityComponent,
     AddAreaComponent,
-    AddInstructionComponent
+    AddInstructionComponent,
+    AddStatusComponent
   ],
   imports: [
     BrowserModule,
