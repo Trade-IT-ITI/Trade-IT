@@ -18,30 +18,34 @@
 
     </li>
     <li class="nav-item">
-      <a routerLink="subcategory" class="nav-link text-white" 
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+      <a routerLink="subcategory" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
         <i class="fa-solid fa-clone m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">Sub Category</span>
       </a>
 
     </li>
     <li class="nav-item">
-      <a routerLink="city" class="nav-link text-white" 
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+      <a routerLink="city" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
         <i class="fa-solid fa-city m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">City </span>
       </a>
 
     </li>
     <li class="nav-item">
-      <a routerLink="area" class="nav-link text-white" 
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+      <a routerLink="area" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
         <i class="fa-solid fa-building m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">Area </span>
       </a>
 
     </li>
-   
+    <li class="nav-item">
+      <a routerLink="instruction" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-person-chalkboard m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Instruction </span>
+      </a>
+
+    </li>
+
   </ul>
   <div class="dropdown p-3" [ngClass]="{ 'd-none': isToggle }">
     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"

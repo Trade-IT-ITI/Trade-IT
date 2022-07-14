@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AddInstructionComponent } from 'src/app/component/Instruction/add-instruction/add-instruction.component';
 import { AddCityComponent } from 'src/app/component/Location/City/add-city/add-city.component';
 import { AddCategoryComponent } from 'src/app/component/Category/add-category/add-category.component';
 import { AddSubcategoryComponent } from 'src/app/component/Subcategory/add-subcategory/add-subcategory.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
   {path:"category", component: AddCategoryComponent},
   {path:"subcategory", component: AddSubcategoryComponent},
   {path:"city", component: AddCityComponent},
-  {path:"area", component: AddAreaComponent}
+  {path:"area", component: AddAreaComponent},
+  {path:"instruction", component: AddInstructionComponent}
 ];
 
 @NgModule({

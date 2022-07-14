@@ -10,6 +10,7 @@ import { SidebarComponent } from './Layout/sidebar/sidebar.component';
 import { AddSubcategoryComponent } from './component/Subcategory/add-subcategory/add-subcategory.component';
 import { AddCityComponent } from './component/Location/City/add-city/add-city.component';
 import { AddAreaComponent } from './component/Location/Area/add-area/add-area.component';
+import { AddInstructionComponent } from './component/Instruction/add-instruction/add-instruction.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AddAreaComponent } from './component/Location/Area/add-area/add-area.co
     SidebarComponent,
     AddSubcategoryComponent,
     AddCityComponent,
-    AddAreaComponent
+    AddAreaComponent,
+    AddInstructionComponent
   ],
   imports: [
     BrowserModule,
