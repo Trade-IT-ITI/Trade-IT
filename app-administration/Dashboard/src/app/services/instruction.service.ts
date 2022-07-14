@@ -1,19 +1,29 @@
+
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+import { instruction } from 'src/app/models/instruction';
+
 @Injectable({
   providedIn: 'root'
 })
-export class SubcategoryService {
-  public url = "http://localhost:5228/api/Subcategory";
+export class InstructionService {
+
+  public url = "http://localhost:5228/api/Instruction"
 
   constructor(private http: HttpClient) { }
 
-  addSubcategory(name: string,categoryId: number) {
-    return this.http.post<any>(this.url, { name,categoryId })
+  getAllInstruction(): Observable<instruction[]> {
+    return this.http.get<instruction[]>(this.url)
       .pipe(catchError(this.handleError));
-    
   }
+  addInstruction(text: string) {
+    return this.http.post<any>(this.url, { text })
+      .pipe(catchError(this.handleError));
+    ;
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);

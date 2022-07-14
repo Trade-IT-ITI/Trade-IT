@@ -5,61 +5,54 @@
     <i class="fa-solid fa-bars"></i>
   </a>
   <a routerLink="Home" class="text-primary text-center" (click)="active(Home)" style="font-size: xx-large">
-    <i class="fa-regular fa-hospital"></i>
+    <i class=" border p-1 rounded-circle fa-solid fa-dove"></i>
   </a>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item" data-bs-toggle="collapse"role="button" aria-expanded="false" aria-controls="collapseExample">
+    <li class="nav-item" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
       <a routerLink="category" class="nav-link text-white" (click)="active(Home)" id="Home" #Home
-      [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-      <i class="fa-solid fa-table-cells m-1"></i>
+        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-layer-group m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">Category</span>
       </a>
-  
+
     </li>
     <li class="nav-item">
-      <a routerLink="subcategory" class="nav-link text-white" (click)="active(Doctors)" id="Doctors" #Doctors
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-user-doctor m-1"></i>
+      <a routerLink="subcategory" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-clone m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">Sub Category</span>
       </a>
-     
-    </li>
-    <li *ngIf="type=='e'" class="nav-item">
-      <a routerLink="Employees" class="nav-link text-white" (click)="active(Employees)" id="Employees" #Employees
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-user-gear m1"></i>
-        <span [ngClass]="{ 'd-none': isToggle }">Employees</span>
-      </a>
+
     </li>
     <li class="nav-item">
-      <a routerLink="Appointments" class="nav-link text-white" (click)="active(Appointments)" id="Appointments"
-        #Appointments [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-regular fa-calendar-plus m-1"></i>
-        <span [ngClass]="{ 'd-none': isToggle }">Appointments</span>
+      <a routerLink="city" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-city m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">City </span>
       </a>
-    </li>
-    <li *ngIf="type=='p'" class="nav-item">
-      <a routerLink="Patients" class="nav-link text-white" (click)="active(Patients)" id="Patients" #Patients
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-hospital-user m-1"></i>
-        <span [ngClass]="{ 'd-none': isToggle }">Patients</span>
-      </a>
+
     </li>
     <li class="nav-item">
-      <a routerLink="Services" class="nav-link text-white" (click)="active(Services)" id="Services" #Services
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-puzzle-piece m-1"></i>
-        <span [ngClass]="{ 'd-none': isToggle }">Services</span>
+      <a routerLink="area" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-building m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Area </span>
       </a>
+
     </li>
     <li class="nav-item">
-      <a routerLink="Reports" class="nav-link text-white" (click)="active(Reports)" id="Reports" #Reports
-        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-scroll m-1"></i>
-        <span [ngClass]="{ 'd-none': isToggle }">Report</span>
+      <a routerLink="instruction" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-helmet-safety m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Instruction </span>
       </a>
+
     </li>
+    <li class="nav-item">
+      <a routerLink="status" class="nav-link text-white" [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-tag m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Status </span>
+      </a>
+
+    </li>
+
   </ul>
   <div class="dropdown p-3" [ngClass]="{ 'd-none': isToggle }">
     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"

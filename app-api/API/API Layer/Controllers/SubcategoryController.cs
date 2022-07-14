@@ -7,10 +7,10 @@ namespace API_Layer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubcategryController : ControllerBase
+    public class SubcategoryController : ControllerBase
     {
         private readonly ISubcategoryRepository subcategoryRepository;
-        public SubcategryController(ISubcategoryRepository subcategoryRepository)
+        public SubcategoryController(ISubcategoryRepository subcategoryRepository)
         {
             this.subcategoryRepository = subcategoryRepository;
         }
