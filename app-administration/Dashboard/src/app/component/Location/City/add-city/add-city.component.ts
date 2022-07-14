@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+import { CityService } from 'src/app/services/city.service';
 
 @Component({
   selector: 'app-add-city',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddCityComponent implements OnInit {
 
-  constructor() { }
+  cityName:string="";
+  constructor( private CityService:CityService) { }
+  
+  addCity(){
+    this.CityService.addCity(this.cityName).subscribe(data => {console.log(data)});
+  }
 
   ngOnInit(): void {
   }

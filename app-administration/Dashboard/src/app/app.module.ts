@@ -5,11 +5,11 @@ import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddCategoryComponent } from './Category/add-category/add-category.component';
+import { AddCategoryComponent } from './component/Category/add-category/add-category.component';
 import { SidebarComponent } from './Layout/sidebar/sidebar.component';
-import { AddSubcategoryComponent } from './Category/add-subcategory/add-subcategory.component';
-import { AddCityComponent } from './Location/City/add-city/add-city.component';
-import { AddAreaComponent } from './Location/Area/add-area/add-area.component';
+import { AddSubcategoryComponent } from './component/Subcategory/add-subcategory/add-subcategory.component';
+import { AddCityComponent } from './component/Location/City/add-city/add-city.component';
+import { AddAreaComponent } from './component/Location/Area/add-area/add-area.component';
 
 
 @NgModule({
