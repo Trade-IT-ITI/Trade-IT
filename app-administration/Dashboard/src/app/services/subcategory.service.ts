@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SubcategoryService {
-  public url = "http://localhost:5228/api/Subcategory"
+  public url = "http://localhost:5228/api/Subcategory";
 
   constructor(private http: HttpClient) { }
 
