@@ -5,31 +5,39 @@
     <i class="fa-solid fa-bars"></i>
   </a>
   <a routerLink="Home" class="text-primary text-center" (click)="active(Home)" style="font-size: xx-large">
-    <i class="fa-regular fa-hospital"></i>
+    <i class=" border p-1 rounded-circle fa-solid fa-dove"></i>
   </a>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
       <a routerLink="category" class="nav-link text-white" (click)="active(Home)" id="Home" #Home
         [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-table-cells m-1"></i>
+        <i class="fa-solid fa-layer-group m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">Category</span>
       </a>
 
     </li>
     <li class="nav-item">
-      <a routerLink="subcategory" class="nav-link text-white" (click)="active(Doctors)" id="Doctors" #Doctors
+      <a routerLink="subcategory" class="nav-link text-white" 
         [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-user-doctor m-1"></i>
+        <i class="fa-solid fa-clone m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">Sub Category</span>
       </a>
 
     </li>
     <li class="nav-item">
-      <a routerLink="city" class="nav-link text-white" (click)="active(Doctors)" id="Doctors" #Doctors
+      <a routerLink="city" class="nav-link text-white" 
         [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
-        <i class="fa-solid fa-user-doctor m-1"></i>
+        <i class="fa-solid fa-city m-1"></i>
         <span [ngClass]="{ 'd-none': isToggle }">City </span>
+      </a>
+
+    </li>
+    <li class="nav-item">
+      <a routerLink="area" class="nav-link text-white" 
+        [ngClass]="{ 'fs-5': isToggle, 'text-center': isToggle }">
+        <i class="fa-solid fa-building m-1"></i>
+        <span [ngClass]="{ 'd-none': isToggle }">Area </span>
       </a>
 
     </li>
