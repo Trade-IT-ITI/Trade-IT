@@ -1,0 +1,13 @@
+<form>
+    <div class="mb-3">
+      <label for="categoryName" class="form-label">Category </label>
+      <select name="categoryId" id="categoryId" [(ngModel)]="categoryId">
+        <option  *ngFor="let category of categories" [value]="category.categoryId">{{category.name}}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="categoryName" class="form-label">Subcategory Name</label>
+      <input type="text" [(ngModel)]="subcategoryName" class="form-control" id="categoryName" name="categoryName" aria-describedby="categoryName">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="addSubcategory()">Submit</button>
+  </form>
