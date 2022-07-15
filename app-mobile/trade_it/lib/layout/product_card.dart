@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Product extends StatefulWidget {
-  const Product({Key? key}) : super(key: key);
+import '../models/product.dart';
 
-  @override
-  State<Product> createState() => _ProductState();
-}
+class ProductCard extends StatelessWidget {
+  ProductCard({Key? key, required this.productOBJ}) : super(key: key);
+  Product productOBJ;
 
-class _ProductState extends State<Product> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,7 +14,7 @@ class _ProductState extends State<Product> {
         Navigator.pushNamed(context, "/details");
       },
       child: Card(
-        elevation: 2,
+        elevation: 3,
         child: Column(
           children: [
             Container(
@@ -32,11 +30,38 @@ class _ProductState extends State<Product> {
                 padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
                 child: Column(
                   children: [
+                    // Image.asset(
+                    //   "assets/images/product.jpg",
+                    // ),
+                    // FadeInImage(
+                    //   width: double.infinity,
+                    //   height: 180,
+                    //   placeholder: AssetImage("assets/images/product.png"),
+                    //   image: NetworkImage(productOBJ.productImages?[0]['name']),
+                    //   // image: productOBJ.productImages![0].name,
+                    // ),
+                    // Image.network(
+                    //   productOBJ.productImages?[0]['name'],
+                    //   loadingBuilder: (BuildContext context, Widget child,
+                    //       ImageChunkEvent? loadingProgress) {
+                    //     if (loadingProgress == null) {
+                    //       return child;
+                    //     }
+                    //     return Center(
+                    //       child: CircularProgressIndicator(
+                    //         value: loadingProgress.expectedTotalBytes != null
+                    //             ? loadingProgress.cumulativeBytesLoaded /
+                    //                 loadingProgress.expectedTotalBytes!
+                    //             : null,
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                     Row(
                       children: [
                         Chip(
                           label: Text(
-                            "Electronics",
+                            productOBJ.subcategory!['name'],
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: Colors.white,
@@ -48,7 +73,7 @@ class _ProductState extends State<Product> {
                         const Spacer(),
                         Chip(
                           label: Text(
-                            "New",
+                            productOBJ.status!['name'],
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: Colors.white,
@@ -75,12 +100,15 @@ class _ProductState extends State<Product> {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "Kikon Camera",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(color: Colors.black87, fontSize: 16),
+                      Expanded(
+                        child: Text(
+                          productOBJ.title!,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: Colors.black87, fontSize: 16),
+                        ),
                       ),
                     ],
                   ),
@@ -90,7 +118,7 @@ class _ProductState extends State<Product> {
                   Row(
                     children: [
                       Text(
-                        "8500 EGP",
+                        "${productOBJ.price!} EGP",
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: const Color.fromARGB(221, 80, 80, 80),
                               fontSize: 18,
@@ -117,34 +145,42 @@ class _ProductState extends State<Product> {
                           backgroundImage:
                               AssetImage("assets/images/avatar.jpg"),
                         ),
-                        Text(
-                          "7amama Elgen",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: Colors.black54, fontSize: 15),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Expanded(
+                          child: Text(
+                            productOBJ.owner!['firstName'] +
+                                " " +
+                                productOBJ.owner!['lastName'],
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: Colors.black54, fontSize: 15),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Chip(
-                        label: Text(
-                          "Trade For Laptop",
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Colors.white,
-                                  ),
-                        ),
-                        backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Chip(
+                  //       label: Text(
+                  //         "Trade For Laptop",
+                  //         style:
+                  //             Theme.of(context).textTheme.bodySmall?.copyWith(
+                  //                   color: Colors.white,
+                  //                 ),
+                  //       ),
+                  //       backgroundColor:
+                  //           Theme.of(context).colorScheme.secondary,
+                  //     ),
+                  //   ],
+                  // ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10) +
+                    padding: const EdgeInsets.symmetric(horizontal: 5) +
                         const EdgeInsets.only(top: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,12 +190,20 @@ class _ProductState extends State<Product> {
                           size: 30,
                           color: Colors.redAccent,
                         ),
-                        Text(
-                          "Cairo , Egypt",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: Colors.black54, fontSize: 15),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Expanded(
+                          child: Text(
+                            productOBJ.area!['name'] +
+                                "," +
+                                productOBJ.city!['name'],
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: Colors.black54, fontSize: 14),
+                          ),
                         ),
                       ],
                     ),

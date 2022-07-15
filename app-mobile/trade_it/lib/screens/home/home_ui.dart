@@ -5,8 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trade_it/bloc/bloc_state.dart';
 import 'package:trade_it/screens/home/home_bloc.dart';
 
-import '../../layout/product.dart';
-import '../../models/user.dart';
+import '../../layout/product_card.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     homeBloc.add(HomeGetDataEvent());
     int gridCount = MediaQuery.of(context).size.width > 500 ? 3 : 2;
-    return BlocBuilder<HomeBloc, BlocState<List<User>>>(
+    return BlocBuilder<HomeBloc, BlocState<List>>(
       bloc: homeBloc,
       builder: (context, state) {
         if (state.hasError) {
@@ -128,13 +127,16 @@ class Home extends StatelessWidget {
                                 crossAxisCount: gridCount,
                                 crossAxisSpacing: 0,
                                 mainAxisSpacing: 5,
-                                childAspectRatio: 1 / 2.2,
+                                childAspectRatio: 1 / 2,
                               ),
                               itemCount: state.data!.length,
                               itemBuilder: (BuildContext context, int index) {
-                                print("data");
-                                print(state.data![index].firstName ?? "NULL");
-                                return const Product();
+                                // print("data");
+                                //print(state.data![index].title ?? "NULL");
+                                return ProductCard(
+                                  productOBJ: state.data![index],
+                                );
+                                //return Text(state.data![index].title ?? "NULL");
                               }),
                         ),
                       ],
