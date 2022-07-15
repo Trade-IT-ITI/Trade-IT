@@ -36,6 +36,8 @@ builder.Services.AddScoped<IAreaRepository , AreaRepository>();
 builder.Services.AddScoped<IProductsDetailsRepository , ProductsDetailsRepository>();
 builder.Services.AddScoped<ICategoryInstructionRepository , CategoryInstructionRepository>();
 builder.Services.AddScoped<IStatusRepository , StatusRepository>();
+builder.Services.AddScoped<IUserRepository , UserRepository>();
+
 
 
 builder.Services.AddCors(options =>

@@ -9,6 +9,16 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late var image;
+    if (productOBJ.productImages == null ||
+        productOBJ.productImages?[0] == null) {
+      image = const AssetImage("assets/images/product.png");
+    } else {
+      image = NetworkImage('http://10.0.2.2:5228/Images/' +
+          productOBJ.productId.toString() +
+          '/' +
+          productOBJ.productImages?[0]['name']);
+    }
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, "/details");
@@ -20,42 +30,25 @@ class ProductCard extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 180,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/product.jpg"),
+                  image: image,
                   fit: BoxFit.cover,
                 ),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
-                child: Column(
+                child: Stack(
                   children: [
-                    // Image.asset(
-                    //   "assets/images/product.jpg",
-                    // ),
                     // FadeInImage(
                     //   width: double.infinity,
-                    //   height: 180,
+                    //   height: 100,
                     //   placeholder: AssetImage("assets/images/product.png"),
-                    //   image: NetworkImage(productOBJ.productImages?[0]['name']),
+                    //   image: NetworkImage('http://10.0.2.2:5228/Images/' +
+                    //       productOBJ.productId.toString() +
+                    //       '/' +
+                    //       productOBJ.productImages?[0]['name']),
                     //   // image: productOBJ.productImages![0].name,
-                    // ),
-                    // Image.network(
-                    //   productOBJ.productImages?[0]['name'],
-                    //   loadingBuilder: (BuildContext context, Widget child,
-                    //       ImageChunkEvent? loadingProgress) {
-                    //     if (loadingProgress == null) {
-                    //       return child;
-                    //     }
-                    //     return Center(
-                    //       child: CircularProgressIndicator(
-                    //         value: loadingProgress.expectedTotalBytes != null
-                    //             ? loadingProgress.cumulativeBytesLoaded /
-                    //                 loadingProgress.expectedTotalBytes!
-                    //             : null,
-                    //       ),
-                    //     );
-                    //   },
                     // ),
                     Row(
                       children: [
@@ -163,32 +156,16 @@ class ProductCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     Chip(
-                  //       label: Text(
-                  //         "Trade For Laptop",
-                  //         style:
-                  //             Theme.of(context).textTheme.bodySmall?.copyWith(
-                  //                   color: Colors.white,
-                  //                 ),
-                  //       ),
-                  //       backgroundColor:
-                  //           Theme.of(context).colorScheme.secondary,
-                  //     ),
-                  //   ],
-                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5) +
                         const EdgeInsets.only(top: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const FaIcon(
+                        FaIcon(
                           FontAwesomeIcons.locationDot,
                           size: 30,
-                          color: Colors.redAccent,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                         const SizedBox(
                           width: 4,
@@ -196,7 +173,7 @@ class ProductCard extends StatelessWidget {
                         Expanded(
                           child: Text(
                             productOBJ.area!['name'] +
-                                "," +
+                                " , " +
                                 productOBJ.city!['name'],
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
