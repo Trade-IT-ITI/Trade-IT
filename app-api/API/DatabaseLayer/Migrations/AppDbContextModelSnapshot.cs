@@ -404,12 +404,6 @@ namespace DatabaseLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductImageId"), 1L, 1);
 
-                    b.Property<byte[]>("Bytes")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ContentType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -426,14 +420,44 @@ namespace DatabaseLayer.Migrations
                         new
                         {
                             ProductImageId = 1,
-                            Name = "lenovo_x1.jpg",
+                            Name = "lenovo1.jpg",
                             ProductId = 1
                         },
                         new
                         {
                             ProductImageId = 2,
-                            Name = "lenovo_x1_2.jpg",
+                            Name = "lenovo2.jpg",
                             ProductId = 1
+                        },
+                        new
+                        {
+                            ProductImageId = 3,
+                            Name = "152419-review-hands-on-redmi-note-9-image1-rr6mm2jbpp.jpg",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            ProductImageId = 4,
+                            Name = "nacon-gaming-chair-blue-pcch-310-bl.jpg",
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            ProductImageId = 5,
+                            Name = "New-Summer-Children-shirts-Printing-Anchor-pattern-Cotton-100-Short-sleeved-Boy-s-shirts-Fit-for.jpg",
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            ProductImageId = 6,
+                            Name = "16828269_35035155_300.jpg",
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            ProductImageId = 7,
+                            Name = "c827e760-197a-4dde-83fe-2975d46017de_large.jpg",
+                            ProductId = 6
                         });
                 });
 

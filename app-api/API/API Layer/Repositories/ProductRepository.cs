@@ -22,23 +22,27 @@ namespace API_Layer.Repositories
         public async Task Add(Product product , IFormFile image)
         {
             if (image.Length > 0)
-            {                
+            {
+
                 await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();   
 
-                var folderName = Path.Combine(hostEnvironment.WebRootPath , "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory() , folderName);
+                var folderName = Path.Combine(hostEnvironment.WebRootPath , $@"Images\{product.ProductId}");
+                Directory.CreateDirectory(folderName);
                 //create folder for product images and it's name equals product id
-                
-                var fileName = $"{ Path.GetFileName(product.ProductId.ToString())}{Path.GetExtension(image.FileName)}";
-                var fullPath = Path.Combine(pathToSave , fileName);
+
+                var fileName = $"{product.ProductId}-{Guid.NewGuid()}-{image.FileName}";
+
+                var fullPath = Path.Combine(folderName , fileName);
                 using (var stream = new FileStream(fullPath , FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
                 }
-                ProductImage productImage = new ProductImage();
-                productImage.Name = fileName;
-                productImage.ProductId = product.ProductId;
+                ProductImage productImage = new ProductImage()
+                {
+                    Name = fileName ,
+                    ProductId = product.ProductId
+                };
 
                 await _context.AddAsync(productImage);
                 await _context.SaveChangesAsync();
