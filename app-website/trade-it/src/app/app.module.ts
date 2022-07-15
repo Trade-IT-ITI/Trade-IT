@@ -17,6 +17,7 @@ import { SearchComponent } from './app-pages/search/search.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { AppRoutingModule } from './app.routing';
 import { NotFoundComponent } from './app-pages/not-found/not-found.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NotFoundComponent } from './app-pages/not-found/not-found.component';
     HttpClientModule,
     FormsModule,
     NgxSliderModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
