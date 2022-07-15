@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     homeBloc.add(HomeGetDataEvent());
     int gridCount = MediaQuery.of(context).size.width > 500 ? 3 : 2;
-    return BlocBuilder<HomeBloc, BlocState<List>>(
+    return BlocBuilder<HomeBloc, BlocState<List<List>>>(
       bloc: homeBloc,
       builder: (context, state) {
         if (state.hasError) {
@@ -114,11 +114,49 @@ class Home extends StatelessWidget {
                                   ))
                               .toList(),
                         ),
+                        Container(
+                          height: 60,
+                          margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                          width: double.infinity,
+                          child: ListView.builder(
+                              itemCount: state.data![1].length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  margin: const EdgeInsets.symmetric(
+                                    horizontal: 2,
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      print(state.data![1][index].name);
+                                    },
+                                    child: Chip(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 5,
+                                        vertical: 10,
+                                      ),
+                                      backgroundColor:
+                                          Theme.of(context).colorScheme.primary,
+                                      label: Text(
+                                        state.data![1][index].name,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
                         const SizedBox(
                           height: 15,
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                          ),
                           child: GridView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -129,12 +167,12 @@ class Home extends StatelessWidget {
                                 mainAxisSpacing: 5,
                                 childAspectRatio: 1 / 2,
                               ),
-                              itemCount: state.data!.length,
+                              itemCount: state.data![0].length,
                               itemBuilder: (BuildContext context, int index) {
-                                // print("data");
-                                //print(state.data![index].title ?? "NULL");
+                                //print("data");
+                                //print(state.data![0][index] ?? "NULL");
                                 return ProductCard(
-                                  productOBJ: state.data![index],
+                                  productOBJ: state.data![0][index],
                                 );
                                 //return Text(state.data![index].title ?? "NULL");
                               }),
