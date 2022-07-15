@@ -29,12 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\10.jpg" />
-    <None Include="wwwroot\Images\3.png" />
-    <None Include="wwwroot\Images\8.jpg" />
-    <None Include="wwwroot\Images\9.jpg" />
-    <None Include="wwwroot\Images\lenovo_x1.jpg" />
-    <None Include="wwwroot\Images\lenovo_x1_2.jpg" />
+    <None Include="wwwroot\Images\1\lenovo1.jpg" />
+    <None Include="wwwroot\Images\1\lenovo2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\2\" />
+    <Folder Include="wwwroot\Images\5\" />
+    <Folder Include="wwwroot\Images\6\" />
+    <Folder Include="wwwroot\Images\4\" />
+    <Folder Include="wwwroot\Images\3\" />
   </ItemGroup>
 
 </Project>
