@@ -24,7 +24,7 @@ class TradeITApp extends StatelessWidget {
         '/home': (context) => const NavigationContainer(
               index: 0,
             ),
-        '/details': (context) => const ProductDetails(),
+        '/details': (context) => ProductDetails(),
       },
     );
   }
