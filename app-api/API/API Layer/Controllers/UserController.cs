@@ -1,4 +1,5 @@
 ﻿using API_Layer.Repositories.Interfaces;
+using DatabaseLayer.Helper;
 using DatabaseLayer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace API_Layer.Controllers
             _userRepository = userRepository;
         }
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(string email , string password)
+        public async Task<IActionResult> Login(string email , string password,int type)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 return BadRequest("email and password are required");
@@ -26,6 +27,10 @@ namespace API_Layer.Controllers
 
             if (user.Password != password.ToLower())
                 return NotFound("wrong password");
+
+            //need for editing for safe casting 
+            if (user.Type != (UserType)type)
+                return NotFound("There is no such a user");
 
             return Ok(user);
         }
