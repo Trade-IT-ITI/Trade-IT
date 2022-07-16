@@ -10,6 +10,7 @@ import { category } from 'src/app/models/category';
 import { subcategory } from 'src/app/models/subcategory';
 import { StatusService } from 'src/app/services/status.service';
 import { Status } from 'src/app/models/status';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 
 @Component({
@@ -60,9 +61,25 @@ export class SearchComponent implements OnInit {
   constructor(private productsDetailsService: ProductsDetailsService,
     private cityService: CityService,
     private categoryService: CategoyService,
-    private statusService: StatusService) { }
+    private statusService: StatusService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParamMap.subscribe(data => {
+      console.log(data.keys)
+      if (data.keys.length > 0) {
+        let cat = data.get('category');
+        let subcat = data.get('subcategory');
+        if (cat) {
+          this.categoryId = +cat;
+          this.onSelectCategory();
+        }
+        if (subcat) {
+          this.subcategoryId = +subcat;
+          this.onSelectSubcategory()
+        }
+      }
+    })
     //loading products
     this.productsQueryParams = this.productsQueryParams.append('expand', 'City');
     this.productsQueryParams = this.productsQueryParams.append('expand', 'Area');

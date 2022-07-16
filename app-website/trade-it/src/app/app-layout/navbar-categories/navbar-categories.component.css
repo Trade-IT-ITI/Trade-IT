@@ -11,12 +11,11 @@
   height: 400px;
 }
 a {
+  cursor: pointer;
   color: var(--linksColor);
   text-decoration: none;
   width: fit-content;
 }
 a:hover {
   text-decoration: underline;
-}
-b {
 }
