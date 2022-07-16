@@ -11,6 +11,7 @@ import { AddCityComponent } from 'src/app/admin/component/Location/City/add-city
 import { AddAreaComponent } from 'src/app/admin/component/Location/Area/add-area/add-area.component';
 import { AddInstructionComponent } from 'src/app/admin/component/Instruction/add-instruction/add-instruction.component';
 import { AddStatusComponent } from 'src/app/admin/component/Status/add-status/add-status.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -28,7 +29,18 @@ import { AddStatusComponent } from 'src/app/admin/component/Status/add-status/ad
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
-  ]
+    FormsModule,
+    RouterModule
+  ],
+  exports: [
+    AdminComponent,
+    SidebarComponent,
+    AddCategoryComponent,
+    AddSubcategoryComponent,
+    AddCityComponent,
+    AddAreaComponent,
+    AddInstructionComponent,
+    AddStatusComponent
+  ],
 })
 export class AdminModule { }
