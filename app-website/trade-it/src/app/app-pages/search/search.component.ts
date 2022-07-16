@@ -65,21 +65,6 @@ export class SearchComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParamMap.subscribe(data => {
-      console.log(data.keys)
-      if (data.keys.length > 0) {
-        let cat = data.get('category');
-        let subcat = data.get('subcategory');
-        if (cat) {
-          this.categoryId = +cat;
-          this.onSelectCategory();
-        }
-        if (subcat) {
-          this.subcategoryId = +subcat;
-          this.onSelectSubcategory()
-        }
-      }
-    })
     //loading products
     this.productsQueryParams = this.productsQueryParams.append('expand', 'City');
     this.productsQueryParams = this.productsQueryParams.append('expand', 'Area');
@@ -113,7 +98,22 @@ export class SearchComponent implements OnInit {
     let CategoriesParams: HttpParams = new HttpParams();
     CategoriesParams = CategoriesParams.append('expand', 'Subcategories')
     this.categoryService.getall(CategoriesParams).subscribe(data => {
-      this.categories = data
+      this.categories = data;
+      //subscribe on changing query params event
+      this.activatedRoute.queryParamMap.subscribe(data => {
+        if (data.keys.length > 0) {
+          let cat = data.get('category');
+          let subcat = data.get('subcategory');
+          if (cat) {
+            this.categoryId = +cat;
+            this.onSelectCategory();
+          }
+          if (subcat) {
+            this.subcategoryId = +subcat;
+            this.onSelectSubcategory()
+          }
+        }
+      })
     });
 
     //loading statuses
@@ -169,6 +169,7 @@ export class SearchComponent implements OnInit {
         else
           this.productsQueryParams = this.productsQueryParams.append('city', this.cityId);
 
+        this.productsQueryParams = this.productsQueryParams.delete('area');
         this.isFiltersClean = false;
       }
     }
@@ -204,6 +205,7 @@ export class SearchComponent implements OnInit {
         else
           this.productsQueryParams = this.productsQueryParams.append('category', this.categoryId);
 
+        this.productsQueryParams = this.productsQueryParams.delete('subcategory');
         this.isFiltersClean = false;
 
       }

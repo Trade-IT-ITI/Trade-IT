@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  categoriesToggle: boolean = true;
+  categoriesToggle: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  toggleSubscribe(value: boolean) {
+    this.categoriesToggle = value
+  }
 }
