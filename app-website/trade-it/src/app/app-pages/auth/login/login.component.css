@@ -18,8 +18,10 @@
   }
   
   
-  input{
+  input,select,option{
     color: var(--mainColor);
+    font-weight: bolder;
+    
   }
   input:focus{
     outline: none;
