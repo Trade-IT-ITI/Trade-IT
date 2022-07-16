@@ -1,0 +1,52 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  :root {
+    --mainColor: #2B375E;
+    --secondColor :#4460EF;
+    
+  }
+  .container {
+    border:6px solid var(--mainColor);
+    border-radius:10px;
+    box-shadow: 10px 1px 16px var(--secondColor);
+  
+  }
+  h1{
+    color: var(--mainColor);
+  }
+  
+  
+  input,select,option{
+    color: var(--mainColor);
+    font-weight: bolder;
+    
+  }
+  input:focus{
+    outline: none;
+  }
+  Button{
+   background-color: var(--secondColor);
+   cursor: pointer;
+  }
+  
+  h3>a{
+    color: var(--secondColor);
+    text-decoration: none;
+  }
+  
+  .coloring{
+    background-color:var(--mainColor);
+  } 
+  footer {
+    background-color: var(--mainColor);
+    box-shadow: 10px 1px 16px var(--secondColor);
+  }
+  
+  
+  @media screen and (max-width: 600px){
+   footer {
+    font-size: 10px !important;
+  }
+  }

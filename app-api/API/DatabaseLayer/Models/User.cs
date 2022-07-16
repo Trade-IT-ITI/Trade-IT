@@ -1,4 +1,6 @@
-﻿namespace DatabaseLayer.Models
+﻿using DatabaseLayer.Helper;
+
+namespace DatabaseLayer.Models
 {
     public class User
     {
@@ -8,6 +10,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
+        public UserType Type { get; set; }
 
         public ICollection<Favourite> Favourites { get; set; }
         public ICollection<Product> Products { get; set; }

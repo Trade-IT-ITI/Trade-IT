@@ -1,0 +1,44 @@
+<section class="container m-auto my-5 py-1 px-5 ">
+    <h1 class="text-center my-2 fs-1">Sign up page </h1>
+    <div class="row g-0 ">
+        <img src="./assets/images/login.PNG" alt="" srcset="" class=" col-lg-6  d-md-flex ">
+
+        <form class="col-lg-5 m-1 d-flex align-items-center justify-content-center flex-column">
+            <div class=" row  justify-content-center align-items-center border  border-top-0 border-dark rounded-pill">
+                <i class="mx-1 text-center col-1 ">FN</i>
+                <input [(ngModel)]="user.firstName" type="text" class=" border-0 col fs-3  m-3 px-2 " name="fname" id="fname">
+            </div>
+            <div
+                class=" my-2 row  justify-content-center align-items-center border  border-top-0 border-dark rounded-pill">
+                <i class="mx-1 text-center col-1 ">LN</i>
+                <input [(ngModel)]="user.lastName" type="text" class=" border-0 col fs-3  m-3 px-2 " name="lname" id="lname">
+            </div>
+            <div
+                class=" my-2 row  justify-content-center align-items-center border  border-top-0 border-dark rounded-pill">
+                <i class="mx-1 text-center col-1 fa-solid fa-mobile"></i>
+                <input [(ngModel)]="user.phone" type="string" class=" border-0 col fs-3  m-3 px-2 " name="mobile" id="mobile">
+            </div>
+            <div
+                class=" my-2 row  justify-content-center align-items-center border  border-top-0 border-dark rounded-pill">
+                <i class="mx-1 text-center col-1 fa-solid fa-envelope"></i>
+                <input [(ngModel)]="user.email" type="email" class=" border-0 col fs-3  m-3 px-2 " name="email" id="email">
+            </div>
+            <div class="row  justify-content-center align-items-center border  border-top-0 border-dark rounded-pill">
+                <i class="mx-1 text-center col-1 fa-solid fa-lock"></i>
+                <input [(ngModel)]="user.password" type="password" class="border-0 col fs-3  m-3 px-2 " name="password"
+                    id="password">
+            </div>
+
+            <!-- <div class="row  justify-content-center align-items-center border  border-top-0 border-dark rounded-pill">
+                <i class="mx-1 text-center col-1 fa-solid fa-wand-sparkles"></i>
+                <select [(ngModel)]="user.type" name="type" class="border-0 col fs-3  m-3 px-2 ">
+                    <option value="0">Admin</option>
+                    <option [selected]="true" value="1">User</option>
+                </select>
+            </div> -->
+            <button (click)="register()" class=" my-1 py-2 w-100 border-0 rounded-pill text-light fs-4 mb-3">Sign up</button>
+            <h3 class="text-secondary fs-6">Already have an account <a routerLink="/login">login</a></h3>
+        </form>
+    </div>
+
+</section>

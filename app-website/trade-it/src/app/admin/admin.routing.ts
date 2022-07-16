@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin.component';
 import { AddCategoryComponent } from './component/Category/add-category/add-category.component';
 import { AddInstructionComponent } from './component/Instruction/add-instruction/add-instruction.component';
 import { AddAreaComponent } from './component/Location/Area/add-area/add-area.component';
@@ -9,12 +10,16 @@ import { AddSubcategoryComponent } from './component/Subcategory/add-subcategory
 
 const routes: Routes = [
   
-  {path:"category/add", component: AddCategoryComponent},
-  {path:"subcategory/add", component: AddSubcategoryComponent},
-  {path:"city/add", component: AddCityComponent},
-  {path:"area/add", component: AddAreaComponent},
-  {path:"instruction/add", component: AddInstructionComponent},
-  {path:"status/add", component: AddStatusComponent}
+  {
+        path: "admin", component: AdminComponent, children: [
+            { path: "category/add", component: AddCategoryComponent },
+            { path: "subcategory/add", component: AddSubcategoryComponent },
+            { path: "city/add", component: AddCityComponent },
+            { path: "area/add", component: AddAreaComponent },
+            { path: "instruction/add", component: AddInstructionComponent },
+            { path: "status/add", component: AddStatusComponent }
+        ]
+    },
 ];
 
 @NgModule({
