@@ -17,14 +17,11 @@
             </div>
             <label class="alert text-danger p-2 my-2  fs-6" id="namealert"></label>
             <div class="row  justify-content-center align-items-center border  border-top-0 border-dark rounded-pill">
-
                 <i class="mx-1 text-center col-1 fa-solid fa-wand-sparkles"></i>
                 <select [(ngModel)]="type" name="type" class="border-0 col fs-3  m-3 px-2 ">
-                    <option  value="0">Admin</option>
-                    <option  [selected]="true" value="1">User</option>
-
+                    <option value="0">Admin</option>
+                    <option [selected]="true" value="1">User</option>
                 </select>
-               
             </div>
             <label class="alert text-danger p-2 my-2  fs-6" id="paswordalert"></label>
             <button (click)="login()" class="py-2 w-100 border-0 rounded-pill text-light fs-4 mb-3">Sign in</button>
