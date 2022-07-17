@@ -30,7 +30,7 @@ namespace API_Layer.Helper
                     result = result.Include(exp);
                 }
             }
-            return result;
+            return result.AsSplitQuery();
         }
     }
 }

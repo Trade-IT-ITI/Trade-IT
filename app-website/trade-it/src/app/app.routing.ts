@@ -10,12 +10,14 @@ import { AddAreaComponent } from 'src/app/admin/component/Location/Area/add-area
 import { AddCityComponent } from 'src/app/admin/component/Location/City/add-city/add-city.component';
 import { AddStatusComponent } from 'src/app/admin/component/Status/add-status/add-status.component';
 import { AddSubcategoryComponent } from 'src/app/admin/component/Subcategory/add-subcategory/add-subcategory.component';
+import { ProdutDetailsComponent } from "./app-pages/produt-details/produt-details.component";
 import { LoginComponent } from "src/app/app-pages/auth/login/login.component";
 import { RegisterComponent } from "src/app/app-pages/auth/register/register.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'product/:id', component: ProdutDetailsComponent },
     { path: 'search', component: SearchComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },

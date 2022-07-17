@@ -1,0 +1,12 @@
+.PImage {
+  width: 100px;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+}
+.PImage:hover {
+  border-color: white;
+}
+i {
+  width: 30px;
+}

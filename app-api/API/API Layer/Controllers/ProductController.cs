@@ -20,15 +20,21 @@ namespace API_Layer.Controllers
         {
             return Ok(await _productRepository.GetAll(queryParameters));
         }
-
+        //get by id
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> getById(int id)
+        {
+            var product = await _productRepository.GetById(id);
+            return product != null ? Ok(product) : NotFound();
+        }
         //add new Product 
         [HttpPost]
-        public async Task<IActionResult> Add([FromForm]Product product, IFormFile image)
+        public async Task<IActionResult> Add([FromForm] Product product , IFormFile image)
         {
             try
             {
                 await _productRepository.Add(product , image);
-                return Created("url", product);
+                return Created("url" , product);
             }
             catch (Exception ex)
             {

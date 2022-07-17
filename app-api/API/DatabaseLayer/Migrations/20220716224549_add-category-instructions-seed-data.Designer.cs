@@ -4,6 +4,7 @@ using DatabaseLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,13 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220716224549_add-category-instructions-seed-data")]
+    partial class addcategoryinstructionsseeddata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -676,9 +678,6 @@ namespace DatabaseLayer.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
@@ -691,8 +690,7 @@ namespace DatabaseLayer.Migrations
                             FirstName = "Abdelrahman",
                             LastName = "Ahmed",
                             Password = "890",
-                            Phone = "01155661788",
-                            Type = 0
+                            Phone = "01155661788"
                         },
                         new
                         {
@@ -701,18 +699,7 @@ namespace DatabaseLayer.Migrations
                             FirstName = "Marwan",
                             LastName = "Sayed",
                             Password = "321",
-                            Phone = "01524556671",
-                            Type = 1
-                        },
-                        new
-                        {
-                            UserId = 3,
-                            Email = "ali@gmail.com",
-                            FirstName = "ali",
-                            LastName = "salim",
-                            Password = "345",
-                            Phone = "01548574125",
-                            Type = 1
+                            Phone = "01524556671"
                         });
                 });
 

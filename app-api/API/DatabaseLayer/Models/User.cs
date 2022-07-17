@@ -12,7 +12,7 @@ namespace DatabaseLayer.Models
         public string Phone { get; set; }
         public UserType Type { get; set; }
 
-        public ICollection<Favourite> Favourites { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Favourite> Favourites { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
