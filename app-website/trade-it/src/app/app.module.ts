@@ -18,6 +18,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { AppRoutingModule } from './app.routing';
 import { NotFoundComponent } from './app-pages/not-found/not-found.component';
 import { AdminModule } from './admin/admin.module';
+import { ProdutDetailsComponent } from './app-pages/produt-details/produt-details.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AdminModule } from './admin/admin.module';
     PagesNavComponent,
     SearchComponent,
     NotFoundComponent,
+    ProdutDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
         public string Body { get; set; }
         public DateTime DateTime { get; set; }
 
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public int ProductId { get; set; }
     }
 }
