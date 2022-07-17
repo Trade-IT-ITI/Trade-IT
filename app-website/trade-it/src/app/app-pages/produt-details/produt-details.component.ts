@@ -11,16 +11,20 @@ import { ProductsDetailsService } from 'src/app/services/products-details.servic
 })
 export class ProdutDetailsComponent implements OnInit {
   id: number = 0;
-  productDetails: ProductData | null = null
+  productDetails: any = {}
+  isSold: boolean = false;
+  imgIndex: number = 0;
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.id = params['id'])
     this.productService.getById(this.id).subscribe(data => {
-      this.productDetails = data
-      console.log(this.productDetails)
+      this.productDetails = data;
+      this.isSold = (this.productDetails.status == 'Sold')
     });
   }
-
+  onChooseImage(index: number) {
+    this.imgIndex = index
+  }
 }
