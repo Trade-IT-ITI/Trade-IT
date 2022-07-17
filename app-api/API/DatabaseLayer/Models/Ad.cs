@@ -7,7 +7,7 @@ namespace DatabaseLayer.Models
         public AdLevel Level { get; set; }
         public DateTime ExpireDate { get; set; }
 
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public int ProductId { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace API_Layer.Repositories.Interfaces
     {
         Task<ProductsData> GetAll(ProductQueryParameter queryParameters);
         Task Add(Product product , IFormFile image);
+        Task<ProductData> GetById(int id);
     }
 
 }

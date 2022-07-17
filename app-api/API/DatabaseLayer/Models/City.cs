@@ -10,8 +10,8 @@ namespace DatabaseLayer.Models
     {
         public int CityId { get; set; }
         public string Name { get; set; }
-        public ICollection<Area> Areas { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Area> Areas { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
     }
 }

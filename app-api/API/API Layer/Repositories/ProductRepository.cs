@@ -13,7 +13,7 @@ namespace API_Layer.Repositories
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment hostEnvironment;
 
-        public ProductRepository(AppDbContext context,IWebHostEnvironment hostEnvironment)
+        public ProductRepository(AppDbContext context , IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             this.hostEnvironment = hostEnvironment;
@@ -25,7 +25,7 @@ namespace API_Layer.Repositories
             {
 
                 await _context.Products.AddAsync(product);
-                await _context.SaveChangesAsync();   
+                await _context.SaveChangesAsync();
 
                 var folderName = Path.Combine(hostEnvironment.WebRootPath , $@"Images\{product.ProductId}");
                 Directory.CreateDirectory(folderName);
@@ -109,9 +109,37 @@ namespace API_Layer.Repositories
                     Products = Products.Expand(queryParameters.expand);
                 }
 
-                productsData.Products = await Products.ToListAsync();
+                productsData.Products = await Products.AsNoTracking().ToListAsync();
             }
             return productsData;
+        }
+
+        public async Task<ProductData> GetById(int id)
+        {
+            var product = await _context.Products.AsNoTracking().Select(p => new ProductData()
+            {
+                ProductId = p.ProductId ,
+                Title = p.Title ,
+                Descrioption = p.Descrioption ,
+                City = p.City.Name ,
+                Area = p.Area.Name ,
+                Status = p.Status.Name ,
+                Category = p.Subcategory.Category.Name ,
+                Subcategory = p.Subcategory.Name ,
+                PostDateTime = p.PostDateTime ,
+                Price = p.Price ,
+                ViewsCount = p.ViewsCount ,
+                RequestCount = p.RequestCount ,
+                ProductImages = p.ProductImages.Select(pi => pi.Name).ToList() ,
+                OwnerFullName = p.Owner.FirstName + " " + p.Owner.LastName ,
+                OwnerPhoneNumber = p.Owner.Phone ,
+                Instructions = p.Subcategory.Category.CategoryInstructions
+                .Select(ci => _context.Instructions
+                .AsNoTracking()
+                .SingleOrDefault(catIns => catIns.InstructionId == ci.InstructionId).Text)
+                .ToList()
+            }).SingleOrDefaultAsync(p => p.ProductId == id);
+            return product;
         }
     }
 }

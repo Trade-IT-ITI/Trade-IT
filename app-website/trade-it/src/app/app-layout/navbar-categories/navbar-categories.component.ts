@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { category } from 'src/app/models/category';
 import { CategoyService } from '../../services/categoy.service';
 
@@ -11,7 +12,8 @@ import { CategoyService } from '../../services/categoy.service';
 })
 export class NavbarCategoriesComponent implements OnInit {
   categories: category[] = [];
-  constructor(private categoryService: CategoyService) {
+  @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
+  constructor(private categoryService: CategoyService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,4 +24,12 @@ export class NavbarCategoriesComponent implements OnInit {
     });
   }
 
+  onClickCategory(category: any) {
+    this.router.navigate(['/search'], { queryParams: { 'category': category } })
+    this.toggle.emit(false);
+  }
+  onClickSubcategory(category: any, subcategory: any) {
+    this.router.navigate(['/search'], { queryParams: { 'category': category, 'subcategory': subcategory } })
+    this.toggle.emit(false);
+  }
 }

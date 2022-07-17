@@ -4,16 +4,21 @@
   <!--col-md-3-->
   <div *ngFor="let cat of categories" class="col-4 col-md-2 p-2">
     <b
-      ><a style="text-transform: uppercase">{{ cat.name }}</a></b
+      ><a
+        class="link"
+        style="text-transform: uppercase"
+        (click)="onClickCategory(cat.categoryId)"
+        >{{ cat.name }}</a
+      ></b
     >
     <div class="d-flex flex-column">
       <a
+        class="link"
         *ngFor="let subcat of cat.subcategories"
         style="text-transform: lowercase"
+        (click)="onClickSubcategory(cat.categoryId, subcat.subcategoryId)"
         >{{ subcat.name }}</a
       >
     </div>
   </div>
 </div>
-<!--   class="d-flex flex-column justify-content-start align-content-start row overflow-auto p-2 m-0"
- -->

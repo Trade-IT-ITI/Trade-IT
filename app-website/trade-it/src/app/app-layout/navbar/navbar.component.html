@@ -12,23 +12,43 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/">Home</a>
+            <a
+              class="nav-link px-3"
+              (click)="toggleSubscribe(false)"
+              routerLink="/"
+              >Home</a
+            >
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link px-3 dropdown-toggle cursor-pointer"
               (click)="categoriesToggle = !categoriesToggle">Categories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/search">Search</a>
+            <a
+              class="nav-link px-3"
+              (click)="toggleSubscribe(false)"
+              routerLink="/search"
+              >Search</a
+            >
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link px-3" routerLink="/admin">Admin</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/login">Login</a>
+            <a
+              class="nav-link px-3"
+              (click)="toggleSubscribe(false)"
+              routerLink="/admin"
+              >Admin</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/register">Register</a>
+            <a
+              class="nav-link px-3"
+              (click)="toggleSubscribe(false)"
+              routerLink="/login"
+              >Login</a
+            >
           </li>
         </ul>
       </div>
@@ -36,7 +56,10 @@
   </nav>
   <div [style]="{
       display: categoriesToggle ? 'block' : 'none'
-    }">
-    <app-navbar-categories></app-navbar-categories>
+    }"
+  >
+    <app-navbar-categories
+      (toggle)="toggleSubscribe($event)"
+    ></app-navbar-categories>
   </div>
 </div>

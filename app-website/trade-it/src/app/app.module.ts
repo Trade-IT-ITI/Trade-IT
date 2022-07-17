@@ -18,6 +18,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { AppRoutingModule } from './app.routing';
 import { NotFoundComponent } from './app-pages/not-found/not-found.component';
 import { AdminModule } from './admin/admin.module';
+import { ProdutDetailsComponent } from './app-pages/produt-details/produt-details.component';
 import { LoginComponent } from './app-pages/auth/login/login.component';
 import { RegisterComponent } from './app-pages/auth/register/register.component';
 
@@ -34,6 +35,7 @@ import { RegisterComponent } from './app-pages/auth/register/register.component'
     PagesNavComponent,
     SearchComponent,
     NotFoundComponent,
+    ProdutDetailsComponent,
     LoginComponent,
     RegisterComponent,
   ],
