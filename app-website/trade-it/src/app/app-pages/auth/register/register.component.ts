@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-user:User={userId: 0,type:1};//always user
+user:User={};
   constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
