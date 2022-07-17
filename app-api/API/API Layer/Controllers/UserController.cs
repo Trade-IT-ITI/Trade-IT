@@ -37,16 +37,18 @@ namespace API_Layer.Controllers
             return Ok(user);
         }
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] RegisterData user)
         {
             try
             {
-                await _userRepository.Add(user);
-                return Ok(user);
+                User newUser = new User() { Email = user.Email ,FirstName=user.firstName,LastName=user.lastName,Password=user.Password,Phone=user.phone,Type=UserType.User};
+                
+                await _userRepository.Add(newUser);
+                return Ok(newUser);
             }
-            catch
+            catch(Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
     }

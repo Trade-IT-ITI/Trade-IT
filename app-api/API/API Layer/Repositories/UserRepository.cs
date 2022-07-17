@@ -16,11 +16,24 @@ namespace API_Layer.Repositories
         public async Task Add(User user)
         {
             user.Email = user.Email.ToLower();
-            if ((await GetByEmail(user.Email)) == null && !string.IsNullOrWhiteSpace(user.Password))
+            if (!string.IsNullOrWhiteSpace(user.Email) && !string.IsNullOrWhiteSpace(user.Password))
             {
-                await context.Users.AddAsync(user);
-                await context.SaveChangesAsync();
+                if ((await GetByEmail(user.Email)) == null)
+                {
+                    await context.Users.AddAsync(user);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Email is Already exists");
+                }
+
             }
+            else
+            {
+                throw new Exception("Complete Mising data");
+            }
+
         }
 
         public async Task<User> GetByEmail(string email)
