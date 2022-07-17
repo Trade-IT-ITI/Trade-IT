@@ -131,7 +131,8 @@ namespace API_Layer.Repositories
                 ViewsCount = p.ViewsCount ,
                 RequestCount = p.RequestCount ,
                 ProductImages = p.ProductImages.Select(pi => pi.Name).ToList() ,
-                Owner = p.Owner ,
+                OwnerFullName = p.Owner.FirstName + " " + p.Owner.LastName ,
+                OwnerPhoneNumber = p.Owner.Phone ,
                 Instructions = p.Subcategory.Category.CategoryInstructions
                 .Select(ci => _context.Instructions
                 .AsNoTracking()

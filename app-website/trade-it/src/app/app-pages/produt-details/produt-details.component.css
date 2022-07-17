@@ -7,3 +7,6 @@
 .PImage:hover {
   border-color: white;
 }
+i {
+  width: 30px;
+}

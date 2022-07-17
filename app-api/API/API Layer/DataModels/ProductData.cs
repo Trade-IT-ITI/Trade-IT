@@ -16,7 +16,9 @@ namespace API_Layer.DataModels
         public double Price { get; set; }
         public int? RequestCount { get; set; }
         public int? ViewsCount { get; set; }
-        public User Owner { get; set; }
+        //public User Owner { get; set; }
+        public string OwnerFullName { get; set; }
+        public string OwnerPhoneNumber { get; set; }
         public List<string> Instructions { get; set; }
         public List<string> ProductImages { get; set; }
 

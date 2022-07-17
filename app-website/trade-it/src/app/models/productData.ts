@@ -1,5 +1,3 @@
-import { User } from "./user";
-
 export interface ProductData {
     productId: number;
     title: string;
@@ -13,7 +11,8 @@ export interface ProductData {
     price: number;
     requestCount: number | null;
     viewsCount: number | null;
-    owner: User;
+    ownerFullName: string;
+    ownerPhoneNumber: string;
     instructions: string[];
     productImages: string[];
 }

@@ -102,8 +102,14 @@ export class SearchComponent implements OnInit {
       //subscribe on changing query params event
       this.activatedRoute.queryParamMap.subscribe(data => {
         if (data.keys.length > 0) {
+          if (!this.isFiltersClean) {
+            debugger;
+            this.resetFilters();
+          }
+
           let cat = data.get('category');
           let subcat = data.get('subcategory');
+
           if (cat) {
             this.categoryId = +cat;
             this.onSelectCategory();
@@ -112,6 +118,7 @@ export class SearchComponent implements OnInit {
             this.subcategoryId = +subcat;
             this.onSelectSubcategory()
           }
+
         }
       })
     });
