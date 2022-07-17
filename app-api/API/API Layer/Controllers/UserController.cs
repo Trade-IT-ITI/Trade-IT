@@ -1,4 +1,5 @@
-﻿using API_Layer.Repositories.Interfaces;
+﻿using API_Layer.DataModels;
+using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Helper;
 using DatabaseLayer.Models;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +18,7 @@ namespace API_Layer.Controllers
         }
         [HttpPost("Login")]
         //public async Task<IActionResult> Login( string email ,  string password, int type)
-        public async Task<IActionResult> Login(User loginUser)
+        public async Task<IActionResult> Login(LoginData loginUser)
         {
             if (string.IsNullOrEmpty(loginUser.Email) || string.IsNullOrEmpty(loginUser.Password))
                 return BadRequest("email and password are required");
