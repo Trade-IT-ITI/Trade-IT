@@ -5,7 +5,7 @@ import { ProductsDetailsService } from 'src/app/services/products-details.servic
 import { City } from '../../models/city'
 import { Area } from '../../models/area'
 import { CityService } from 'src/app/services/city.service';
-import { CategoyService } from 'src/app/services/categoy.service';
+import { CategoryService } from 'src/app/services/category.service';
 import { category } from 'src/app/models/category';
 import { subcategory } from 'src/app/models/subcategory';
 import { StatusService } from 'src/app/services/status.service';
@@ -60,7 +60,7 @@ export class SearchComponent implements OnInit {
 
   constructor(private productsDetailsService: ProductsDetailsService,
     private cityService: CityService,
-    private categoryService: CategoyService,
+    private categoryService: CategoryService,
     private statusService: StatusService,
     private activatedRoute: ActivatedRoute) { }
 

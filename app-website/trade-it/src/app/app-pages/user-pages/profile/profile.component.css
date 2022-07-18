@@ -2,34 +2,40 @@
 body {
     background: rgb(99, 39, 120)
 }
-
+a,i{
+    text-decoration: none;
+    color: var(--linksColor);
+}
+a:hover>i{
+    color:white !important;
+}
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: var(--linksColor);
 }
 
 .profile-button {
-    background: rgb(99, 39, 120);
+    background: var(--linksColor);
     box-shadow: none;
     border: none
 }
 
 .profile-button:hover {
-    background: #682773
+    background: var(--linksColor);
 }
 
 .profile-button:focus {
-    background: #682773;
+    background: var(--linksColor);
     box-shadow: none
 }
 
 .profile-button:active {
-    background: #682773;
+    background: var(--linksColor);
     box-shadow: none
 }
 
 .back:hover {
-    color: #682773;
+    color: var(--linksColor);
     cursor: pointer
 }
 
@@ -38,8 +44,8 @@ body {
 }
 
 .add-experience:hover {
-    background: #BA68C8;
+    background: var(--linksColor);
     color: #fff;
     cursor: pointer;
-    border: solid 1px #BA68C8
+    border: solid 1px var(--linksColor);
 }

@@ -15,15 +15,19 @@ import { ProductDetailsComponent } from "src/app/app-pages/product-pages/product
 import { LoginComponent } from "src/app/app-pages/auth/login/login.component";
 import { RegisterComponent } from "src/app/app-pages/auth/register/register.component";
 import { ProfileComponent } from "src/app/app-pages/user-pages/profile/profile.component";
+import { EditProfileComponent } from "src/app/app-pages/user-pages/edit-profile/edit-profile.component";
+import { AddProductComponent } from "src/app/app-pages/product-pages/add-product/add-product.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'product/:id', component: ProductDetailsComponent },
+    { path: 'addProduct', component: AddProductComponent },
     { path: 'search', component: SearchComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'settings', component: EditProfileComponent },
    // { path: 'admin', component: AdminComponent },
     
     {
