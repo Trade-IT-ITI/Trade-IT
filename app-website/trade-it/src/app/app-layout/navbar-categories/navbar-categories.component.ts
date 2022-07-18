@@ -2,7 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { category } from 'src/app/models/category';
-import { CategoyService } from '../../services/categoy.service';
+import { CategoryService } from '../../services/category.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { CategoyService } from '../../services/categoy.service';
 export class NavbarCategoriesComponent implements OnInit {
   categories: category[] = [];
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(private categoryService: CategoyService, private router: Router) {
+  constructor(private categoryService: CategoryService, private router: Router) {
   }
 
   ngOnInit(): void {

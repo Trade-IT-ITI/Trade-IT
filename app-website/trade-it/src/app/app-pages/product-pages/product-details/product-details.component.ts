@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
-  selector: 'app-produt-details',
-  templateUrl: './produt-details.component.html',
-  styleUrls: ['./produt-details.component.css']
+  selector: 'app-product-details',
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.css']
 })
-export class ProdutDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit {
   id: number = 0;
   productDetails: any = {}
   isSold: boolean = false;
