@@ -5,7 +5,7 @@ class RequestHandler {
   Future<String> getData(String url, {Map<String, String>? headers}) async {
     try {
       Uri requestURL = Uri.parse(url);
-      print("URL : ${requestURL.toString()}");
+      print("URL : ${url}");
       http.Response response = await http.get(requestURL, headers: headers);
       if (response.statusCode == 200) {
         //print("Response is : ${response.body}");
@@ -15,7 +15,7 @@ class RequestHandler {
       }
     } catch (error) {
       print(error);
-      throw Error.safeToString("Error With Request");
+      throw Error.safeToString("Error With Request Handler");
     }
   }
 

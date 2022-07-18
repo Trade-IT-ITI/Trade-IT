@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trade_it/layout/theme.dart';
-import 'package:trade_it/screens/ProductDetails/productDetails.dart';
 import 'package:trade_it/screens/login/LoginPage.dart';
+import 'package:trade_it/screens/register/RegistrationPage.dart';
 
 import 'layout/navigation_container.dart';
 import 'screens/onboard/onboard.dart';
@@ -22,10 +22,10 @@ class TradeITApp extends StatelessWidget {
       routes: {
         '/onboard': (context) => const Onboard(),
         '/login': (context) => LoginPage(),
+        '/register': (context) => RegistrationPage(),
         '/home': (context) => const NavigationContainer(
               index: 0,
             ),
-        '/details': (context) => ProductDetails(),
       },
     );
   }
