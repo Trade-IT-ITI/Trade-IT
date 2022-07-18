@@ -12,43 +12,34 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a
-              class="nav-link px-3"
-              (click)="toggleSubscribe(false)"
-              routerLink="/"
-              >Home</a
-            >
+            <a class="nav-link px-3" (click)="toggleSubscribe(false)" routerLink="/">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link px-3 dropdown-toggle cursor-pointer"
               (click)="categoriesToggle = !categoriesToggle">Categories</a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link px-3"
-              (click)="toggleSubscribe(false)"
-              routerLink="/search"
-              >Search</a
-            >
+            <a class="nav-link px-3" (click)="toggleSubscribe(false)" routerLink="/search">Search</a>
           </li>
           <!-- <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/admin">Admin</a>
-          </li> -->
-          <li class="nav-item">
-            <a
-              class="nav-link px-3"
-              (click)="toggleSubscribe(false)"
-              routerLink="/admin"
-              >Admin</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link px-3"
-              (click)="toggleSubscribe(false)"
-              routerLink="/login"
-              >Login</a
-            >
+            <a class="nav-link px-3" (click)="toggleSubscribe(false)" routerLink="/admin">Admin</a>
+          </li>-->
+          <li class="nav-item ">
+            <div class="btn-group nav-link px-3 user-menu">
+              <button (click)="toggleSubscribe(false)" class="dropdown-toggle border-0 bg-transparent "
+                data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                <i *ngIf="loggedUserFlag">{{loggedUser.firstName}}</i>
+                <i *ngIf="!loggedUserFlag" class="fa-solid fa-user "></i>
+              </button>
+              <ul *ngIf="!loggedUserFlag" class="dropdown-menu dropdown-menu-lg-end">
+                <li><a class="dropdown-item nav-link" routerLink="/login">login</a></li>
+                <li><a class="dropdown-item nav-link"routerLink="/register">Register</a></li>
+              </ul>
+              <ul *ngIf="loggedUserFlag" class="dropdown-menu dropdown-menu-lg-end">
+                <li><a class="dropdown-item nav-link"routerLink="/profile">Profile</a></li>
+                <li><a class="dropdown-item nav-link" (click)="logout()">Logout</a></li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>
@@ -56,10 +47,7 @@
   </nav>
   <div [style]="{
       display: categoriesToggle ? 'block' : 'none'
-    }"
-  >
-    <app-navbar-categories
-      (toggle)="toggleSubscribe($event)"
-    ></app-navbar-categories>
+    }">
+    <app-navbar-categories (toggle)="toggleSubscribe($event)"></app-navbar-categories>
   </div>
 </div>

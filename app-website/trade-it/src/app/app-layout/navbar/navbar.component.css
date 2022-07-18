@@ -7,3 +7,15 @@
   color: white;
   background-color: var(--linksColor);
 }
+
+.user-menu:hover>button{
+  color: white;
+  background-color: var(--linksColor);
+}
+.user-menu:hover>button>i{
+  color: white;
+  background-color: var(--linksColor);
+}
+.user-menu>button,.user-menu>button>i{
+  color: var(--linksColor);
+}

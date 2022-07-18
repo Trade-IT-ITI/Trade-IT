@@ -17,10 +17,13 @@ import { PagesNavComponent } from 'src/app/app-layout/pages-nav/pages-nav.compon
 import { SearchComponent } from 'src/app/app-pages/search/search.component';
 import { AppRoutingModule } from 'src/app/app.routing';
 import { NotFoundComponent } from 'src/app/app-pages/not-found/not-found.component';
-import { AdminModule } from './admin/admin.module';
+import { AdminModule } from 'src/app/admin/admin.module';
 import { ProductDetailsComponent } from 'src/app/app-pages/product-pages/product-details/product-details.component';
 import { LoginComponent } from 'src/app/app-pages/auth/login/login.component';
 import { RegisterComponent } from 'src/app/app-pages/auth/register/register.component';
+import { AddProductComponent } from 'src/app/app-pages/product-pages/add-product/add-product.component';
+import { ProfileComponent } from 'src/app/app-pages/user-pages/profile/profile.component';
+import { EditProfileComponent } from './app-pages/user-pages/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { RegisterComponent } from 'src/app/app-pages/auth/register/register.comp
     ProductDetailsComponent,
     LoginComponent,
     RegisterComponent,
+    AddProductComponent,
+    ProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

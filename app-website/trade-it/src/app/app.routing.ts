@@ -14,6 +14,7 @@ import { AddSubcategoryComponent } from 'src/app/admin/component/Subcategory/add
 import { ProductDetailsComponent } from "src/app/app-pages/product-pages/product-details/product-details.component";
 import { LoginComponent } from "src/app/app-pages/auth/login/login.component";
 import { RegisterComponent } from "src/app/app-pages/auth/register/register.component";
+import { ProfileComponent } from "src/app/app-pages/user-pages/profile/profile.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'search', component: SearchComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'profile', component: ProfileComponent },
    // { path: 'admin', component: AdminComponent },
     
     {
