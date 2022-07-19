@@ -128,7 +128,9 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/register");
+                      },
                       child: const Text(
                         "Sign Up",
                         style: TextStyle(

@@ -13,6 +13,8 @@ namespace DatabaseLayer
             builder.HasOne(p => p.Owner).WithMany(s => s.Products).OnDelete(DeleteBehavior.Restrict);
             builder.Property(p => p.ViewsCount).HasDefaultValue(0);
             builder.Property(p => p.RequestCount).HasDefaultValue(0);
+            builder.Property(p => p.StatusId).HasDefaultValue(1);
+            builder.Property(x => x.PostDateTime).HasDefaultValueSql("getdate()");
             builder.HasData(
                 new Product()
                 {

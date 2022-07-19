@@ -21,7 +21,6 @@ export class PagesNavComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    debugger;
     if (this.itemsTotalCount > 0) {
       this.updateNav();
     }

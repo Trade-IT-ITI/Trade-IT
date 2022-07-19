@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,27 +7,26 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private router: Router) { }
-  activeElement: HTMLElement | undefined;
+  constructor() { }
   isToggle: boolean = false;
-  type: string = '';
   ngOnInit(): void {
-    let path = location.pathname.slice(1);
-    this.active(document.getElementById((path == '') ? 'Home' : path)!);
+
   }
   toggle(): void {
     this.isToggle = !this.isToggle;
   }
-  active(element: HTMLElement) {
-    if (this.activeElement?.id != element?.id) {
-      element.classList.add('active');
-      if (this.activeElement != undefined) { this.activeElement.classList.remove('active'); }
-      this.activeElement = element;
-    }
+
+  onToggleLinks(): object {
+    return { 'fs-5': this.isToggle, 'text-center': this.isToggle }
   }
-  logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    this.router.navigate(['/Login']);
+  onToggleSpans(): object {
+    return { 'd-none': this.isToggle }
   }
+  onToggleSideBar(): object {
+    return { 'min-sidebar': this.isToggle, 'max-sidebar': !this.isToggle }
+  }
+  onToggleButton(): object {
+    return { 'text-center': this.isToggle, 'ms-auto': !this.isToggle }
+  }
+
 }

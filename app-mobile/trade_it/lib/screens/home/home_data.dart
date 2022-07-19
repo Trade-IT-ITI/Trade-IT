@@ -18,7 +18,7 @@ class HomeData {
       "Status"
     ];
     String url = reqHandler.createUrlParams(
-      endPoint: "Product",
+      fullUrl: reqHandler.baseURL + "Product",
       queryParams: query,
     );
     String response = await reqHandler.getData(url);
@@ -46,7 +46,4 @@ class HomeData {
     //print(subCategoryList[0].name);
     return subCategoryList;
   }
-  // Future<List<Product>> getProducts() async {
-  //   String url = Constants.baseURL + "users";
-  // }
 }

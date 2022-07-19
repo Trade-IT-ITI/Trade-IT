@@ -1,11 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:trade_it/screens/addProduct/AddProductScreen.dart';
-import 'package:trade_it/screens/faviorate/faviorate.dart';
 import 'package:trade_it/screens/home/home_ui.dart';
 import 'package:trade_it/screens/profile/profile.dart';
-
-import '../screens/notification/notifications.dart';
 
 class NavigationContainer extends StatefulWidget {
   const NavigationContainer({
@@ -21,15 +17,15 @@ class _NavigationContainerState extends State<NavigationContainer> {
   int _bottomNavIndex = 0;
   List<IconData> iconList = [
     Icons.home,
-    Icons.favorite,
-    Icons.notifications,
+    // Icons.favorite,
+    // Icons.notifications,
     Icons.person,
   ];
 
   List<Widget> widgetList = [
     Home(),
-    const Faviorate(),
-    const Notifications(),
+    // const Faviorate(),
+    // const Notifications(),
     const Profile(),
   ];
   @override
@@ -39,6 +35,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
   }
 
   Widget build(BuildContext context) {
+    bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: widgetList[_bottomNavIndex],
@@ -52,7 +49,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         activeColor: Theme.of(context).colorScheme.primary,
-        iconSize: 35,
+        iconSize: 45,
         icons: iconList,
         activeIndex: _bottomNavIndex,
         leftCornerRadius: 10,

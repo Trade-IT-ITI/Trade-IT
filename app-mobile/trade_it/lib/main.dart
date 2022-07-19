@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trade_it/layout/theme.dart';
-import 'package:trade_it/screens/ProductDetails/productDetails.dart';
-import 'package:trade_it/screens/addProduct/AddProductScreen.dart';
-import 'package:trade_it/screens/addProduct/cubit/productCubit.dart';
-import 'package:trade_it/screens/addProduct/cubit/imageCubit.dart';
 import 'package:trade_it/screens/login/LoginPage.dart';
+import 'package:trade_it/screens/register/RegistrationPage.dart';
 
 import 'layout/navigation_container.dart';
 import 'screens/onboard/onboard.dart';
@@ -19,13 +16,12 @@ class TradeITApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-
       providers: [
         BlocProvider(
-            create: (context) => AddProductCubit(),
+          create: (context) => AddProductCubit(),
         ),
         BlocProvider(
-          create: (context)=> PickingImageCubit(),
+          create: (context) => PickingImageCubit(),
         ),
       ],
       child: MaterialApp(
@@ -36,6 +32,7 @@ class TradeITApp extends StatelessWidget {
         routes: {
           '/onboard': (context) => const Onboard(),
           '/login': (context) => LoginPage(),
+          '/register': (context) => RegistrationPage(),
           '/home': (context) => const NavigationContainer(
                 index: 0,
               ),

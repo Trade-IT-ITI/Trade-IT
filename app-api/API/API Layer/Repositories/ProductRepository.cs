@@ -13,35 +13,37 @@ namespace API_Layer.Repositories
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment hostEnvironment;
 
-        public ProductRepository(AppDbContext context,IWebHostEnvironment hostEnvironment)
+        public ProductRepository(AppDbContext context , IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             this.hostEnvironment = hostEnvironment;
         }
 
-        public async Task Add(Product product , IFormFile image)
+        public async Task Add(NewProduct product)
         {
-            if (image.Length > 0)
+            if (product.image.Length > 0)
             {
+                Product product1 = new Product() { Title=product.Title,Descrioption=product.Descrioption,Price=product.Price
+                    ,CityId=product.CityId,AreaId=product.AreaId,SubcategoryId=product.SubcategoryId,UserId=product.UserId};  
 
-                await _context.Products.AddAsync(product);
-                await _context.SaveChangesAsync();   
+                await _context.Products.AddAsync(product1);
+                await _context.SaveChangesAsync();
 
-                var folderName = Path.Combine(hostEnvironment.WebRootPath , $@"Images\{product.ProductId}");
+                var folderName = Path.Combine(hostEnvironment.WebRootPath , $@"Images\{product1.ProductId}");
                 Directory.CreateDirectory(folderName);
                 //create folder for product images and it's name equals product id
 
-                var fileName = $"{product.ProductId}-{Guid.NewGuid()}-{image.FileName}";
+                var fileName = $"{product1.ProductId}-{Guid.NewGuid()}-{product.image.FileName}";
 
                 var fullPath = Path.Combine(folderName , fileName);
                 using (var stream = new FileStream(fullPath , FileMode.Create))
                 {
-                    await image.CopyToAsync(stream);
+                    await product.image.CopyToAsync(stream);
                 }
                 ProductImage productImage = new ProductImage()
                 {
                     Name = fileName ,
-                    ProductId = product.ProductId
+                    ProductId = product1.ProductId
                 };
 
                 await _context.AddAsync(productImage);
@@ -109,9 +111,37 @@ namespace API_Layer.Repositories
                     Products = Products.Expand(queryParameters.expand);
                 }
 
-                productsData.Products = await Products.ToListAsync();
+                productsData.Products = await Products.AsNoTracking().ToListAsync();
             }
             return productsData;
+        }
+
+        public async Task<ProductData> GetById(int id)
+        {
+            var product = await _context.Products.AsNoTracking().Select(p => new ProductData()
+            {
+                ProductId = p.ProductId ,
+                Title = p.Title ,
+                Descrioption = p.Descrioption ,
+                City = p.City.Name ,
+                Area = p.Area.Name ,
+                Status = p.Status.Name ,
+                Category = p.Subcategory.Category.Name ,
+                Subcategory = p.Subcategory.Name ,
+                PostDateTime = p.PostDateTime ,
+                Price = p.Price ,
+                ViewsCount = p.ViewsCount ,
+                RequestCount = p.RequestCount ,
+                ProductImages = p.ProductImages.Select(pi => pi.Name).ToList() ,
+                OwnerFullName = p.Owner.FirstName + " " + p.Owner.LastName ,
+                OwnerPhoneNumber = p.Owner.Phone ,
+                Instructions = p.Subcategory.Category.CategoryInstructions
+                .Select(ci => _context.Instructions
+                .AsNoTracking()
+                .SingleOrDefault(catIns => catIns.InstructionId == ci.InstructionId).Text)
+                .ToList()
+            }).SingleOrDefaultAsync(p => p.ProductId == id);
+            return product;
         }
     }
 }

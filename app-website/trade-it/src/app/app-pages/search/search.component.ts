@@ -5,11 +5,12 @@ import { ProductsDetailsService } from 'src/app/services/products-details.servic
 import { City } from '../../models/city'
 import { Area } from '../../models/area'
 import { CityService } from 'src/app/services/city.service';
-import { CategoyService } from 'src/app/services/categoy.service';
+import { CategoryService } from 'src/app/services/category.service';
 import { category } from 'src/app/models/category';
 import { subcategory } from 'src/app/models/subcategory';
 import { StatusService } from 'src/app/services/status.service';
 import { Status } from 'src/app/models/status';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 
 @Component({
@@ -59,8 +60,9 @@ export class SearchComponent implements OnInit {
 
   constructor(private productsDetailsService: ProductsDetailsService,
     private cityService: CityService,
-    private categoryService: CategoyService,
-    private statusService: StatusService) { }
+    private categoryService: CategoryService,
+    private statusService: StatusService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     //loading products
@@ -96,7 +98,29 @@ export class SearchComponent implements OnInit {
     let CategoriesParams: HttpParams = new HttpParams();
     CategoriesParams = CategoriesParams.append('expand', 'Subcategories')
     this.categoryService.getall(CategoriesParams).subscribe(data => {
-      this.categories = data
+      this.categories = data;
+      //subscribe on changing query params event
+      this.activatedRoute.queryParamMap.subscribe(data => {
+        if (data.keys.length > 0) {
+          if (!this.isFiltersClean) {
+            debugger;
+            this.resetFilters();
+          }
+
+          let cat = data.get('category');
+          let subcat = data.get('subcategory');
+
+          if (cat) {
+            this.categoryId = +cat;
+            this.onSelectCategory();
+          }
+          if (subcat) {
+            this.subcategoryId = +subcat;
+            this.onSelectSubcategory()
+          }
+
+        }
+      })
     });
 
     //loading statuses
@@ -152,6 +176,7 @@ export class SearchComponent implements OnInit {
         else
           this.productsQueryParams = this.productsQueryParams.append('city', this.cityId);
 
+        this.productsQueryParams = this.productsQueryParams.delete('area');
         this.isFiltersClean = false;
       }
     }
@@ -187,6 +212,7 @@ export class SearchComponent implements OnInit {
         else
           this.productsQueryParams = this.productsQueryParams.append('category', this.categoryId);
 
+        this.productsQueryParams = this.productsQueryParams.delete('subcategory');
         this.isFiltersClean = false;
 
       }

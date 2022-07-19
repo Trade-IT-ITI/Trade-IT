@@ -151,6 +151,53 @@ namespace DatabaseLayer.Migrations
                     b.HasIndex("InstructionId");
 
                     b.ToTable("CategoriesInstructions");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            InstructionId = 1
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            InstructionId = 1
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            InstructionId = 1
+                        },
+                        new
+                        {
+                            CategoryId = 1,
+                            InstructionId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            InstructionId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            InstructionId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 1,
+                            InstructionId = 3
+                        },
+                        new
+                        {
+                            CategoryId = 1,
+                            InstructionId = 5
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            InstructionId = 4
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.City", b =>
@@ -215,6 +262,33 @@ namespace DatabaseLayer.Migrations
                     b.HasKey("InstructionId");
 
                     b.ToTable("Instructions");
+
+                    b.HasData(
+                        new
+                        {
+                            InstructionId = 1,
+                            Text = "you should meet product's owner in a public place"
+                        },
+                        new
+                        {
+                            InstructionId = 2,
+                            Text = "it would be better if you brought someone with you to witness selling process"
+                        },
+                        new
+                        {
+                            InstructionId = 3,
+                            Text = "check product's battery before buying"
+                        },
+                        new
+                        {
+                            InstructionId = 4,
+                            Text = "make sure the cloth have no cuts"
+                        },
+                        new
+                        {
+                            InstructionId = 5,
+                            Text = "check the screen well"
+                        });
                 });
 
             modelBuilder.Entity("DatabaseLayer.Models.Notification", b =>
@@ -262,7 +336,9 @@ namespace DatabaseLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PostDateTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -273,7 +349,9 @@ namespace DatabaseLayer.Migrations
                         .HasDefaultValue(0);
 
                     b.Property<int>("StatusId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<int>("SubcategoryId")
                         .HasColumnType("int");
@@ -602,6 +680,9 @@ namespace DatabaseLayer.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
@@ -614,7 +695,8 @@ namespace DatabaseLayer.Migrations
                             FirstName = "Abdelrahman",
                             LastName = "Ahmed",
                             Password = "890",
-                            Phone = "01155661788"
+                            Phone = "01155661788",
+                            Type = 0
                         },
                         new
                         {
@@ -623,7 +705,18 @@ namespace DatabaseLayer.Migrations
                             FirstName = "Marwan",
                             LastName = "Sayed",
                             Password = "321",
-                            Phone = "01524556671"
+                            Phone = "01524556671",
+                            Type = 1
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            Email = "ali@gmail.com",
+                            FirstName = "ali",
+                            LastName = "salim",
+                            Password = "345",
+                            Phone = "01548574125",
+                            Type = 1
                         });
                 });
 

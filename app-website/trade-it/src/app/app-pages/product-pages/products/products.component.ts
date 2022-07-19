@@ -1,5 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
 import { ProductsData } from 'src/app/models/productsData';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -20,7 +22,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 
   isLoading: boolean = false;
   productColClass: string = '';
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
 
   }
 
@@ -58,5 +60,9 @@ export class ProductsComponent implements OnInit, OnChanges {
     this.pageNumber = pageData.pageNumber;
     this.itemsNumber = pageData.itemsPerPage;
     this.loadData()
+  }
+
+  openProduct(productId: number) {
+    this.router.navigate(['/product', productId])
   }
 }
