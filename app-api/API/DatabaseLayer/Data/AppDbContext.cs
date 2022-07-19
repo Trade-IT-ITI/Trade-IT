@@ -12,16 +12,13 @@ namespace DatabaseLayer.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-<<<<<<< HEAD
-            optionsBuilder.UseSqlServer("server=.;database=TradeIt;trusted_connection=true;");
-            base.OnConfiguring(optionsBuilder);
-=======
+            
             //optionsBuilder.UseSqlServer("server=.;database=TradeIt;trusted_connection=true;");
             //base.OnConfiguring(optionsBuilder);
->>>>>>> 1c4eb04138e7d6cc7707cff41985cd91dc4b3c4b
-        }
+
+        }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AdConfiguration());

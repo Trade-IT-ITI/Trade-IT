@@ -365,6 +365,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         if(isValid == true){
 
                         }
+
+                        
                       },
                     ),
                   ],
@@ -377,3 +379,4 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
   }
 }
+
