@@ -1,26 +1,33 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AdminComponent } from "./admin/admin.component";
-import { HomeComponent } from "./app-pages/home/home.component";
-import { NotFoundComponent } from "./app-pages/not-found/not-found.component";
-import { SearchComponent } from "./app-pages/search/search.component";
+
+import { AdminComponent } from "src/app/admin/admin.component";
+import { HomeComponent } from "src/app/app-pages/home/home.component";
+import { NotFoundComponent } from "src/app/app-pages/not-found/not-found.component";
+import { SearchComponent } from "src/app/app-pages/search/search.component";
 import { AddCategoryComponent } from 'src/app/admin/component/Category/add-category/add-category.component';
 import { AddInstructionComponent } from 'src/app/admin/component/Instruction/add-instruction/add-instruction.component';
 import { AddAreaComponent } from 'src/app/admin/component/Location/Area/add-area/add-area.component';
 import { AddCityComponent } from 'src/app/admin/component/Location/City/add-city/add-city.component';
 import { AddStatusComponent } from 'src/app/admin/component/Status/add-status/add-status.component';
 import { AddSubcategoryComponent } from 'src/app/admin/component/Subcategory/add-subcategory/add-subcategory.component';
-import { ProdutDetailsComponent } from "./app-pages/produt-details/produt-details.component";
+import { ProductDetailsComponent } from "src/app/app-pages/product-pages/product-details/product-details.component";
 import { LoginComponent } from "src/app/app-pages/auth/login/login.component";
 import { RegisterComponent } from "src/app/app-pages/auth/register/register.component";
+import { ProfileComponent } from "src/app/app-pages/user-pages/profile/profile.component";
+import { EditProfileComponent } from "src/app/app-pages/user-pages/edit-profile/edit-profile.component";
+import { AddProductComponent } from "src/app/app-pages/product-pages/add-product/add-product.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'product/:id', component: ProdutDetailsComponent },
+    { path: 'product/:id', component: ProductDetailsComponent },
+    { path: 'addProduct', component: AddProductComponent },
     { path: 'search', component: SearchComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'settings', component: EditProfileComponent },
    // { path: 'admin', component: AdminComponent },
     
     {

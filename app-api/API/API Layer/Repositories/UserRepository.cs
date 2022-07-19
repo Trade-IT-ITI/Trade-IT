@@ -31,7 +31,7 @@ namespace API_Layer.Repositories
 
         public async Task<User> GetById(int id)
         {
-            return await context.Users.FindAsync(id);
+            return await context.Users.Include(u=>u.Products).Include(u => u.Favourites).FirstOrDefaultAsync(u=>u.UserId==id);
         }
 
         public string GenerateToken(User user)

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/product.dart';
+import '../screens/ProductDetails/productDetails_ui.dart';
 
 class ProductCard extends StatelessWidget {
   ProductCard({Key? key, required this.productOBJ}) : super(key: key);
@@ -9,6 +10,11 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print("ljskhdcflkjshdlfjkhsdkjfh");
+    // print('http://10.0.2.2:5228/Images/' +
+    //     productOBJ.productId.toString() +
+    //     '/' +
+    //     productOBJ.productImages?[0]['name']);
     late var image;
     if (productOBJ.productImages == null ||
         productOBJ.productImages?[0] == null) {
@@ -18,10 +24,22 @@ class ProductCard extends StatelessWidget {
           productOBJ.productId.toString() +
           '/' +
           productOBJ.productImages?[0]['name']);
+      // image = NetworkImage('http://localhost:5228/Images/' +
+      //     productOBJ.productId.toString() +
+      //     '/' +
+      //     productOBJ.productImages?[0]['name']);
     }
+
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, "/details");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetails(
+              productID: productOBJ.productId!,
+            ),
+          ),
+        );
       },
       child: Card(
         elevation: 3,
@@ -40,16 +58,6 @@ class ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
                 child: Stack(
                   children: [
-                    // FadeInImage(
-                    //   width: double.infinity,
-                    //   height: 100,
-                    //   placeholder: AssetImage("assets/images/product.png"),
-                    //   image: NetworkImage('http://10.0.2.2:5228/Images/' +
-                    //       productOBJ.productId.toString() +
-                    //       '/' +
-                    //       productOBJ.productImages?[0]['name']),
-                    //   // image: productOBJ.productImages![0].name,
-                    // ),
                     Row(
                       children: [
                         Chip(

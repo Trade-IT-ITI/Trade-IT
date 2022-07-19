@@ -16,6 +16,13 @@ namespace API_Layer.Controllers
         {
             _userRepository = userRepository; 
         }
+        //get by id
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> getById(int id)
+        {
+            var product = await _userRepository.GetById(id);
+            return product != null ? Ok(product) : NotFound();
+        }
         [HttpPost("Login")]
         //public async Task<IActionResult> Login( string email ,  string password, int type)
         public async Task<IActionResult> Login(LoginData loginUser)

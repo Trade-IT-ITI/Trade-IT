@@ -19,29 +19,31 @@ namespace API_Layer.Repositories
             this.hostEnvironment = hostEnvironment;
         }
 
-        public async Task Add(Product product , IFormFile image)
+        public async Task Add(NewProduct product)
         {
-            if (image.Length > 0)
+            if (product.image.Length > 0)
             {
+                Product product1 = new Product() { Title=product.Title,Descrioption=product.Descrioption,Price=product.Price
+                    ,CityId=product.CityId,AreaId=product.AreaId,SubcategoryId=product.SubcategoryId,UserId=product.UserId};  
 
-                await _context.Products.AddAsync(product);
+                await _context.Products.AddAsync(product1);
                 await _context.SaveChangesAsync();
 
-                var folderName = Path.Combine(hostEnvironment.WebRootPath , $@"Images\{product.ProductId}");
+                var folderName = Path.Combine(hostEnvironment.WebRootPath , $@"Images\{product1.ProductId}");
                 Directory.CreateDirectory(folderName);
                 //create folder for product images and it's name equals product id
 
-                var fileName = $"{product.ProductId}-{Guid.NewGuid()}-{image.FileName}";
+                var fileName = $"{product1.ProductId}-{Guid.NewGuid()}-{product.image.FileName}";
 
                 var fullPath = Path.Combine(folderName , fileName);
                 using (var stream = new FileStream(fullPath , FileMode.Create))
                 {
-                    await image.CopyToAsync(stream);
+                    await product.image.CopyToAsync(stream);
                 }
                 ProductImage productImage = new ProductImage()
                 {
                     Name = fileName ,
-                    ProductId = product.ProductId
+                    ProductId = product1.ProductId
                 };
 
                 await _context.AddAsync(productImage);

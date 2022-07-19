@@ -2,10 +2,11 @@ import 'package:http/http.dart' as http;
 
 class RequestHandler {
   String baseURL = "http://10.0.2.2:5228/api/";
+  //String baseURL = "http://localhost:5228/api/";
   Future<String> getData(String url, {Map<String, String>? headers}) async {
     try {
       Uri requestURL = Uri.parse(url);
-      print("URL : ${requestURL.toString()}");
+      print("URL : ${url}");
       http.Response response = await http.get(requestURL, headers: headers);
       if (response.statusCode == 200) {
         //print("Response is : ${response.body}");
@@ -15,16 +16,23 @@ class RequestHandler {
       }
     } catch (error) {
       print(error);
-      throw Error.safeToString("Error With Request");
+      throw Error.safeToString("Error With Request Handler");
     }
   }
 
-  String createUrlParams(
-      {required String endPoint, required List<String> queryParams}) {
-    String finalURL = baseURL + endPoint;
+  String createUrlParams({
+    required String fullUrl,
+    required List<String> queryParams,
+    inFilter = false,
+  }) {
+    String finalURL = fullUrl;
     for (int i = 0; i < queryParams.length; i++) {
-      finalURL +=
-          i == 0 ? "?expand=${queryParams[i]}" : "&expand=${queryParams[i]}";
+      if (inFilter) {
+        finalURL += "&expand=${queryParams[i]}";
+      } else {
+        finalURL +=
+            i == 0 ? "?expand=${queryParams[i]}" : "&expand=${queryParams[i]}";
+      }
     }
     return finalURL;
   }

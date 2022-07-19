@@ -1,0 +1,76 @@
+<form  encType="multipart/form-data"  >
+
+
+<div class="container rounded bg-white mt-5 mb-5" >
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-right">Add New Product </h2>
+    </div>
+    <div class="row">
+        <div class="col-md-4 border-end">
+            <div class="col-md-12 py-2">
+                <p class="fw-bold m-0">Product Name</p>
+                <input required type="text" required class="form-control" name="title" [(ngModel)]="title">
+            </div>
+            <div class="col-md-12 py-2">
+                <p class="fw-bold m-0">Product Description</p>
+                <input required type="text" class="form-control" name="descrioption" [(ngModel)]="descrioption">
+            </div>
+            <div class="col-md-12 py-2">
+                <p class="fw-bold m-0">Price</p>
+                <input required type="number" min="1" class="form-control" name="price" [(ngModel)]="price">
+            </div>
+
+
+        </div>
+        <div class="col-md-4">
+            <!-- location -->
+            <div class="py-2 ">
+                <p class="fw-bold m-0">location</p>
+                <select required name="cityiId" class="w-100 my-1 form-select" (change)="onSelectCity()" [(ngModel)]="cityId">
+                    <option value="0">-- choose city</option>
+                    <option *ngFor="let city of cities" [value]="city.cityId">
+                        {{ city.name }}
+                    </option>
+                </select>
+                <select name="areaId" required class="w-100 my-1 form-select" [(ngModel)]="areaId" [disabled]="isAreasDisabled">
+                    <option value="0">-- choose area</option>
+                    <option *ngFor="let area of areas" [value]="area.areaId">
+                        {{ area.name }}
+                    </option>
+                </select>
+            </div>
+            <!-- category -->
+            <div class="py-2 ">
+                <p class="fw-bold m-0">category</p>
+                <select required name="categoryId" class="w-100 my-1 form-select" [(ngModel)]="categoryId"
+                    (change)="onSelectCategory()">
+                    <option value="0">-- choose category</option>
+                    <option *ngFor="let category of categories" [value]="category.categoryId">
+                        {{ category.name }}
+                    </option>
+                </select>
+                <select name="subcategoryId" required class="w-100 my-1 form-select" [(ngModel)]="subcategoryId" [disabled]="isSubcategoriesDisabled">
+                    <option value="0">-- choose subcategory</option>
+                    <option *ngFor="let subcategory of subcategories" [value]="subcategory.subcategoryId">
+                        {{ subcategory.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4 border-start py-2">
+            <div class="card m-auto" style="width: 18rem;">
+
+                <img src="../../../../assets/images/image.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold m-0">Upload Image</h5>
+                  <input required="true" type="file" class="form-control" (change)="onFileSelected($event)"  accept=".jpg,.png" >
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="mt-5 text-center">
+     
+        <button (click)="addProduct()" class="btn btn-primary profile-button w-50 fw-bold"  >Add Product</button>
+    </div>
+</div>
+</form>
