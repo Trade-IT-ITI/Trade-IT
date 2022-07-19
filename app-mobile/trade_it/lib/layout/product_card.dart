@@ -20,14 +20,14 @@ class ProductCard extends StatelessWidget {
         productOBJ.productImages?[0] == null) {
       image = const AssetImage("assets/images/product.png");
     } else {
-      // image = NetworkImage('http://10.0.2.2:5228/Images/' +
-      //     productOBJ.productId.toString() +
-      //     '/' +
-      //     productOBJ.productImages?[0]['name']);
-      image = NetworkImage('http://localhost:5228/Images/' +
+      image = NetworkImage('http://10.0.2.2:5228/Images/' +
           productOBJ.productId.toString() +
           '/' +
           productOBJ.productImages?[0]['name']);
+      // image = NetworkImage('http://localhost:5228/Images/' +
+      //     productOBJ.productId.toString() +
+      //     '/' +
+      //     productOBJ.productImages?[0]['name']);
     }
 
     return InkWell(

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trade_it/handlers/requests_handler.dart';
 
-import '../../layout/constants.dart';
+import '../../models/user.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -52,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Image.asset(
                 "assets/images/logo.png",
-                height: 250,
+                height: 220,
                 width: double.infinity,
               ),
               loading
@@ -157,7 +160,28 @@ class _LoginPageState extends State<LoginPage> {
                                             BorderRadius.circular(10))),
                               ),
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {}
+                                // setState(() {
+                                //   loading = true;
+                                // });
+                                // login(
+                                //   email: "marwansayed@gmail.com",
+                                //   password: "321",
+                                // );
+                                // setState(() {
+                                //   loading = false;
+                                // });
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  login(
+                                    email: emailController.text,
+                                    password: passController.text,
+                                  );
+                                  setState(() {
+                                    loading = false;
+                                  });
+                                }
                               },
                               child: const Text(
                                 "Log In",
@@ -247,5 +271,48 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<User> login({
+    required String email,
+    required String password,
+  }) async {
+    User user;
+    RequestHandler reqHandler = RequestHandler();
+    String url = reqHandler.baseURL + 'User/Login';
+    Map<String, String> reqBody = {
+      "email": email,
+      "password": password,
+      "type": "1",
+    };
+    String response = await reqHandler.postData(
+      url,
+      bodyMap: reqBody,
+    );
+    if (response == "error") {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text("Can't Login !"),
+          content: const Text('Your Email or Password is Incorrect'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+      //return null;
+    } else {
+      user = User.fromJson(jsonDecode(response));
+      storeUser(user: user);
+      Navigator.pushNamed(context, "/home");
+      // print(user.toString());
+    }
+    // user = User.fromJson(jsonDecode(response));
+    // print("sjkahd");
+    // print(response);
+    return User();
   }
 }
