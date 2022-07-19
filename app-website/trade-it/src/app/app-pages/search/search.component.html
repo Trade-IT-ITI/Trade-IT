@@ -1,13 +1,7 @@
 <!-- search section -->
 <div class="m-2 d-flex">
   <!-- <form class="d-flex" role="search"> -->
-  <input
-    class="form-control me-2"
-    type="search"
-    placeholder="Search"
-    aria-label="Search"
-    [(ngModel)]="searchText"
-  />
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchText" />
   <a class="btn btn-outline-primary" (click)="search()">Search</a>
   <!-- </form> -->
 </div>
@@ -16,29 +10,15 @@
 <div class="d-flex border-bottom mx-2">
   <p class="fw-bold">order by</p>
   <div class="mx-1 p-0">
-    <select
-      aria-label="Default select"
-      [value]="orderBy"
-      (change)="changeOrderByProperty($event.target)"
-    >
+    <select aria-label="Default select" [value]="orderBy" (change)="changeOrderByProperty($event.target)">
       <option value="PostDateTime">time</option>
       <option value="Price">price</option>
       <option value="ViewsCount">views</option>
       <option value="RequestCount">requests</option>
     </select>
-    <a
-      style="text-decoration: none; cursor: pointer"
-      class="mx-1"
-      (click)="toggleOrderType()"
-    >
-      <i
-        [style.display]="!asc ? 'none' : 'inline'"
-        class="fa-solid fa-arrow-up-wide-short"
-      ></i>
-      <i
-        [style.display]="asc ? 'none' : 'inline'"
-        class="fa-solid fa-arrow-down-wide-short"
-      ></i>
+    <a style="text-decoration: none; cursor: pointer" class="mx-1" (click)="toggleOrderType()">
+      <i [style.display]="!asc ? 'none' : 'inline'" class="fa-solid fa-arrow-up-wide-short"></i>
+      <i [style.display]="asc ? 'none' : 'inline'" class="fa-solid fa-arrow-down-wide-short"></i>
     </a>
   </div>
 </div>
@@ -47,10 +27,8 @@
   <!-- results section -->
   <section class="col-6 col-md-8 m-0">
     <h1>Results</h1>
-    <app-products
-      [queryParams]="productsQueryParams"
-      [productCol]="{ colLg: 4, colMd: 6, colSm: 12, col: 12 }"
-    ></app-products>
+    <app-products [queryParams]="productsQueryParams" [productCol]="{ colLg: 4, colMd: 6, colSm: 12, col: 12 }">
+    </app-products>
   </section>
   <!-- filter results section -->
   <section class="col-6 col-md-4 m-0 border-start">
@@ -60,42 +38,24 @@
       <div class="py-2 border-bottom">
         <p class="fw-bold m-0">price</p>
         <div class="m-0">
-          <ngx-slider
-            [(value)]="minValue"
-            [(highValue)]="maxValue"
-            [options]="options"
-            (userChange)="isChanged = true"
-          ></ngx-slider>
+          <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChange)="isChanged = true">
+          </ngx-slider>
         </div>
         <div class="d-flex flex-row-reverse p-1">
-          <a
-            class="btn btn-success"
-            [class]="!this.isChanged ? 'disabled' : ''"
-            style="height: fit-content"
-            (click)="applyPriceFilter()"
-            >Apply</a
-          >
+          <a class="btn btn-success" [class]="!this.isChanged ? 'disabled' : ''" style="height: fit-content"
+            (click)="applyPriceFilter()">Apply</a>
         </div>
       </div>
       <!-- location -->
       <div class="py-2 border-bottom">
         <p class="fw-bold m-0">location</p>
-        <select
-          class="w-100 my-1"
-          (change)="onSelectCity()"
-          [(ngModel)]="cityId"
-        >
+        <select class="w-100 my-1" (change)="onSelectCity()" [(ngModel)]="cityId">
           <option value="0">-- choose city</option>
           <option *ngFor="let city of cities" [value]="city.cityId">
             {{ city.name }}
           </option>
         </select>
-        <select
-          class="w-100 my-1"
-          [(ngModel)]="areaId"
-          (change)="onSelectArea()"
-          [disabled]="isAreasDisabled"
-        >
+        <select class="w-100 my-1" [(ngModel)]="areaId" (change)="onSelectArea()" [disabled]="isAreasDisabled">
           <option value="0">-- choose area</option>
           <option *ngFor="let area of areas" [value]="area.areaId">
             {{ area.name }}
@@ -105,30 +65,16 @@
       <!-- category -->
       <div class="py-2 border-bottom">
         <p class="fw-bold m-0">category</p>
-        <select
-          class="w-100 my-1"
-          [(ngModel)]="categoryId"
-          (change)="onSelectCategory()"
-        >
+        <select class="w-100 my-1" [(ngModel)]="categoryId" (change)="onSelectCategory()">
           <option value="0">-- choose category</option>
-          <option
-            *ngFor="let category of categories"
-            [value]="category.categoryId"
-          >
+          <option *ngFor="let category of categories" [value]="category.categoryId">
             {{ category.name }}
           </option>
         </select>
-        <select
-          class="w-100 my-1"
-          [(ngModel)]="subcategoryId"
-          [disabled]="isSubcategoriesDisabled"
-          (change)="onSelectSubcategory()"
-        >
+        <select class="w-100 my-1" [(ngModel)]="subcategoryId" [disabled]="isSubcategoriesDisabled"
+          (change)="onSelectSubcategory()">
           <option value="0">-- choose subcategory</option>
-          <option
-            *ngFor="let subcategory of subcategories"
-            [value]="subcategory.subcategoryId"
-          >
+          <option *ngFor="let subcategory of subcategories" [value]="subcategory.subcategoryId">
             {{ subcategory.name }}
           </option>
         </select>
@@ -136,11 +82,7 @@
       <!-- status -->
       <div class="py-2 border-bottom">
         <p class="fw-bold m-0">status</p>
-        <select
-          class="w-100"
-          [(ngModel)]="statusId"
-          (change)="onSelectStatus()"
-        >
+        <select class="w-100" [(ngModel)]="statusId" (change)="onSelectStatus()">
           <option value="0">-- choose status</option>
           <option *ngFor="let status of statuses" [value]="status.statusId">
             {{ status.name }}
@@ -148,13 +90,8 @@
         </select>
       </div>
       <div class="d-flex flex-row-reverse p-1">
-        <a
-          class="btn btn-secondary"
-          [class]="isFiltersClean ? 'disabled' : ''"
-          style="height: fit-content"
-          (click)="resetFilters()"
-          >Clear</a
-        >
+        <a class="btn btn-secondary" [class]="isFiltersClean ? 'disabled' : ''" style="height: fit-content"
+          (click)="resetFilters()">Clear</a>
       </div>
     </div>
   </section>
