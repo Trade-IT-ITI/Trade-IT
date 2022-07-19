@@ -19,12 +19,19 @@ class RequestHandler {
     }
   }
 
-  String createUrlParams(
-      {required String endPoint, required List<String> queryParams}) {
-    String finalURL = baseURL + endPoint;
+  String createUrlParams({
+    required String fullUrl,
+    required List<String> queryParams,
+    inFilter = false,
+  }) {
+    String finalURL = fullUrl;
     for (int i = 0; i < queryParams.length; i++) {
-      finalURL +=
-          i == 0 ? "?expand=${queryParams[i]}" : "&expand=${queryParams[i]}";
+      if (inFilter) {
+        finalURL += "&expand=${queryParams[i]}";
+      } else {
+        finalURL +=
+            i == 0 ? "?expand=${queryParams[i]}" : "&expand=${queryParams[i]}";
+      }
     }
     return finalURL;
   }
