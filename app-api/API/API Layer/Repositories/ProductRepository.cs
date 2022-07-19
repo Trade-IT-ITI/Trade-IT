@@ -153,5 +153,12 @@ namespace API_Layer.Repositories
             }).SingleOrDefaultAsync(p => p.ProductId == id);
             return product;
         }
+
+        public async  Task IncreaseViews(int id)
+        {
+            Product product = await _context.Products.Where(p => p.ProductId == id).FirstOrDefaultAsync();
+            product.ViewsCount++;
+            await _context.SaveChangesAsync();
+        }
     }
 }

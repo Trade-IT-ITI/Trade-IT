@@ -8,14 +8,18 @@ import 'package:trade_it/screens/home/home_bloc.dart';
 import '../../layout/constants.dart';
 import '../../layout/filter_widget.dart';
 import '../../layout/product_card.dart';
-import '../register/RegistrationPage.dart';
+import '../../models/user.dart';
 import '../search/search_ui.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
+
   HomeBloc homeBloc = HomeBloc(BlocState());
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   final GlobalKey<FormState> _searchFormKey = GlobalKey<FormState>();
+
   final searchController = TextEditingController();
 
   List<String> imageList = [
@@ -27,6 +31,7 @@ class Home extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    printUserName();
     homeBloc.add(HomeGetDataEvent());
     return BlocBuilder<HomeBloc, BlocState<List<List>>>(
       bloc: homeBloc,
@@ -251,5 +256,12 @@ class Home extends StatelessWidget {
         }
       },
     );
+  }
+
+//For Testing
+  void printUserName() async {
+    User userr = await getUser();
+    print("User In Home");
+    print(userr.firstName);
   }
 }

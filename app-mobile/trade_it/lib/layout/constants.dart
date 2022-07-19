@@ -15,7 +15,7 @@ void filterPage(BuildContext context, FilterData filterOBJ) {
 }
 
 InputDecoration inputStyle(
-    {required BuildContext context, required String hintText}) {
+    {required BuildContext context, String hintText = ""}) {
   return InputDecoration(
     focusedErrorBorder: OutlineInputBorder(
       borderSide:
