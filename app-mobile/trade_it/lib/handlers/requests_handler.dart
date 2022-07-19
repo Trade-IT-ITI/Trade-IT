@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 
 class RequestHandler {
   String baseURL = "http://10.0.2.2:5228/api/";
+  //String baseURL = "http://localhost:5228/api/";
   Future<String> getData(String url, {Map<String, String>? headers}) async {
     try {
       Uri requestURL = Uri.parse(url);

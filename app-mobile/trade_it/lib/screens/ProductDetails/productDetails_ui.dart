@@ -52,6 +52,9 @@ class _ProductDetailsState extends State<ProductDetails> {
             imgPath = 'http://10.0.2.2:5228/Images/' +
                 product.productId.toString() +
                 '/';
+            // imgPath = 'http://localhost:5228/Images/' +
+            //     product.productId.toString() +
+            //     '/';
             for (int i = 0; i < product.productImages!.length; i++) {
               imagesList.add(imgPath + product.productImages![i]);
             }

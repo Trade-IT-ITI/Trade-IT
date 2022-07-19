@@ -5,6 +5,8 @@ import 'package:trade_it/bloc/bloc_state.dart';
 import 'package:trade_it/models/filter.dart';
 import 'package:trade_it/screens/home/home_bloc.dart';
 
+import '../../layout/constants.dart';
+import '../../layout/filter_widget.dart';
 import '../../layout/product_card.dart';
 import '../register/RegistrationPage.dart';
 import '../search/search_ui.dart';
@@ -13,11 +15,9 @@ class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
   HomeBloc homeBloc = HomeBloc(BlocState());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _searchFormKey = GlobalKey<FormState>();
   final searchController = TextEditingController();
-  final minPriceController = TextEditingController();
-  final maxPriceController = TextEditingController();
+
   List<String> imageList = [
     "assets/images/banner.jpg",
     "assets/images/banner.jpg",
@@ -42,90 +42,8 @@ class Home extends StatelessWidget {
             child: Scaffold(
               drawer: SizedBox(
                 width: screenWidth * .85,
-                child: Drawer(
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    child: Field(
-                                      type: TextInputType.number,
-                                      controllerName: minPriceController,
-                                      hint: "Min Price",
-                                    ),
-                                    width: screenWidth * .38,
-                                  ),
-                                  SizedBox(
-                                    child: Field(
-                                      type: TextInputType.number,
-                                      controllerName: maxPriceController,
-                                      hint: "Max Price",
-                                    ),
-                                    width: screenWidth * .4,
-                                  ),
-                                ],
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                              ),
-                              // Row(
-                              //   children: [
-                              //     SizedBox(
-                              //       child: DropdownButton(
-                              //         onChanged: (value) {},
-                              //         items: const [
-                              //           DropdownMenuItem<int>(
-                              //             child: Text("1"),
-                              //             value: 1,
-                              //           ),
-                              //           DropdownMenuItem<int>(
-                              //             child: Text("1"),
-                              //             value: 1,
-                              //           ),
-                              //           DropdownMenuItem<int>(
-                              //             child: Text("1"),
-                              //             value: 1,
-                              //           ),
-                              //           DropdownMenuItem<int>(
-                              //             child: Text("1"),
-                              //             value: 1,
-                              //           ),
-                              //         ],
-                              //       ),
-                              //       width: screenWidth * .38,
-                              //     ),
-                              //     SizedBox(
-                              //       child: Field(
-                              //         type: TextInputType.number,
-                              //         controllerName: maxPriceController,
-                              //         hint: "Max Price",
-                              //       ),
-                              //       width: screenWidth * .4,
-                              //     ),
-                              //   ],
-                              //   mainAxisAlignment:
-                              //       MainAxisAlignment.spaceAround,
-                              // ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child: ElevatedButton(
-                            child: const Text('Cancel'),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                child: const Drawer(
+                  child: FilterWidget(),
                 ),
               ),
               key: _scaffoldKey,
@@ -162,33 +80,9 @@ class Home extends StatelessWidget {
                                   return "Enter a Word More than 3 Characters !";
                                 }
                               },
-                              decoration: InputDecoration(
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.error,
-                                      width: 1.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.error,
-                                      width: 1.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 1.0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      width: 1.0),
-                                ),
-                                labelText: "Search",
+                              decoration: inputStyle(
+                                context: context,
+                                hintText: "Search",
                               ),
                             ),
                           ),
@@ -200,14 +94,7 @@ class Home extends StatelessWidget {
                                   isSearch: true,
                                   searchText: searchController.text,
                                 );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Search(
-                                      filterDataOBJ: filterOBJ,
-                                    ),
-                                  ),
-                                );
+                                filterPage(context, filterOBJ);
                               }
                             },
                             icon:
@@ -363,65 +250,6 @@ class Home extends StatelessWidget {
           );
         }
       },
-    );
-  }
-}
-
-class FiltersWidget extends StatelessWidget {
-  const FiltersWidget({
-    Key? key,
-    required this.screenWidth,
-    required this.formKey,
-    required this.minPriceController,
-  }) : super(key: key);
-  final screenWidth;
-  final formKey;
-  final minPriceController;
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      child: Field(
-                        type: TextInputType.number,
-                        controllerName: minPriceController,
-                        hint: "Min Price",
-                      ),
-                      width: screenWidth * .38,
-                    ),
-                    SizedBox(
-                      child: Field(
-                        type: TextInputType.number,
-                        controllerName: minPriceController,
-                        hint: "Max Price",
-                      ),
-                      width: screenWidth * .4,
-                    ),
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: ElevatedButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.pop(context),
-            ),
-          )
-        ],
-      ),
     );
   }
 }

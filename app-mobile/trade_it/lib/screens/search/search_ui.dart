@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trade_it/bloc/bloc_state.dart';
 import 'package:trade_it/models/product.dart';
 import 'package:trade_it/screens/search/search_bloc.dart';
@@ -54,7 +55,7 @@ class _SearchState extends State<Search> {
                       ),
                       ElevatedButton(
                         child: const Text('Return To Home'),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Navigator.pushNamed(context, "/home"),
                       ),
                     ],
                   ),
@@ -65,16 +66,37 @@ class _SearchState extends State<Search> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    "Products",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w700,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10.0,
+                    ),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/home");
+                          },
+                          icon: const Icon(
+                            FontAwesomeIcons.angleLeft,
+                            color: Colors.blueGrey,
+                            size: 30,
+                          ),
+                        ),
+                        const Spacer(),
+                        const Text(
+                          "Products",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Expanded(
                     child: SingleChildScrollView(
