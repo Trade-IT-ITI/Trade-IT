@@ -1,3 +1,4 @@
+import { categoryInstruction } from './models/categoryInstruction';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
@@ -10,6 +11,7 @@ import { AddInstructionComponent } from 'src/app/admin/component/Instruction/add
 import { AddAreaComponent } from 'src/app/admin/component/Location/Area/add-area/add-area.component';
 import { AddCityComponent } from 'src/app/admin/component/Location/City/add-city/add-city.component';
 import { AddStatusComponent } from 'src/app/admin/component/Status/add-status/add-status.component';
+import { CategoryInstructionComponent } from 'src/app/admin/component/category-instruction/category-instruction.component';
 import { AddSubcategoryComponent } from 'src/app/admin/component/Subcategory/add-subcategory/add-subcategory.component';
 import { ProductDetailsComponent } from "src/app/app-pages/product-pages/product-details/product-details.component";
 import { LoginComponent } from "src/app/app-pages/auth/login/login.component";
@@ -37,7 +39,8 @@ const routes: Routes = [
             { path: "city/add", component: AddCityComponent },
             { path: "area/add", component: AddAreaComponent },
             { path: "instruction/add", component: AddInstructionComponent },
-            { path: "status/add", component: AddStatusComponent }
+            { path: "status/add", component: AddStatusComponent },
+            { path: "categoryInstruction/add", component: CategoryInstructionComponent }
         ]
     },
     { path: 'not-found', component: NotFoundComponent },
