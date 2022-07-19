@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:trade_it/screens/addProduct/AddProductScreen.dart';
 import 'package:trade_it/screens/faviorate/faviorate.dart';
 import 'package:trade_it/screens/home/home_ui.dart';
 import 'package:trade_it/screens/profile/profile.dart';
@@ -42,7 +43,9 @@ class _NavigationContainerState extends State<NavigationContainer> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: widgetList[_bottomNavIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/addProduct');
+        },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),

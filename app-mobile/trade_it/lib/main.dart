@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trade_it/layout/theme.dart';
 import 'package:trade_it/screens/ProductDetails/productDetails.dart';
+import 'package:trade_it/screens/addProduct/AddProductScreen.dart';
+import 'package:trade_it/screens/addProduct/cubit/productCubit.dart';
+import 'package:trade_it/screens/addProduct/cubit/imageCubit.dart';
 import 'package:trade_it/screens/login/LoginPage.dart';
 
 import 'layout/navigation_container.dart';
@@ -14,19 +18,31 @@ void main() {
 class TradeITApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: themeData,
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
-      //initialRoute: '/onboard',
-      routes: {
-        '/onboard': (context) => const Onboard(),
-        '/login': (context) => LoginPage(),
-        '/home': (context) => const NavigationContainer(
-              index: 0,
-            ),
-        '/details': (context) => ProductDetails(),
-      },
+    return MultiBlocProvider(
+
+      providers: [
+        BlocProvider(
+            create: (context) => AddProductCubit(),
+        ),
+        BlocProvider(
+          create: (context)=> PickingImageCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: themeData,
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/home',
+        //initialRoute: '/onboard',
+        routes: {
+          '/onboard': (context) => const Onboard(),
+          '/login': (context) => LoginPage(),
+          '/home': (context) => const NavigationContainer(
+                index: 0,
+              ),
+          '/details': (context) => ProductDetails(),
+          '/addProduct': (context) => AddProductScreen(),
+        },
+      ),
     );
   }
 }
