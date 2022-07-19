@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   loggedUser:User={};
   constructor(private router:Router) { }
 
+  //TODO need to be edited
   ngOnInit(): void {
     let userData = localStorage.getItem('userData');
     this.loggedUser= userData!=null?JSON.parse(userData):null
