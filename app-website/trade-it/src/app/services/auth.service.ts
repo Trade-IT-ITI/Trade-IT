@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { User } from 'src/app/models/user';
+
+interface UserResponse {
+  user: User;
+  token: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +18,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string,type:number) {
-    return this.http.post<User>(`${this.url}/Login`, { email, password,type })
+  login(email: string, password: string, type: number) {
+    return this.http.post<UserResponse>(`${this.url}/Login`, { email, password, type })
       .pipe(catchError(this.handleError));
     ;
   }
   register(user: User) {
-    return this.http.post<User>(`${this.url}/Register`, user)
+    return this.http.post<UserResponse>(`${this.url}/Register`, user)
       .pipe(catchError(this.handleError));
     ;
   }
