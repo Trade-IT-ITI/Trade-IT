@@ -12,6 +12,7 @@ import { AddAreaComponent } from 'src/app/admin/component/Location/Area/add-area
 import { AddInstructionComponent } from 'src/app/admin/component/Instruction/add-instruction/add-instruction.component';
 import { AddStatusComponent } from 'src/app/admin/component/Status/add-status/add-status.component';
 import { RouterModule } from '@angular/router';
+import { CategoryInstructionComponent } from './component/category-instruction/category-instruction.component';
 
 
 
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     AddCityComponent,
     AddAreaComponent,
     AddInstructionComponent,
-    AddStatusComponent
+    AddStatusComponent,
+    CategoryInstructionComponent
   ],
   imports: [
     CommonModule,

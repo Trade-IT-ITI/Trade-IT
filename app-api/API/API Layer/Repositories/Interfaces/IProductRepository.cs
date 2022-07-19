@@ -10,6 +10,7 @@ namespace API_Layer.Repositories.Interfaces
        // Task Add(Product product , IFormFile image);
         Task Add(NewProduct product);
         Task<ProductData> GetById(int id);
+        Task IncreaseViews(int id);
     }
 
 }

@@ -1,8 +1,9 @@
 import { subcategory } from "./subcategory";
+import { categoryInstruction } from "./categoryInstruction";
 
 export interface category {
     categoryId: number,
     name: string,
-    categoryInstructions: null,
+    categoryInstructions?: categoryInstruction[] ,
     subcategories: subcategory[]
 }

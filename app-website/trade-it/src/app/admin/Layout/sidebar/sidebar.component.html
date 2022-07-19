@@ -1,13 +1,5 @@
-<div
-  class="d-flex flex-column flex-shrink-0 p-1 text-white bg-dark"
-  style="height: 100vh"
-  [class]="onToggleSideBar()"
->
-  <a
-    class="m-2 fs-5 text-decoration-none text-light"
-    (click)="toggle()"
-    [class]="onToggleButton()"
-  >
+<div class="d-flex flex-column flex-shrink-0 p-1 text-white bg-dark" style="height: 100vh" [class]="onToggleSideBar()">
+  <a class="m-2 fs-5 text-decoration-none text-light" (click)="toggle()" [class]="onToggleButton()">
     <i class="fa-solid fa-bars"></i>
   </a>
   <a class="text-primary text-center" style="font-size: xx-large">
@@ -16,61 +8,43 @@
   <hr />
   <ul class="nav nav-tabs flex-column mb-auto">
     <li role="presentation" routerLinkActive="active">
-      <a
-        routerLink="category/add"
-        class="nav-link text-white"
-        [class]="onToggleLinks()"
-      >
+      <a routerLink="category/add" class="nav-link text-white" [class]="onToggleLinks()">
         <i class="fa-solid fa-layer-group m-1"></i>
         <span [class]="onToggleSpans()">Category</span>
       </a>
     </li>
     <li role="presentation" routerLinkActive="active">
-      <a
-        routerLink="subcategory/add"
-        class="nav-link text-white"
-        [class]="onToggleLinks()"
-      >
+      <a routerLink="subcategory/add" class="nav-link text-white" [class]="onToggleLinks()">
         <i class="fa-solid fa-clone m-1"></i>
         <span [class]="onToggleSpans()">Sub Category</span>
       </a>
     </li>
     <li role="presentation" routerLinkActive="active">
-      <a
-        routerLink="city/add"
-        class="nav-link text-white"
-        [class]="onToggleLinks()"
-      >
-        <i class="fa-solid fa-city m-1"></i>
-        <span [class]="onToggleSpans()">City </span>
+      <a routerLink="subcategory/add" class="nav-link text-white" [class]="onToggleLinks()">
+        <i class="fa-solid fa-clone m-1"></i>
+        <span [class]="onToggleSpans()">Sub Category</span>
       </a>
     </li>
     <li role="presentation" routerLinkActive="active">
-      <a
-        routerLink="area/add"
-        class="nav-link text-white"
-        [class]="onToggleLinks()"
-      >
+      <a routerLink="categoryInstruction/add" class="nav-link text-white" [class]="onToggleLinks()">
+        <i class="fa-solid fa-person-chalkboard m-1"></i>
+        <span [class]="onToggleSpans() ">Category Instructions </span>
+      </a>
+    </li>
+    <li role="presentation" routerLinkActive="active">
+      <a routerLink="area/add" class="nav-link text-white" [class]="onToggleLinks()">
         <i class="fa-solid fa-building m-1"></i>
         <span [class]="onToggleSpans()">Area </span>
       </a>
     </li>
     <li role="presentation" routerLinkActive="active">
-      <a
-        routerLink="instruction/add"
-        class="nav-link text-white"
-        [class]="onToggleLinks()"
-      >
+      <a routerLink="instruction/add" class="nav-link text-white" [class]="onToggleLinks()">
         <i class="fa-solid fa-helmet-safety m-1"></i>
         <span [class]="onToggleSpans()">Instruction </span>
       </a>
     </li>
     <li role="presentation" routerLinkActive="active">
-      <a
-        routerLink="status/add"
-        class="nav-link text-white"
-        [class]="onToggleLinks()"
-      >
+      <a routerLink="status/add" class="nav-link text-white" [class]="onToggleLinks()">
         <i class="fa-solid fa-tag m-1"></i>
         <span [class]="onToggleSpans()">Status </span>
       </a>
