@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   email: string = ""
   password: string = ""
-  type: number = 0
+  type: number = 1
   constructor(private authService: AuthService,private router:Router) { }
 
   ngOnInit(): void {
@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.email, this.password, this.type).subscribe((user) => {
       console.log(user)
-      this.router.navigateByUrl("/home")
       localStorage.setItem("userData",JSON.stringify(user));
+      this.router.navigateByUrl("/home")
       //TODO navigate and do things :)
     })
   }
