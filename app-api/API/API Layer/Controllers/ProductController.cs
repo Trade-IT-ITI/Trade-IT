@@ -3,6 +3,7 @@ using DatabaseLayer.Models;
 using API_Layer.Repositories.Interfaces;
 using API_Layer.QueryParameters;
 using API_Layer.DataModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_Layer.Controllers
 {
@@ -29,10 +30,10 @@ namespace API_Layer.Controllers
             return product != null ? Ok(product) : NotFound();
         }
         //add new Product 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] NewProduct product)
         {
-
             try
             {
                 await _productRepository.Add(product);

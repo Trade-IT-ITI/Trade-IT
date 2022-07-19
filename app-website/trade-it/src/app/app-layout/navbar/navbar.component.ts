@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {User} from 'src/app/models/user'
+// import { User } from 'src/app/models/user'
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,27 +11,37 @@ import {User} from 'src/app/models/user'
 export class NavbarComponent implements OnInit {
 
   categoriesToggle: boolean = false;
-  loggedUserFlag:boolean=false
-  loggedUser:User={};
-  constructor(private router:Router) { }
+  // loggedUserFlag: boolean = false
+  // loggedUser: User = {};
+  isLogged: boolean = false;
+  isAdmin: boolean = false;
+  userEmail: string = '';
 
-  //TODO need to be edited
+  constructor(private authService: AuthService, private router: Router) {
+    this.authService.changeEmitted.subscribe(data => {
+      this.isLogged = true;
+      this.isAdmin = data.isAdmin;
+      this.userEmail = data.email;
+    })
+  }
+
   ngOnInit(): void {
-    let userData = localStorage.getItem('userData');
-    this.loggedUser= userData!=null?JSON.parse(userData):null
-    if(this.loggedUser){
-      this.loggedUserFlag=true;
-      console.log(this.loggedUser)
+    let user = localStorage.getItem('user');
+    if (user) {
+      this.isLogged = true;
+      this.userEmail = (JSON.parse(user)).email;
     }
   }
   toggleSubscribe(value: boolean) {
     this.categoriesToggle = value
-    
+
   }
-  logout(){
-    localStorage.removeItem('userData');
+  logout() {
+    this.isLogged = false;
+    this.isAdmin = false;
+    this.userEmail = '';
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.router.navigateByUrl('');
   }
-
-
 }
