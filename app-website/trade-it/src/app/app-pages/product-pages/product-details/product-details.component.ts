@@ -21,6 +21,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productDetails = data;
       this.isSold = (this.productDetails.status == 'Sold')
     });
+    this.productService.increaseViewCount(this.id).subscribe(()=>{})
   }
   onChooseImage(index: number) {
     this.imgIndex = index

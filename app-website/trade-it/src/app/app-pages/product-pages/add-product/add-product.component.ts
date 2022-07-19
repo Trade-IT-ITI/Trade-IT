@@ -16,8 +16,8 @@ import { CityService } from 'src/app/services/city.service';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-  title: string = "qefc";
-  descrioption: string = "qqq";
+  title: string = "";
+  descrioption: string = "";
   price: number = 1;
   cityId: number = 0;
   areaId: number = 0;
@@ -84,13 +84,7 @@ export class AddProductComponent implements OnInit {
   fileName = '';
   
   onFileSelected(event: any) {
-  
     this.image = event.target.files[0];
-    //save image in local temporally
-  let localImage :File|null=null;
-    localImage=this.image;
-
-    //continue
     if (this.image) {
       this.fileName = this.image.name;
     }else{
