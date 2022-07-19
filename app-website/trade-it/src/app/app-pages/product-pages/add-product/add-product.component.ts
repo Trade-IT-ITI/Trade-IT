@@ -16,8 +16,8 @@ import { CityService } from 'src/app/services/city.service';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-  title: string = "";
-  descrioption: string = "";
+  title: string = "qefc";
+  descrioption: string = "qqq";
   price: number = 1;
   cityId: number = 0;
   areaId: number = 0;
@@ -80,30 +80,27 @@ export class AddProductComponent implements OnInit {
   }
 
   //product data
-
-  file: File | null = null;
+  image: File | null = null;
   fileName = '';
   onFileSelected(event: any) {
-    this.file = <File>event.target.files[0];
-    if (this.file) {
-      this.fileName = this.file.name;
-
+    this.image = event.target.files[0];
+    if (this.image) {
+      this.fileName = this.image.name;
     }
   }
-  addProduct() {
-    const formData = new FormData();
-    formData.append('title', this.title);
-    formData.append('descrioption', this.descrioption);
-    formData.append('price', this.price.toString());
-    formData.append('cityId', this.cityId.toString());
-    formData.append('areaId', this.areaId.toString());
-    formData.append('subcategoryId', this.subcategoryId.toString());
-    formData.append('userId', this.userId.toString());
-    formData.append("image", this.file!);
-    console.log(formData)
-    this.productService.addProduct(formData).subscribe((product) => {
-      console.log(product);
-    });
+  formData = new FormData();
+ async addProduct() {
+    this.formData.append('title', this.title);
+    this.formData.append('descrioption', this.descrioption);
+    this.formData.append('price', this.price.toString());
+    this.formData.append('cityId', this.cityId.toString());
+    this.formData.append('areaId', this.areaId.toString());
+    this.formData.append('subcategoryId', this.subcategoryId.toString());
+    this.formData.append('userId', this.userId.toString());
+    this.formData.append("image", this.image!);
+await this.productService.addProduct(this.formData).subscribe((product) => {
+        console.log(product);
+      });
   }
 
 }

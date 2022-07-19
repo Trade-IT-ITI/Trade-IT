@@ -21,7 +21,7 @@ export class ProductService {
       .pipe(catchError(this.handleError));
   }
   addProduct(product: any) {
-    return this.http.post<any>(this.url,{product})
+    return this.http.post<any>(this.url,product)
       .pipe(catchError(this.handleError));
     ;
   }
