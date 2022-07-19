@@ -82,10 +82,19 @@ export class AddProductComponent implements OnInit {
   //product data
   image: File | null = null;
   fileName = '';
+  
   onFileSelected(event: any) {
+  
     this.image = event.target.files[0];
+    //save image in local temporally
+  let localImage :File|null=null;
+    localImage=this.image;
+
+    //continue
     if (this.image) {
       this.fileName = this.image.name;
+    }else{
+      this.fileName ="";
     }
   }
   formData = new FormData();

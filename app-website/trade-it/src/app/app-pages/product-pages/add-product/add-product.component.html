@@ -58,11 +58,18 @@
             </div>
         </div>
         <div class="col-md-4 border-start py-2">
-            <p class="fw-bold m-0">Upload Image</p>
-            <input required="true" type="file" class="form-control" (change)="onFileSelected($event)"  accept=".jpg,.png" >
+            <div class="card m-auto" style="width: 18rem;">
+
+                <img src="../../../../assets/images/image.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold m-0">Upload Image</h5>
+                  <input required="true" type="file" class="form-control" (change)="onFileSelected($event)"  accept=".jpg,.png" >
+                </div>
+              </div>
         </div>
     </div>
     <div class="mt-5 text-center">
+     
         <button (click)="addProduct()" class="btn btn-primary profile-button w-50 fw-bold"  >Add Product</button>
     </div>
 </div>
