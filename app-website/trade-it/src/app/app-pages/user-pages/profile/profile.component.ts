@@ -11,7 +11,7 @@ user:User={}
   constructor() { }
 
   ngOnInit(): void {
-    let userData = localStorage.getItem('userData');
+    let userData = localStorage.getItem('user');
     this.user= userData!=null?JSON.parse(userData):null
   }
 
