@@ -14,7 +14,7 @@ namespace API_Layer.Controllers
 
         public UserController(IUserRepository userRepository)
         {
-            _userRepository = userRepository; 
+            _userRepository = userRepository;
         }
         //get by id
         [HttpGet("{id:int}")]
@@ -42,7 +42,7 @@ namespace API_Layer.Controllers
             if (user.Type != loginUser.Type)
                 return NotFound("There is no such a user");
 
-            return Ok(new { user = user , token = _userRepository.GenerateToken(user) });
+            return Ok(new { user = user, token = _userRepository.GenerateToken(user) });
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterData user)
@@ -53,16 +53,30 @@ namespace API_Layer.Controllers
             }
             User newUser = new User()
             {
-                Email = user.Email.ToLower() ,
-                FirstName = user.firstName ,
-                LastName = user.lastName ,
-                Password = user.Password ,
-                Phone = user.phone ,
+                Email = user.Email.ToLower(),
+                FirstName = user.firstName,
+                LastName = user.lastName,
+                Password = user.Password,
+                Phone = user.phone,
                 Type = UserType.User
             };
 
             await _userRepository.Add(newUser);
-            return Ok(new { user = newUser , token = _userRepository.GenerateToken(newUser) });
+            return Ok(new { user = newUser, token = _userRepository.GenerateToken(newUser) });
         }
+        [HttpPut]
+        public async Task<IActionResult> Update(EditUserData user)
+        {
+            try
+            {
+                await _userRepository.UpdateUser(user);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

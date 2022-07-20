@@ -1,4 +1,5 @@
-﻿using API_Layer.Repositories.Interfaces;
+﻿using API_Layer.DataModels;
+using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Data;
 using DatabaseLayer.Models;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace API_Layer.Repositories
     {
         private readonly AppDbContext context;
         private readonly IConfiguration configuration;
-        public UserRepository(AppDbContext context , IConfiguration configuration)
+        public UserRepository(AppDbContext context, IConfiguration configuration)
         {
             this.context = context;
             this.configuration = configuration;
@@ -31,8 +32,9 @@ namespace API_Layer.Repositories
 
         public async Task<User> GetById(int id)
         {
-            return await context.Users.Include(u=>u.Products).Include(u => u.Favourites).FirstOrDefaultAsync(u=>u.UserId==id);
+            return await context.Users.Include(u => u.Products).Include(u => u.Favourites).FirstOrDefaultAsync(u => u.UserId == id);
         }
+
 
         public string GenerateToken(User user)
         {
@@ -45,15 +47,36 @@ namespace API_Layer.Repositories
                 new Claim("Email", user.Email),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
-            var sign = new SigningCredentials(key , SecurityAlgorithms.HmacSha256);
+            var sign = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
-                configuration["Jwt:Issuer"] ,
-                configuration["Jwt:Audience"] ,
-                claims ,
-                expires: DateTime.UtcNow.AddMinutes(10) ,
+                configuration["Jwt:Issuer"],
+                configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddMinutes(10),
                 signingCredentials: sign);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public async Task UpdateUser(EditUserData user)
+        {
+            User editUserData = await context.Users.Where(u => u.UserId == user.ID).FirstOrDefaultAsync();
+            if (editUserData != null)
+            {
+                editUserData.FirstName = user.firstName;
+                editUserData.LastName = user.lastName;
+                editUserData.Phone = user.phone;
+                editUserData.Email = user.Email;
+
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("There is no such a user");
+            }
+
+        }
+
+      
     }
 }
