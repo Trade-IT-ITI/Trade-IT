@@ -12,10 +12,15 @@ user:User={}
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-    this.userService.getUserById(1).subscribe((data)=>{
-      localStorage.setItem("user", JSON.stringify(data));
-      this.user=data
-    })
+    let userString = localStorage.getItem('user');
+    if (userString) {
+      let u = JSON.parse(userString);
+
+      this.userService.getUserById(u.userId).subscribe((data)=>{
+        localStorage.setItem("user", JSON.stringify(data));
+        this.user=data
+      })
+    }
   }
 
 }
