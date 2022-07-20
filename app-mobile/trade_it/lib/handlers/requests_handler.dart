@@ -69,10 +69,7 @@ class RequestHandler {
     return finalURL;
   }
 
-  Future<String> post(String url,
-      {Map<String, String>? headers,
-      required Map<String, dynamic> body,
-      String? bearerToken}) async {
+  Future<http.Response> post(String url, {Map<String, String>? headers, required Map<String, dynamic> body, String? bearerToken}) async {
     try {
       http.Response response =
           await http.post(Uri.parse(url), body: jsonEncode(body), headers: {
@@ -80,14 +77,14 @@ class RequestHandler {
         HttpHeaders.acceptHeader: 'application/json',
         HttpHeaders.authorizationHeader: 'Bearer bearerToken',
       }).timeout(const Duration(seconds: 10));
-
-      if (response.statusCode == 200) {
-        return response.body;
+          print(response.statusCode);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return response;
       } else {
         throw Error.safeToString("Error With Request Not 200 ");
       }
     } catch (error) {
-      throw Error.safeToString("Error With Request");
+      throw Error.safeToString(error);
     }
   }
 }
