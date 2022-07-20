@@ -32,7 +32,7 @@ namespace API_Layer.Repositories
 
         public async Task<User> GetById(int id)
         {
-            return await context.Users.Include(u => u.Products).Include(u => u.Favourites).FirstOrDefaultAsync(u => u.UserId == id);
+            return await context.Users.Include(u => u.Products).Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p=>p.ProductImages).FirstOrDefaultAsync(u => u.UserId == id);
         }
 
 
