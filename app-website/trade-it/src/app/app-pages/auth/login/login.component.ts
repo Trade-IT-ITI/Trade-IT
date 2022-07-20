@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.email, this.password, this.type).subscribe((data) => {
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("token", JSON.stringify(data.token));
-      this.authService.emitChange({ email: this.email, isAdmin: data.user.type == 0 })
+      this.authService.emitChange({ fullname: data.user.firstName + ' ' + data.user.lastName, isAdmin: data.user.type == 0 })
       this.router.navigate(["/home"]);
       //TODO navigate and do things :)
     })

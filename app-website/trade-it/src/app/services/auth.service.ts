@@ -45,7 +45,7 @@ export class AuthService {
   // Observable string streams
   changeEmitted = this.emitChangeSource.asObservable();
   // Service message commands
-  emitChange(change: { email: string, isAdmin: boolean }) {
+  emitChange(change: { fullname: string, isAdmin: boolean }) {
     this.emitChangeSource.next(change);
   }
 }

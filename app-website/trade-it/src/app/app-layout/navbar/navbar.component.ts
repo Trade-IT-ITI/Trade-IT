@@ -11,25 +11,23 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent implements OnInit {
 
   categoriesToggle: boolean = false;
-  // loggedUserFlag: boolean = false
-  // loggedUser: User = {};
   isLogged: boolean = false;
   isAdmin: boolean = false;
-  userEmail: string = '';
+  fullName: string = '';
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.changeEmitted.subscribe(data => {
       this.isLogged = true;
       this.isAdmin = data.isAdmin;
-      this.userEmail = data.email;
+      this.fullName = data.fullname;
     })
   }
 
   ngOnInit(): void {
-    let user = localStorage.getItem('user');
+    let user = JSON.parse(localStorage.getItem('user') ?? '');
     if (user) {
       this.isLogged = true;
-      this.userEmail = (JSON.parse(user)).email;
+      this.fullName = user.firstName + ' ' + user.lastName;
     }
   }
   toggleSubscribe(value: boolean) {
@@ -39,7 +37,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.isLogged = false;
     this.isAdmin = false;
-    this.userEmail = '';
+    this.fullName = '';
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     this.router.navigateByUrl('');
