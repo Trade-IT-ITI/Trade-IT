@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
@@ -26,6 +26,7 @@ import { ProfileComponent } from 'src/app/app-pages/user-pages/profile/profile.c
 import { EditProfileComponent } from './app-pages/user-pages/edit-profile/edit-profile.component';
 import { LoaderComponent } from './app-layout/loader/loader.component';
 import { NotAccessibleComponent } from './app-pages/not-accessible/not-accessible.component';
+import { Interceptor } from './services/interceptors/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,11 @@ import { NotAccessibleComponent } from './app-pages/not-accessible/not-accessibl
     AppRoutingModule,
     AdminModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

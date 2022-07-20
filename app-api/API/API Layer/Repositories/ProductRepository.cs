@@ -39,6 +39,7 @@ namespace API_Layer.Repositories
                 await _context.Products.AddAsync(product1);
                 await _context.SaveChangesAsync();
 
+
                 var folderName = Path.Combine(hostEnvironment.WebRootPath , $@"Images\{product1.ProductId}");
                 Directory.CreateDirectory(folderName);
                 //create folder for product images and it's name equals product id
@@ -126,7 +127,7 @@ namespace API_Layer.Repositories
             return productsData;
         }
 
-        public async Task<ProductData> GetById(int id)
+        public async Task<ProductData?> GetById(int id)
         {
             var product = await _context.Products.AsNoTracking().Select(p => new ProductData()
             {
@@ -154,11 +155,14 @@ namespace API_Layer.Repositories
             return product;
         }
 
-        public async  Task IncreaseViews(int id)
+        public async Task IncreaseViews(int id)
         {
-            Product product = await _context.Products.Where(p => p.ProductId == id).FirstOrDefaultAsync();
-            product.ViewsCount++;
-            await _context.SaveChangesAsync();
+            Product product = await _context.Products.FindAsync(id);
+            if (product != null)
+            {
+                product.ViewsCount++;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

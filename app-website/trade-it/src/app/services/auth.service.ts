@@ -26,7 +26,7 @@ export class AuthService {
       this.isAuth = true;
       this.isAdmin = data.user.type == 0;
       localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", JSON.stringify(data.token));
+      localStorage.setItem("token", data.token);
     });
     return response.pipe(catchError(this.handleError));
   }
@@ -44,7 +44,8 @@ export class AuthService {
   checkIsAuth(): boolean { return localStorage.getItem('token') != null }
   checkIsAdmin(): boolean { return (JSON.parse(localStorage.getItem('user') ?? '')).type == 0 }
   getToken() {
-    return localStorage.getItem('token')
+    let token = localStorage.getItem("token")
+    return token
   }
   logout() {
     this.isAuth = false;

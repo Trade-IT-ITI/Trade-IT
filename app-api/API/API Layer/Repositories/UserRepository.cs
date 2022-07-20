@@ -52,7 +52,7 @@ namespace API_Layer.Repositories
                 configuration["Jwt:Issuer"],
                 configuration["Jwt:Audience"],
                 claims,
-                expires: DateTime.UtcNow.AddMinutes(10),
+                expires: DateTime.UtcNow.AddDays(2),
                 signingCredentials: sign);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
