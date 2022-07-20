@@ -4,7 +4,6 @@ namespace API_Layer.DataModels
 {
     public class NewProduct
     {
-
         public string Title { get; set; }
         public string Descrioption { get; set; }
         public double Price { get; set; }
@@ -12,6 +11,7 @@ namespace API_Layer.DataModels
         public int AreaId { get; set; }
         public int SubcategoryId { get; set; }
         public int UserId { get; set; }
+        public int StatusId { get; set; }
         public IFormFile image { get; set; }
     }
 }

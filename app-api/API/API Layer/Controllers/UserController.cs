@@ -2,7 +2,6 @@
 using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Helper;
 using DatabaseLayer.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Layer.Controllers
@@ -12,6 +11,7 @@ namespace API_Layer.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+
         public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -31,6 +31,7 @@ namespace API_Layer.Controllers
                 return BadRequest("email and password are required");
 
             var user = await _userRepository.GetByEmail(loginUser.Email);
+
             if (user == null)
                 return NotFound("no user exists with this email");
 
@@ -41,22 +42,41 @@ namespace API_Layer.Controllers
             if (user.Type != loginUser.Type)
                 return NotFound("There is no such a user");
 
-            return Ok(user);
+            return Ok(new { user = user, token = _userRepository.GenerateToken(user) });
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterData user)
         {
+            if ((await _userRepository.GetByEmail(user.Email)) != null)
+            {
+                return BadRequest("user with this email already exists");
+            }
+            User newUser = new User()
+            {
+                Email = user.Email.ToLower(),
+                FirstName = user.firstName,
+                LastName = user.lastName,
+                Password = user.Password,
+                Phone = user.phone,
+                Type = UserType.User
+            };
+
+            await _userRepository.Add(newUser);
+            return Ok(new { user = newUser, token = _userRepository.GenerateToken(newUser) });
+        }
+        [HttpPut]
+        public async Task<IActionResult> Update(EditUserData user)
+        {
             try
             {
-                User newUser = new User() { Email = user.Email ,FirstName=user.firstName,LastName=user.lastName,Password=user.Password,Phone=user.phone,Type=UserType.User};
-                
-                await _userRepository.Add(newUser);
-                return Ok(newUser);
+                await _userRepository.UpdateUser(user);
+                return Ok(user);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
+
     }
 }
