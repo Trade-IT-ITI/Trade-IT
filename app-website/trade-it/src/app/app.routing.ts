@@ -19,6 +19,7 @@ import { RegisterComponent } from "src/app/app-pages/auth/register/register.comp
 import { ProfileComponent } from "src/app/app-pages/user-pages/profile/profile.component";
 import { EditProfileComponent } from "src/app/app-pages/user-pages/edit-profile/edit-profile.component";
 import { AddProductComponent } from "src/app/app-pages/product-pages/add-product/add-product.component";
+import { UserFavoritesComponent } from './app-pages/user-pages/user-favorites/user-favorites.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'settings', component: EditProfileComponent },
+    { path: 'favorites', component: UserFavoritesComponent },
    // { path: 'admin', component: AdminComponent },
     
     {
