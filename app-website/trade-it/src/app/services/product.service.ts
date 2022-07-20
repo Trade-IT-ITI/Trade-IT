@@ -25,6 +25,11 @@ export class ProductService {
       .pipe(catchError(this.handleError));
     ;
   }
+  increaseViewCount(id:number){
+    return this.http.put<any>(`${this.url}/increase`,{},{params:{id}})
+      .pipe(catchError(this.handleError));
+    ;
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

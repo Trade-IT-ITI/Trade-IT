@@ -45,5 +45,20 @@ namespace API_Layer.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut("increase")]
+        public async Task<IActionResult> IncreaseViews(int id)
+        {
+            try
+            {
+
+               await _productRepository.IncreaseViews(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }
