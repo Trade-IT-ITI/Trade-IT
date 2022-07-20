@@ -39,9 +39,10 @@ class AddProductCubit extends Cubit<AddProductState>{
   void addProduct(Product product)async{
       emit(AddProductLoading());
       try{
-        Product nProduct = await services.addProduct(product);
+        dynamic json = await services.addProduct(product);
+        Product nProduct = Product.fromJson(json);
         emit(AddProductSuccess(nProduct));
-      } catch (error){
+      } on Error catch (error){
         emit(AddProductFailed(error));
       }
   }

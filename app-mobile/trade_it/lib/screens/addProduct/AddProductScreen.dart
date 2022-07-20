@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:trade_it/layout/kDropdownList.dart';
+import 'package:trade_it/models/product.dart';
+import 'package:trade_it/models/sub_category.dart';
 import 'package:trade_it/screens/addProduct/cubit/productCubit.dart';
 import 'package:trade_it/screens/addProduct/cubit/productStates.dart';
-import 'package:trade_it/screens/addProduct/cubit/imageCubit.dart';
-import 'package:trade_it/screens/addProduct/cubit/imageStates.dart';
+
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({Key? key}) : super(key: key);
@@ -20,48 +24,44 @@ class _AddProductScreenState extends State<AddProductScreen> {
   var productNameTextController = TextEditingController();
   var productPriceTextController = TextEditingController();
   var productDescriptionTextController = TextEditingController();
-
+  File? image;
   @override
   void initState() {
     super.initState();
     BlocProvider.of<AddProductCubit>(context).getCategories();
   }
 
-  Widget showImage(BuildContext context,PickingImageStates state){
-    if(state is AddingProductImageFailed){
-      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.white,
-            elevation: 10,
-            duration: const Duration(seconds: 2),
-            content: Text(
-              state.errorMessage,
-              textAlign: TextAlign.right,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  ?.copyWith(color: Colors.black),
-            ),
-          ),
-        );
+  void addProductImage(ImageSource imageSource)async{
+    try{
+      var image = await ImagePicker().pickImage(source: imageSource);
+      if(image == null){
+        return null;
+      }
+      final pickedImageFile = File(image.path);
+      setState(() {
+        this.image = pickedImageFile;
       });
 
-      return Image.asset('assets/images/imagePlaceholder.png');
-    }
-    else if (state is AddingProductImageSuccess){
-
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.file(state.image,fit: BoxFit.cover,),
+    } on PlatformException catch(error){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.white,
+          elevation: 10,
+          duration: const Duration(seconds: 2),
+          content: Text(
+            error.message!,
+            textAlign: TextAlign.right,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                ?.copyWith(color: Colors.black),
+          ),
+        ),
       );
     }
-    else{
-      return Image.asset('assets/images/imagePlaceholder.png');
-    }
-
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
               );
             } else if (state is RequiredDataFailed) {
               return Center(child: Container(child: const Text("FFF")));
-            } else {
+            } else if(state is AddProductFailed){
+              return Center(child: Container(child: Text(state.error.toString())));
+            }
+            else {
               state as RequiredDataLoaded;
               return Form(
                 key: _formKey,
@@ -106,80 +109,83 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ),
                       ),
                     ),
-                    BlocBuilder<PickingImageCubit,PickingImageStates>(
-                      builder:(context,pickingState)=> Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8,horizontal: 16),
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        child: InkWell(
-                          child: showImage(context,pickingState),
-                          onTap: (){
-                            showModalBottomSheet(
-                              context: context,
-                              elevation: 3,
-                              builder: (context)=>Container(
-                                color: const Color(0xFF757575),
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height * 0.2,
-                                  padding: const EdgeInsets.only(right: 20,left: 20,top: 10),
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: InkWell(
+                        child: image == null?
+                                 Image.asset('assets/images/imagePlaceholder.png'):
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.file(image!, fit: BoxFit.cover,),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: MediaQuery.of(context).size.height * 0.08,
-                                        child: TextButton(
-                                          child: Row(
-                                            children: const [
-                                              Icon(
-                                                FontAwesomeIcons.camera,
-                                                color: Colors.blueGrey,
-                                                size: 30,
-                                              ),
-                                              SizedBox(width: 16,),
-                                              Text(
-                                                'Take a photo',
-                                                style: TextStyle(color: Colors.black),
-                                              )
-                                            ],
-                                          ),
-                                          onPressed: (){
-                                            BlocProvider.of<PickingImageCubit>(context).addProductImage(ImageSource.camera);
-                                          },
-                                        ),
-                                      ),
-                                      Divider(color: Colors.grey[300],),
-                                      SizedBox(
-                                        height: MediaQuery.of(context).size.height * 0.08,
-                                        child: TextButton(
-                                          child: Row(
-                                            children: const [
-                                              Icon(
-                                                FontAwesomeIcons.solidImages,
-                                                color: Colors.blueGrey,
-                                                size: 30,
-                                              ),
-                                              SizedBox(width: 16,),
-                                              Text(
-                                                'Pick an image from Gallery',
-                                                style: TextStyle(color: Colors.black),
-                                              )
-                                            ],
-                                          ),
-                                          onPressed: (){
-                                            BlocProvider.of<PickingImageCubit>(context).addProductImage(ImageSource.gallery);
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-
+                        onTap: (){
+                          showModalBottomSheet(
+                            context: context,
+                            elevation: 3,
+                            builder: (context)=>Container(
+                              color: const Color(0xFF757575),
+                              child: Container(
+                                height: MediaQuery.of(context).size.height * 0.2,
+                                padding: const EdgeInsets.only(right: 20,left: 20,top: 10),
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                                 ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height * 0.08,
+                                      child: TextButton(
+                                        child: Row(
+                                          children: const [
+                                            Icon(
+                                              FontAwesomeIcons.camera,
+                                              color: Colors.blueGrey,
+                                              size: 30,
+                                            ),
+                                            SizedBox(width: 16,),
+                                            Text(
+                                              'Take a photo',
+                                              style: TextStyle(color: Colors.black),
+                                            )
+                                          ],
+                                        ),
+                                        onPressed: (){
+                                          addProductImage(ImageSource.camera);
+                                        },
+                                      ),
+                                    ),
+                                    Divider(color: Colors.grey[300],),
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height * 0.08,
+                                      child: TextButton(
+                                        child: Row(
+                                          children: const [
+                                            Icon(
+                                              FontAwesomeIcons.solidImages,
+                                              color: Colors.blueGrey,
+                                              size: 30,
+                                            ),
+                                            SizedBox(width: 16,),
+                                            Text(
+                                              'Pick an image from Gallery',
+                                              style: TextStyle(color: Colors.black),
+                                            )
+                                          ],
+                                        ),
+                                        onPressed: (){
+                                          addProductImage(ImageSource.gallery);
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
+
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     Padding(
@@ -287,7 +293,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           BlocProvider.of<AddProductCubit>(context)
                               .selectedSubCategory = category.subcategories[0];
                         });
-                        print(category?.subcategories[0].name);
                       },
                     ),
                     KDropdownList(label: 'Select SubCategory',
@@ -297,15 +302,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             value: BlocProvider.of<AddProductCubit>(context).selectedCategory.subcategories[index],
                           );
                         }),
-                        onChanged: (category) {
+                        onChanged: (subCategory) {
                           setState(() {
                             BlocProvider.of<AddProductCubit>(context)
-                                .selectedCategory = category!;
+                                .selectedSubCategory = subCategory!;
 
-                            BlocProvider.of<AddProductCubit>(context)
-                                .selectedSubCategory = category.subcategories[0];
                           });
-                          print(category?.subcategories[0].name);
                         },
                         value: BlocProvider.of<AddProductCubit>(context)
                             .selectedSubCategory),
@@ -362,11 +364,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ),
                       onPressed: (){
                         final isValid = _formKey.currentState?.validate();
-                        if(isValid == true){
 
+                        if(isValid == true && image != null){
+                          Product product=  Product(
+                            title: productNameTextController.text,
+                            descrioption: productDescriptionTextController.text,
+                            price: num.parse(productPriceTextController.text).toDouble(),
+                            cityId: BlocProvider.of<AddProductCubit>(context).selectedCity.id,
+                            areaId: BlocProvider.of<AddProductCubit>(context).selectedArea.id,
+                            subcategoryId: BlocProvider.of<AddProductCubit>(context).selectedSubCategory.subcategoryId,
+                            productImages: [image?.path],
+                            userId: 12,
+                          );
+                          BlocProvider.of<AddProductCubit>(context).addProduct(product);
                         }
 
-                        
+
                       },
                     ),
                   ],

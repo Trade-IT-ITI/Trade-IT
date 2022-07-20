@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trade_it/layout/theme.dart';
+import 'package:trade_it/screens/ProductDetails/productDetails_ui.dart';
+import 'package:trade_it/screens/addProduct/AddProductScreen.dart';
+import 'package:trade_it/screens/addProduct/cubit/imageCubit.dart';
+import 'package:trade_it/screens/addProduct/cubit/productCubit.dart';
 import 'package:trade_it/screens/login/LoginPage.dart';
 import 'package:trade_it/screens/register/RegistrationPage.dart';
 
@@ -20,9 +24,6 @@ class TradeITApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AddProductCubit(),
         ),
-        BlocProvider(
-          create: (context) => PickingImageCubit(),
-        ),
       ],
       child: MaterialApp(
         theme: themeData,
@@ -36,7 +37,6 @@ class TradeITApp extends StatelessWidget {
           '/home': (context) => const NavigationContainer(
                 index: 0,
               ),
-          '/details': (context) => ProductDetails(),
           '/addProduct': (context) => AddProductScreen(),
         },
       ),
