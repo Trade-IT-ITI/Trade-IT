@@ -9,6 +9,6 @@ namespace API_Layer.Repositories.Interfaces
         Task<User> GetByEmail(string email);
         string GenerateToken(User user);
         public Task UpdateUser(EditUserData user);
-
+        public Task ChangePasswrd(NewPasswordData data);
     }
 }

@@ -77,6 +77,21 @@ namespace API_Layer.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpPut("changePassword")]
+        public async Task<IActionResult> ChangePassword(NewPasswordData data)
+        {
+            try
+            {
+
+                await _userRepository.ChangePasswrd(data);
+                User user = await _userRepository.GetById(data.id);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }
