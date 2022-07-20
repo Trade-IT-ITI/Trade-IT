@@ -17,14 +17,14 @@ class TradeITApp extends StatelessWidget {
     return MaterialApp(
       theme: themeData,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/register',
+      initialRoute: '/home',
       //initialRoute: '/onboard',
       routes: {
         '/onboard': (context) => const Onboard(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegistrationPage(),
         '/home': (context) => const NavigationContainer(
-              index: 0,
+              index: 1,
             ),
       },
     );
