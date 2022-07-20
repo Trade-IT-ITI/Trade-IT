@@ -24,10 +24,14 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let user = JSON.parse(localStorage.getItem('user') ?? '');
-    if (user) {
-      this.isLogged = true;
-      this.fullName = user.firstName + ' ' + user.lastName;
+    let userString = localStorage.getItem('user');
+    if (userString) {
+      let user = JSON.parse(userString);
+      console.log(user)
+      if (user) {
+        this.isLogged = true;
+        this.fullName = user.firstName + ' ' + user.lastName;
+      }
     }
   }
   toggleSubscribe(value: boolean) {
