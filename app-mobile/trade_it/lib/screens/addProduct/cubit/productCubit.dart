@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,6 +17,9 @@ class AddProductCubit extends Cubit<AddProductState>{
 
   CommonServices services = CommonServices();
 
+  late List<Category> categories;
+  late List<City> cities;
+
   late Category selectedCategory;
   late SubCategory selectedSubCategory;
   late City selectedCity;
@@ -23,8 +28,8 @@ class AddProductCubit extends Cubit<AddProductState>{
   void getCategories() async{
     emit(AddProductLoading());
     try{
-      List<Category> categories = await services.getCategories();
-      List<City> cities = await services.getCities();
+      categories = await services.getCategories();
+      cities = await services.getCities();
       selectedCategory = categories[0];
       selectedSubCategory = categories[0].subcategories[0];
 
@@ -36,14 +41,22 @@ class AddProductCubit extends Cubit<AddProductState>{
     }
   }
 
-  void addProduct(Product product)async{
+  void addProduct(Product product,BuildContext context)async{
       emit(AddProductLoading());
       try{
-        dynamic json = await services.addProduct(product);
-        Product nProduct = Product.fromJson(json);
+        String json = await services.addProduct(product);
+        var map = jsonDecode(json);
+        Product nProduct = Product.fromJson(map);
         emit(AddProductSuccess(nProduct));
-      } on Error catch (error){
-        emit(AddProductFailed(error));
+        Future.delayed(const Duration(seconds: 2),(){
+          Navigator.pop(context);
+        });
+      } catch (error){
+        emit(AddProductFailed(error.toString()));
+        Future.delayed(const Duration(seconds: 2),(){
+          emit(RequiredDataLoaded(categories,cities));
+
+        });
       }
   }
 

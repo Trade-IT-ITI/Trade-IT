@@ -31,7 +31,7 @@ class AddProductSuccess extends AddProductState{
 }
 
 class AddProductFailed extends AddProductState{
-  final Error error;
+  final String error;
 
   AddProductFailed(this.error);
 }

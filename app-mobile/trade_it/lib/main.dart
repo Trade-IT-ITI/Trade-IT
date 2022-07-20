@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trade_it/layout/theme.dart';
-import 'package:trade_it/screens/ProductDetails/productDetails_ui.dart';
 import 'package:trade_it/screens/addProduct/AddProductScreen.dart';
-import 'package:trade_it/screens/addProduct/cubit/imageCubit.dart';
 import 'package:trade_it/screens/addProduct/cubit/productCubit.dart';
 import 'package:trade_it/screens/login/LoginPage.dart';
 import 'package:trade_it/screens/register/RegistrationPage.dart';

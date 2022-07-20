@@ -1,18 +1,14 @@
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:trade_it/handlers/requests_handler.dart';
 import 'package:trade_it/models/category.dart';
 import 'package:trade_it/models/city.dart';
 import 'package:trade_it/models/product.dart';
-import 'package:http_parser/http_parser.dart';
 
 class CommonServices {
 
 
   RequestHandler reqHandler = RequestHandler();
-
-  get l => null;
 
   Future<List<Category>> getCategories() async {
     String response =
@@ -33,19 +29,7 @@ class CommonServices {
   }
 
   Future<String> addProduct(Product product)async{
-    print(product.productImages![0].split('/').last);
     try{
-     /* var formData = FormData.fromMap({
-        'Title': product.title,
-        'Descrioption': product.descrioption,
-        'Price':product.price,
-        'CityId':product.cityId,
-        'AreaId':product.areaId,
-        'SubcategoryId':product.subcategoryId,
-        'UserId':product.userId,
-        'image': await MultipartFile.fromFile(product.productImages![0],filename: product.productImages![0].split('/').last,contentType: MediaType("image", "jpg"),)
-      });*/
-      //var response = await Dio().post("http://10.0.2.2:5228/api/Product", data: formData);
       var request = http.MultipartRequest('POST', Uri.parse("http://10.0.2.2:5228/api/Product"));
       request.fields.addAll({
         'Title': product.title!,
@@ -55,23 +39,20 @@ class CommonServices {
         'AreaId':product.areaId.toString(),
         'SubcategoryId':product.subcategoryId.toString(),
         'UserId':product.userId.toString(),
+        'postDateTime':DateTime.now().toString(),
+        "statusId": "1",
       });
       request.files.add(await http.MultipartFile.fromPath("image", product.productImages![0],));
-      http.StreamedResponse response = await request.send();
+      http.StreamedResponse response = await request.send().timeout(const Duration(seconds: 10));
       print(response.statusCode);
       var responseBytes = await response.stream.toBytes();
       var responseString = utf8.decode(responseBytes);
-      if(response.statusCode == 200){
+      if(response.statusCode == 201 || response.statusCode == 200){
 
-        return jsonDecode(responseString);
-      }
-      else if(response.statusCode == 400){
-        print(responseString);
-        throw Error.safeToString("Error With Request  400 ");
+        return responseString;
       }
       else{
-
-        throw Error.safeToString("Error With Request Not 200 ");
+        throw Error.safeToString(responseString);
       }
     } catch(error){
       print(error);

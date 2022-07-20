@@ -20,31 +20,26 @@ class KDropdownList extends StatelessWidget {
       ),
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-           Text(label),
-          Expanded(
-            child: DropdownButtonFormField(
-              decoration: const InputDecoration(
-                enabled: false,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              style: const TextStyle(
-                color: Colors.black54,
-                fontSize: 16,
-              ),
-              value: value,
-              items: items,
-              onChanged: onChanged,
+      child: Expanded(
+        child: DropdownButtonFormField(
+          decoration: const InputDecoration(
+            enabled: false,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
             ),
           ),
-        ],
+          style: const TextStyle(
+            color: Colors.black54,
+            fontSize: 16,
+          ),
+          value: value,
+          hint: Text(label),
+          items: items,
+          onChanged: onChanged,
+        ),
       ),
     );
   }
