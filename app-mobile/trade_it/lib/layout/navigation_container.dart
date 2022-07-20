@@ -39,13 +39,12 @@ class _NavigationContainerState extends State<NavigationContainer> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: widgetList[_bottomNavIndex],
-      floatingActionButton: Visibility(
-        visible: !keyboardIsOpen,
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          child: const Icon(Icons.add),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/addProduct');
+        },
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(

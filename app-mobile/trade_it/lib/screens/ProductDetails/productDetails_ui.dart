@@ -65,6 +65,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 CustomScrollView(
                   slivers: [
                     SliverAppBar(
+                      backgroundColor: Colors.black,
                       flexibleSpace: ListView.builder(
                         itemCount: imgExist ? imagesList.length : 1,
                         scrollDirection: Axis.horizontal,
@@ -105,7 +106,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             onPressed: () {},
                             icon: const Icon(
                               FontAwesomeIcons.solidHeart,
-                              color: Colors.blueGrey,
+                              color: Colors.grey,
                             ),
                           ),
                         ),

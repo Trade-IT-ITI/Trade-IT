@@ -41,6 +41,8 @@ dependencies:
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
   http: ^0.13.4
+  image_picker: ^0.8.5+3
+  loading_icon_button: ^0.0.3
   url_launcher: ^6.1.5
   email_validator: ^2.0.1
   shared_preferences: ^2.0.15
