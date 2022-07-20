@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { category } from 'src/app/models/category';
+import { categoryInstruction } from 'src/app/models/categoryInstruction';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class CategoryInstructionService {
 
-  public url = "http://localhost:5228/api/Category"
+  public url = "http://localhost:5228/api/CategoryInstruction"
 
   constructor(private http: HttpClient) { }
 
-  getAllCategory(params?: HttpParams): Observable<category[]> {
-    return this.http.get<category[]>(this.url,{ params: params })
+  getAllCategoryInstruction(): Observable<categoryInstruction[]> {
+    return this.http.get<categoryInstruction[]>(this.url)
       .pipe(catchError(this.handleError));
   }
-  addCategory(name: string) {
-    return this.http.post<any>(this.url, { name })
+  addCategoryInstruction(categoryId:number,InstructionId:number) {
+    return this.http.post<any>(this.url, { categoryId,InstructionId })
       .pipe(catchError(this.handleError));
     ;
   }

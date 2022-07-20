@@ -44,7 +44,12 @@ dependencies:
   image_picker: ^0.8.5+3
   loading_icon_button: ^0.0.3
   url_launcher: ^6.1.5
+<<<<<<< HEAD
 
+=======
+  email_validator: ^2.0.1
+  shared_preferences: ^2.0.15
+>>>>>>> 01ec7e37633b396254000f0fde151c26b582bc8e
 dev_dependencies:
   flutter_test:
     sdk: flutter
