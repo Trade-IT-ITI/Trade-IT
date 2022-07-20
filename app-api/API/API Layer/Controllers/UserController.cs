@@ -42,7 +42,8 @@ namespace API_Layer.Controllers
             if (user.Type != loginUser.Type)
                 return NotFound("There is no such a user");
 
-            return Ok(new { user = user, token = _userRepository.GenerateToken(user) });
+            User bigUser = await _userRepository.GetById(user.UserId);
+            return Ok(new { user = bigUser, token = _userRepository.GenerateToken(user) });
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterData user)
@@ -70,6 +71,20 @@ namespace API_Layer.Controllers
             try
             {
                 await _userRepository.UpdateUser(user);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpPut("changePassword")]
+        public async Task<IActionResult> ChangePassword(NewPasswordData data)
+        {
+            try
+            {
+                await _userRepository.ChangePasswrd(data);
+                User user = await _userRepository.GetById(data.id);
                 return Ok(user);
             }
             catch (Exception e)

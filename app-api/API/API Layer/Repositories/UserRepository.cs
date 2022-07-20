@@ -90,6 +90,26 @@ namespace API_Layer.Repositories
 
         }
 
+        public async Task ChangePasswrd(NewPasswordData data)
+        {
+            User user = await context.Users.FirstOrDefaultAsync(u => u.UserId == data.id);
+            if (user != null)
+            {
+                if (user.Password == data.oldPassword)
+                {
+                    user.Password = data.newPassword;
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Wrong Password");
 
+                }
+            }
+            else
+            {
+                throw new Exception("There is no such a user");
+            }
+        }
     }
 }

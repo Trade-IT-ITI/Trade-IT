@@ -15,8 +15,11 @@ namespace API_Layer.Repositories
 
         public async Task Add(Favourite favourite)
         {
+            
             await context.AddAsync(favourite);
             await context.SaveChangesAsync();
         }
+
+        
     }
 }

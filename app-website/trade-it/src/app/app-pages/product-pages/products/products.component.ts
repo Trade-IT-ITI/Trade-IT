@@ -52,13 +52,12 @@ export class ProductsComponent implements OnInit, OnChanges {
   private getData() {
     this.isLoading = true;
     if(this.isFav){
+      this.productsData.products=[]
       this.userService.getUserById(1).subscribe(data=>{
         this.isLoading = false;
-       // let favs:Product=data!.favourites![1]!.product
        this.productsData.productsCount =data!.favourites!.length;
        for (let i = 0; i < data!.favourites!.length; i++) {
         this.productsData.products.push(data!.favourites![i].product)
-        
        }
         console.log(data.favourites)
       })
