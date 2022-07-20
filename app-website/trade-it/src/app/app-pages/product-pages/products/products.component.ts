@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 
   @Input() productCol: { 'colLg': number, 'colMd': number, 'colSm': number, 'col': number } = { colLg: 0, colMd: 0, colSm: 0, col: 0 }
   @Input() queryParams: HttpParams = new HttpParams();
-
+  @Input() isFav:boolean=false
   productsData: ProductsData = { products: [], productsCount: 0 };
   itemsNumber: number = 10;
   pageNumber: number = 1;
@@ -22,7 +23,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 
   isLoading: boolean = false;
   productColClass: string = '';
-  constructor(private productService: ProductService, private router: Router) {
+  constructor(private productService: ProductService, private router: Router,private userService:UserService) {
 
   }
 
@@ -50,10 +51,23 @@ export class ProductsComponent implements OnInit, OnChanges {
 
   private getData() {
     this.isLoading = true;
-    this.productService.getall(this.queryParams).subscribe(data => {
-      this.productsData = data;
-      this.isLoading = false;
-    })
+    if(this.isFav){
+      this.userService.getUserById(1).subscribe(data=>{
+        this.isLoading = false;
+       // let favs:Product=data!.favourites![1]!.product
+       this.productsData.productsCount =data!.favourites!.length;
+       for (let i = 0; i < data!.favourites!.length; i++) {
+        this.productsData.products.push(data!.favourites![i].product)
+        
+       }
+        console.log(data.favourites)
+      })
+    }else{
+      this.productService.getall(this.queryParams).subscribe(data => {
+        this.productsData = data;
+        this.isLoading = false;
+      })
+    }
   }
 
   paginationChanged(pageData: { pageNumber: number, itemsPerPage: number }) {
