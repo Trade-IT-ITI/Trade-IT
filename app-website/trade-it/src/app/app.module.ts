@@ -26,6 +26,7 @@ import { ProfileComponent } from 'src/app/app-pages/user-pages/profile/profile.c
 import { EditProfileComponent } from './app-pages/user-pages/edit-profile/edit-profile.component';
 import { LoaderComponent } from './app-layout/loader/loader.component';
 import { UserFavoritesComponent } from './app-pages/user-pages/user-favorites/user-favorites.component';
+import { ChangePasswordComponent } from './app-pages/user-pages/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { UserFavoritesComponent } from './app-pages/user-pages/user-favorites/us
     EditProfileComponent,
     LoaderComponent,
     UserFavoritesComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
