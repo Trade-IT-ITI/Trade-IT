@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, Subject, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
 
 import { User } from 'src/app/models/user';
 
@@ -13,24 +13,45 @@ interface UserResponse {
   providedIn: 'root'
 })
 export class AuthService {
+  isAuth: boolean = false;
+  isAdmin: boolean = false;
 
   public url = "http://localhost:5228/api/User"
 
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string, type: number) {
-    return this.http.post<UserResponse>(`${this.url}/Login`, { email, password, type })
-      .pipe(catchError(this.handleError));
-    ;
+    let response = this.http.post<UserResponse>(`${this.url}/Login`, { email, password, type });
+    response.subscribe(data => {
+      this.isAuth = true;
+      this.isAdmin = data.user.type == 0;
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", JSON.stringify(data.token));
+    });
+    return response.pipe(catchError(this.handleError));
   }
   register(user: User) {
-    return this.http.post<UserResponse>(`${this.url}/Register`, user)
-      .pipe(catchError(this.handleError));
+    let response = this.http.post<UserResponse>(`${this.url}/Register`, user);
+    response.subscribe(data => {
+      this.isAuth = true;
+      this.isAdmin = false;
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", JSON.stringify(data.token));
+    });
+    return response.pipe(catchError(this.handleError));
     ;
   }
-getToken(){
-  return localStorage.getItem('token')
-}
+  checkIsAuth(): boolean { return localStorage.getItem('token') != null }
+  checkIsAdmin(): boolean { return (JSON.parse(localStorage.getItem('user') ?? '')).type == 0 }
+  getToken() {
+    return localStorage.getItem('token')
+  }
+  logout() {
+    this.isAuth = false;
+    this.isAdmin = false;
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
@@ -42,12 +63,9 @@ getToken(){
   }
 
   //on login
-  // Observable string sources
   private emitChangeSource = new Subject<any>();
-  // Observable string streams
   changeEmitted = this.emitChangeSource.asObservable();
-  // Service message commands
-  emitChange(change: { fullname: string, isAdmin: boolean }) {
+  emitChange(change: { fullname: string, isAuth: boolean, isAdmin: boolean }) {
     this.emitChangeSource.next(change);
   }
 }

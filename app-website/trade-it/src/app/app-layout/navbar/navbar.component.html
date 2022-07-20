@@ -56,11 +56,11 @@
                 data-bs-display="static"
                 aria-expanded="true"
               >
-                <i *ngIf="isLogged">{{ fullName }}</i>
-                <i *ngIf="!isLogged" class="fa-solid fa-user"></i>
+                <i *ngIf="isAuth">{{ fullName }}</i>
+                <i *ngIf="!isAuth" class="fa-solid fa-user"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-lg-end">
-                <ng-template [ngIf]="!isLogged">
+                <ng-template [ngIf]="!isAuth">
                   <li>
                     <a class="dropdown-item nav-link" routerLink="/login"
                       >login</a
@@ -72,9 +72,9 @@
                     >
                   </li>
                 </ng-template>
-                <ng-template [ngIf]="isLogged">
+                <ng-template [ngIf]="isAuth">
                   <li *ngIf="isAdmin">
-                    <a class="dropdown-item nav-link" routerLink="/Admin"
+                    <a class="dropdown-item nav-link" routerLink="/admin"
                       >Admin</a
                     >
                   </li>
@@ -95,7 +95,7 @@
                   </li>
                 </ng-template>
               </ul>
-              <!-- <ul *ngIf="isLogged" class="dropdown-menu dropdown-menu-lg-end">
+              <!-- <ul *ngIf="isAuth" class="dropdown-menu dropdown-menu-lg-end">
                 
               </ul> -->
             </div>
