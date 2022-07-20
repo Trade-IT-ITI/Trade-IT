@@ -73,6 +73,11 @@
                   </li>
                 </ng-template>
                 <ng-template [ngIf]="isLogged">
+                  <li *ngIf="isAdmin">
+                    <a class="dropdown-item nav-link" routerLink="/Admin"
+                      >Admin</a
+                    >
+                  </li>
                   <li>
                     <a class="dropdown-item nav-link" routerLink="/profile"
                       >Profile</a

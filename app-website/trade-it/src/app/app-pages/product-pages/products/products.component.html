@@ -1,7 +1,10 @@
 <div class="row">
-  <h1 *ngIf="isLoading; else DataLoaded" class="text-center text-primary">
-    Loading...
-  </h1>
+  <div
+    *ngIf="isLoading; else DataLoaded"
+    class="text-center text-primary fw-bold"
+  >
+    <app-loader></app-loader>>
+  </div>
   <ng-template #DataLoaded>
     <h1
       *ngIf="productsData.products.length == 0; else Products"
