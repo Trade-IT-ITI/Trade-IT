@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, Subject, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { User } from 'src/app/models/user';
+
+interface UserResponse {
+  user: User;
+  token: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +18,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string,type:number) {
-    return this.http.post<User>(`${this.url}/Login`, { email, password,type })
+  login(email: string, password: string, type: number) {
+    return this.http.post<UserResponse>(`${this.url}/Login`, { email, password, type })
       .pipe(catchError(this.handleError));
     ;
   }
   register(user: User) {
-    return this.http.post<User>(`${this.url}/Register`, user)
+    return this.http.post<UserResponse>(`${this.url}/Register`, user)
       .pipe(catchError(this.handleError));
     ;
   }
@@ -32,5 +37,15 @@ export class AuthService {
         `Backend returned code ${error.status}, body was: `, JSON.stringify(error.error));
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  //on login
+  // Observable string sources
+  private emitChangeSource = new Subject<any>();
+  // Observable string streams
+  changeEmitted = this.emitChangeSource.asObservable();
+  // Service message commands
+  emitChange(change: { fullname: string, isAdmin: boolean }) {
+    this.emitChangeSource.next(change);
   }
 }

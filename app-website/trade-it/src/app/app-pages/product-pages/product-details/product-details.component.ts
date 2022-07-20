@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailsComponent implements OnInit {
   id: number = 0;
-  productDetails: any = {}
+  productDetails: any | null = null;
   isSold: boolean = false;
   imgIndex: number = 0;
 
@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productDetails = data;
       this.isSold = (this.productDetails.status == 'Sold')
     });
-    this.productService.increaseViewCount(this.id).subscribe(()=>{})
+    this.productService.increaseViewCount(this.id).subscribe(() => { })
   }
   onChooseImage(index: number) {
     this.imgIndex = index
