@@ -29,4 +29,10 @@ class SubCategory {
     data['products'] = this.products;
     return data;
   }
+
+  bool operator ==(dynamic other) =>
+      other != null && other is SubCategory && subcategoryId == other.subcategoryId;
+
+  @override
+  int get hashCode => super.hashCode;
 }
