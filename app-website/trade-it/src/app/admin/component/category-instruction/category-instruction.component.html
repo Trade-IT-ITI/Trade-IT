@@ -36,7 +36,7 @@
         <div class="mb-3">
             <label for="categoryName" class="form-label"> Instruction </label>
             <select name="instructionId" required class="w-100 my-1 form-select" [(ngModel)]="instructionId" [disabled]="isInstructionDisabled">
-                <!-- <option value="0">-- choose instruction</option> -->
+                <option value="0">-- choose instruction</option>
                 <option *ngFor="let instruction of notUsedInstructions" [value]="instruction.instructionId">
                     {{ instruction.text }}
                 </option>

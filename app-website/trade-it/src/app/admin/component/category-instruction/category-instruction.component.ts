@@ -1,13 +1,13 @@
-import { categoryInstruction } from './../../../models/categoryInstruction';
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { category } from 'src/app/models/category';
+import { categoryInstruction } from 'src/app/models/categoryInstruction';
 import { CategoryService } from 'src/app/admin/services/category.service';
 import { InstructionService } from 'src/app/admin/services/instruction.service';
 import { instruction } from 'src/app/models/instruction';
 import { CategoryInstructionService } from '../../services/category-instruction.service';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-category-instruction',
   templateUrl: './category-instruction.component.html',
@@ -20,7 +20,7 @@ export class CategoryInstructionComponent implements OnInit {
   instructionId: number = 0
   categoryId: number = 0
   isInstructionDisabled: boolean = true
-  constructor(private router:Router, private categoryInstructionService: CategoryInstructionService, private categoryService: CategoryService, private instructionService: InstructionService) { }
+  constructor(private router: Router, private categoryInstructionService: CategoryInstructionService, private categoryService: CategoryService, private instructionService: InstructionService) { }
 
   ngOnInit(): void {
     let CategoryParams: HttpParams = new HttpParams();
@@ -53,9 +53,15 @@ export class CategoryInstructionComponent implements OnInit {
     }
   }
   addCatInstruction() {
-    this.categoryInstructionService.addCategoryInstruction(this.categoryId,this.instructionId).subscribe((d)=>{
-      console.log(d)
-      this.router.navigateByUrl("/admin/categoryInstruction/add")
-    })
+    if(this.categoryId !=0 &&this.instructionId !=0){
+      this.categoryInstructionService.addCategoryInstruction(this.categoryId, this.instructionId).subscribe((d) => {
+        let catInst :categoryInstruction={categoryId:this.categoryId, instructionId:this.instructionId} 
+        this.categories.find(c => c.categoryId == this.categoryId)?.categoryInstructions?.push(catInst);
+        this.categoryId = 0
+        this.instructionId = 0
+        this.notUsedInstructions = [];
+        
+      })
+    }
   }
 }
