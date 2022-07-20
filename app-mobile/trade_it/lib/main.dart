@@ -17,7 +17,6 @@ void main() {
 class TradeITApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -39,21 +38,6 @@ class TradeITApp extends StatelessWidget {
           '/addProduct': (context) => AddProductScreen(),
         },
       ),
-=======
-    return MaterialApp(
-      theme: themeData,
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/register',
-      //initialRoute: '/onboard',
-      routes: {
-        '/onboard': (context) => const Onboard(),
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegistrationPage(),
-        '/home': (context) => const NavigationContainer(
-              index: 0,
-            ),
-      },
->>>>>>> 01ec7e37633b396254000f0fde151c26b582bc8e
     );
   }
 }

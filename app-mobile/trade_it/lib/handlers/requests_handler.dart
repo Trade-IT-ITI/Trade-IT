@@ -1,8 +1,5 @@
 import 'dart:convert';
-<<<<<<< HEAD
 import 'dart:io';
-=======
->>>>>>> 01ec7e37633b396254000f0fde151c26b582bc8e
 
 import 'package:http/http.dart' as http;
 
