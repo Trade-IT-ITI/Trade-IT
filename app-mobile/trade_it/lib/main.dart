@@ -17,7 +17,7 @@ class TradeITApp extends StatelessWidget {
     return MaterialApp(
       theme: themeData,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/register',
       //initialRoute: '/onboard',
       routes: {
         '/onboard': (context) => const Onboard(),

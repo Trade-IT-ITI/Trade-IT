@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RequestHandler {
-  String baseURL = "http://10.0.2.2:5228/api/";
-  //String baseURL = "http://localhost:5228/api/";
+  // String baseURL = "http://10.0.2.2:5228/api/";
+  String baseURL = "http://localhost:5228/api/";
   Future<String> getData(String url, {Map<String, String>? headers}) async {
     try {
       Uri requestURL = Uri.parse(url);
@@ -22,7 +22,7 @@ class RequestHandler {
     }
   }
 
-  Future<String> postData(String url, {Map<String, String>? bodyMap}) async {
+  Future<String> postData(String url, {Map<String, dynamic>? bodyMap}) async {
     try {
       print(url);
       Uri requestURL = Uri.parse(url);
@@ -38,7 +38,7 @@ class RequestHandler {
         return response.body;
       } else {
         return "error";
-        print("error");
+        //print("error");
         //throw Error.safeToString("Error With Request Not 200 ");
       }
     } catch (error) {

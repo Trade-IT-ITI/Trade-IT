@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trade_it/handlers/requests_handler.dart';
 
+import '../../layout/constants.dart';
 import '../../models/user.dart';
 
 class LoginPage extends StatefulWidget {
@@ -160,16 +161,6 @@ class _LoginPageState extends State<LoginPage> {
                                             BorderRadius.circular(10))),
                               ),
                               onPressed: () {
-                                // setState(() {
-                                //   loading = true;
-                                // });
-                                // login(
-                                //   email: "marwansayed@gmail.com",
-                                //   password: "321",
-                                // );
-                                // setState(() {
-                                //   loading = false;
-                                // });
                                 if (_formKey.currentState!.validate()) {
                                   setState(() {
                                     loading = true;
@@ -213,59 +204,6 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     SizedBox(
-              //       height: 50,
-              //       width: 130,
-              //       child: ElevatedButton(
-              //         style: ButtonStyle(
-              //           backgroundColor: MaterialStateProperty.all<Color>(
-              //               Colors.white.withOpacity(.5)),
-              //           shape:
-              //               MaterialStateProperty.all<RoundedRectangleBorder>(
-              //                   RoundedRectangleBorder(
-              //                       borderRadius: BorderRadius.circular(15))),
-              //         ),
-              //         onPressed: () {},
-              //         child: const Text(
-              //           "F",
-              //           style: TextStyle(
-              //               fontWeight: FontWeight.bold,
-              //               fontSize: 20,
-              //               color: Colors.black),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       height: 50,
-              //       width: 130,
-              //       child: ElevatedButton(
-              //         style: ButtonStyle(
-              //           backgroundColor: MaterialStateProperty.all<Color>(
-              //               Colors.white.withOpacity(.5)),
-              //           shape:
-              //               MaterialStateProperty.all<RoundedRectangleBorder>(
-              //                   RoundedRectangleBorder(
-              //                       borderRadius: BorderRadius.circular(15))),
-              //         ),
-              //         onPressed: () {},
-              //         child: const Text(
-              //           "G",
-              //           style: TextStyle(
-              //               fontWeight: FontWeight.bold,
-              //               fontSize: 20,
-              //               color: Colors.black),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // )
             ],
           ),
         ),
@@ -290,29 +228,23 @@ class _LoginPageState extends State<LoginPage> {
       bodyMap: reqBody,
     );
     if (response == "error") {
-      showDialog<String>(
+      alertDialog(
         context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text("Can't Login !"),
-          content: const Text('Your Email or Password is Incorrect'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
+        title: "Can't Login !",
+        body: 'Your Email or Password is Incorrect',
       );
-      //return null;
     } else {
       user = User.fromJson(jsonDecode(response));
       storeUser(user: user);
+      successSnackBar(
+        context: context,
+        title: 'Login Success !',
+      );
+      await Future.delayed(const Duration(
+        seconds: 2,
+      ));
       Navigator.pushNamed(context, "/home");
-      // print(user.toString());
     }
-    // user = User.fromJson(jsonDecode(response));
-    // print("sjkahd");
-    // print(response);
     return User();
   }
 }
