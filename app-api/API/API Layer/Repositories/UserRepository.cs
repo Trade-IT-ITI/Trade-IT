@@ -32,7 +32,20 @@ namespace API_Layer.Repositories
 
         public async Task<User> GetById(int id)
         {
-            return await context.Users.Include(u => u.Products).Include(u => u.Favourites).FirstOrDefaultAsync(u => u.UserId == id);
+            //var user = (from s in context.Users.Include(u=>u.Favourites).Include(u => u.Products)
+            //             where s.UserId == id
+            //             select s).FirstOrDefaultAsync();
+            //  return await user;
+            return await context.Users.Include(u => u.Products).Include(u => u.Favourites)
+                                                                    .ThenInclude(f => f.Product)
+                                                                     .ThenInclude(p => p.Area)
+                                                                       .ThenInclude(p => p.City)
+                                                                      .Include(u => u.Favourites)
+                                                                      .ThenInclude(f => f.Product)
+                                                                      .ThenInclude(p => p.ProductImages)
+                                                                         .FirstOrDefaultAsync(u => u.UserId == id);
+
+
         }
 
 
@@ -77,6 +90,26 @@ namespace API_Layer.Repositories
 
         }
 
-      
+        public async Task ChangePasswrd(NewPasswordData data)
+        {
+            User user = await context.Users.FirstOrDefaultAsync(u => u.UserId == data.id);
+            if (user != null)
+            {
+                if (user.Password == data.oldPassword)
+                {
+                    user.Password = data.newPassword;
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Wrong Password");
+
+                }
+            }
+            else
+            {
+                throw new Exception("There is no such a user");
+            }
+        }
     }
 }
