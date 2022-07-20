@@ -1,12 +1,11 @@
 using API_Layer.Repositories;
 using API_Layer.Repositories.Interfaces;
 using DatabaseLayer.Data;
-using DatabaseLayer.Models;
-using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-
-string Cors = "";
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,11 +37,9 @@ builder.Services.AddScoped<ICategoryInstructionRepository , CategoryInstructionR
 builder.Services.AddScoped<IStatusRepository , StatusRepository>();
 builder.Services.AddScoped<IUserRepository , UserRepository>();
 
-
-
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(Cors ,
+    options.AddDefaultPolicy(
     builder =>
     {
         builder.AllowAnyOrigin();
@@ -50,6 +47,21 @@ builder.Services.AddCors(options =>
         builder.AllowAnyHeader();
     });
 });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true ,
+        ValidateAudience = true ,
+        ValidAudience = builder.Configuration["Jwt:Audience"] ,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"] ,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,10 +69,18 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    //app.UseDeveloperExceptionPage();
 }
 
-app.UseAuthorization();
-app.UseCors(Cors);
-app.MapControllers();
 app.UseStaticFiles();
+
+app.UseCors();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
 app.Run();
+

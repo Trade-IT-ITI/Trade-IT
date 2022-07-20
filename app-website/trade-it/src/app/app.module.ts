@@ -24,6 +24,8 @@ import { RegisterComponent } from 'src/app/app-pages/auth/register/register.comp
 import { AddProductComponent } from 'src/app/app-pages/product-pages/add-product/add-product.component';
 import { ProfileComponent } from 'src/app/app-pages/user-pages/profile/profile.component';
 import { EditProfileComponent } from './app-pages/user-pages/edit-profile/edit-profile.component';
+import { LoaderComponent } from './app-layout/loader/loader.component';
+import { UserFavoritesComponent } from './app-pages/user-pages/user-favorites/user-favorites.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { EditProfileComponent } from './app-pages/user-pages/edit-profile/edit-p
     AddProductComponent,
     ProfileComponent,
     EditProfileComponent,
+    LoaderComponent,
+    UserFavoritesComponent,
   ],
   imports: [
     BrowserModule,

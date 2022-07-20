@@ -14,26 +14,26 @@ class _OnboardState extends State<Onboard> {
     const OnboardPage(
       title: "Do you Have Items You Don't Need ?",
       description:
-          "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
-      img: "assets/images/1.png",
-    ),
-    const OnboardPage(
-      title: "Do you Have Items You Don't Need ?",
-      description:
-          "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
+          "With Trade it you can easily sell your items from home just share your items and wait for offers",
       img: "assets/images/2.png",
     ),
     const OnboardPage(
-      title: "Do you Have Items You Don't Need ?",
+      title: "Do you get tired from searching for a specific item or second-hand item ?",
       description:
-          "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
-      img: "assets/images/3.png",
+          "With Trade it you can easily find what you looking for",
+      img: "assets/images/4.png",
     ),
     const OnboardPage(
-      title: "Do you Have Items You Don't Need ?",
+      title: "What are you waiting for ?",
       description:
-          "Do you Have Items For You Don't Need Do you Have Items For You Don't Need Do you Have Items For You Don't Need ",
-      img: "assets/images/4.png",
+          "Deal with sellers and customers from all over the world ",
+      img: "assets/images/1.png",
+    ),
+    const OnboardPage(
+      title: "Do It",
+      description:
+          "And Finish all your commercial transactions using trade it",
+      img: "assets/images/3.png",
     ),
   ];
   late PageController _pageController;
