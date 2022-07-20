@@ -23,8 +23,18 @@ namespace API_Layer.Repositories
         {
             if (product.image.Length > 0)
             {
-                Product product1 = new Product() { Title=product.Title,Descrioption=product.Descrioption,Price=product.Price
-                    ,CityId=product.CityId,AreaId=product.AreaId,SubcategoryId=product.SubcategoryId,UserId=product.UserId};  
+                Product product1 = new Product()
+                {
+                    Title = product.Title ,
+                    Descrioption = product.Descrioption ,
+                    Price = product.Price ,
+                    CityId = product.CityId ,
+                    AreaId = product.AreaId ,
+                    StatusId = product.StatusId ,
+                    PostDateTime = DateTime.Now ,
+                    SubcategoryId = product.SubcategoryId ,
+                    UserId = product.UserId
+                };
 
                 await _context.Products.AddAsync(product1);
                 await _context.SaveChangesAsync();

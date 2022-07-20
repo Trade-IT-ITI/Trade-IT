@@ -6,5 +6,6 @@ namespace API_Layer.Repositories.Interfaces
     {
         Task<User> GetById(int id);
         Task<User> GetByEmail(string email);
+        string GenerateToken(User user);
     }
 }
