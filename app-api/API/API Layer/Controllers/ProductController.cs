@@ -30,7 +30,7 @@ namespace API_Layer.Controllers
             return product != null ? Ok(product) : NotFound();
         }
         //add new Product 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] NewProduct product)
         {
