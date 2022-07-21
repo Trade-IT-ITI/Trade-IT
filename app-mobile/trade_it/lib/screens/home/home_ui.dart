@@ -226,14 +226,12 @@ class Home extends StatelessWidget {
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: gridCount,
-                                    crossAxisSpacing: 0,
-                                    mainAxisSpacing: 5,
-                                    childAspectRatio: 1 / 2,
+                                    crossAxisSpacing: 8,
+                                    mainAxisSpacing: 10,
+                                    childAspectRatio: 0.6,
                                   ),
                                   itemCount: state.data![0].length,
                                   itemBuilder: (BuildContext context, int index) {
-                                    //print("data");
-                                    //print(state.data![0][index] ?? "NULL");
                                     return ProductCard(
                                       productOBJ: state.data![0][index],
                                     );

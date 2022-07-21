@@ -85,8 +85,8 @@ class RequestHandler {
 
 
   Future<int> increaseViews(int id)async{
-    http.Response response= await http.put(Uri.parse(baseURL+ "/Product/increase?id=$id"));
-    print(response.statusCode);
+    http.Response response= await http.put(Uri.parse("http://10.0.2.2:5228/api/Product/IncreaseViews?id=$id"));
+    //print("From Increase views: "+ response.statusCode.toString());
     return response.statusCode;
   }
 }

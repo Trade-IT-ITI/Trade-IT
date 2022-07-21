@@ -22,10 +22,10 @@ class ProductDetailsBloc extends Bloc<ProductDetailsEvents, BlocState<DetailsPro
       : super(BlocState()) {
     on<ProductDetailsGetDataEvent>((event, emit) async {
       emit(BlocState(isLoading: true));
-      User user = await getUser();
-      List<Product> favourites = toProductList(objProductList: user.favourites!,isFav: true);
-      print(user.firstName);
       try {
+        User user = await getUser();
+        List<Product> favourites = toProductList(objProductList: user.favourites!,isFav: true);
+        print(user.firstName);
         productOBJ = await ProductDetailsData().getProduct(productID: product.productId!);
         bool isFav = favourites.contains(product);
         print("IS Favourite?: "+ isFav.toString());
@@ -45,7 +45,7 @@ class ProductDetailsBloc extends Bloc<ProductDetailsEvents, BlocState<DetailsPro
         int statusCode = await ProductDetailsData().addProductToFav(userId: user.userId!, productId: product.productId!);
         if(statusCode == 201){
           user.favourites?.add(product);
-          await storeUser(user: user);
+          //await storeUser(user: user);
           emit(BlocState(hasData: true, data: productOBJ,isFav: true));
         }
         else{

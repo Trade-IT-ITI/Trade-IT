@@ -41,8 +41,10 @@ class ProductCard extends StatelessWidget {
           ),
         );
       },
-      child: Card(
-        elevation: 3,
+      child: Material(
+        elevation: 4,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        borderRadius: BorderRadius.circular(15),
         child: Column(
           children: [
             Container(
@@ -163,11 +165,11 @@ class ProductCard extends StatelessWidget {
                       children: [
                         FaIcon(
                           FontAwesomeIcons.locationDot,
-                          size: 30,
+                          size: 24,
                           color: Theme.of(context).colorScheme.secondary,
                         ),
                         const SizedBox(
-                          width: 4,
+                          width: 8,
                         ),
                         Expanded(
                           child: Text(
@@ -184,27 +186,27 @@ class ProductCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          print("Icon Tap");
-                        },
-                        icon: const Icon(Icons.chat_rounded),
-                        color: Theme.of(context).colorScheme.secondary,
-                        iconSize: 30,
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          print("Icon Tap");
-                        },
-                        icon: const Icon(Icons.phone),
-                        color: Theme.of(context).colorScheme.secondary,
-                        iconSize: 30,
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     IconButton(
+                  //       onPressed: () {
+                  //         print("Icon Tap");
+                  //       },
+                  //       icon: const Icon(Icons.chat_rounded),
+                  //       color: Theme.of(context).colorScheme.secondary,
+                  //       iconSize: 30,
+                  //     ),
+                  //     IconButton(
+                  //       onPressed: () {
+                  //         print("Icon Tap");
+                  //       },
+                  //       icon: const Icon(Icons.phone),
+                  //       color: Theme.of(context).colorScheme.secondary,
+                  //       iconSize: 30,
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
