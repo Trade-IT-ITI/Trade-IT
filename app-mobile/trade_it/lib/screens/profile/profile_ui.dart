@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trade_it/bloc/bloc_state.dart';
+import 'package:trade_it/models/user.dart';
 import 'package:trade_it/screens/profile/profile_bloc.dart';
 
 import '../../layout/profile_product.dart';
-import '../../models/user.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     profileBloc.add(ProfileGetDataEvent());
-    return BlocBuilder<ProfileBloc, BlocState<User>>(
+    return BlocBuilder<ProfileBloc, BlocState<Map<String, dynamic>>>(
       bloc: profileBloc,
       builder: (context, state) {
         if (state.hasError) {
@@ -43,30 +43,51 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       height: MediaQuery.of(context).size.height * 0.3,
                       child: Column(
                         children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                            ),
-                            child: CircleAvatar(
-                              radius: 50,
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'assets/images/avatar.png',
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Spacer(
+                                flex: 2,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                ),
+                                child: CircleAvatar(
+                                  radius: 50,
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      'assets/images/avatar.png',
+                                    ),
+                                  ),
                                 ),
                               ),
-                              // backgroundColor: Colors.transparent,
-                              // backgroundImage: AssetImage(
-                              //   'assets/images/avatar.png',
-                              // ),
-                            ),
+                              const Spacer(
+                                flex: 1,
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  removeUser();
+                                  Navigator.pushReplacementNamed(
+                                      context, "/login");
+                                },
+                                icon: const Icon(
+                                  Icons.logout,
+                                  size: 30,
+                                ),
+                              ),
+                            ],
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Marwan Sayed",
+                                state.data!['loggedUser'].firstName +
+                                    " " +
+                                    state.data!['loggedUser'].lastName,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline4!
@@ -76,7 +97,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                     ),
                               ),
                               Text(
-                                'marwansayed@gmail.com',
+                                state.data!['loggedUser'].email,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
@@ -86,7 +107,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                     ),
                               ),
                               Text(
-                                '01112236458',
+                                state.data!['loggedUser'].phone,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
@@ -101,88 +122,60 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       ),
                     ),
                     TabBar(
-                      controller: _tabController,
-                      indicator: const UnderlineTabIndicator(
-                        borderSide: BorderSide(
-                          color: Colors.blueAccent,
-                          width: 5.0,
+                        controller: _tabController,
+                        indicator: const UnderlineTabIndicator(
+                          borderSide: BorderSide(
+                            color: Colors.blueAccent,
+                            width: 5.0,
+                          ),
+                          insets: EdgeInsets.fromLTRB(30.0, 0.0, 20.0, 0.0),
                         ),
-                        insets: EdgeInsets.fromLTRB(30.0, 0.0, 20.0, 0.0),
-                      ),
-                      tabs: [
-                        Container(
-                          child: Tab(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.favorite,
-                                  color: Colors.redAccent,
-                                  size: 30,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Favorites",
-                                  style: Theme.of(context).textTheme.headline6,
-                                ),
-                              ],
+                        tabs: [
+                          Tab(
+                            child: Text(
+                              "Favorites",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(
+                                    fontSize: 18,
+                                  ),
                             ),
                           ),
-                        ),
-                        Container(
-                          child: Tab(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.add_shopping_cart,
-                                  color: Colors.redAccent,
-                                  size: 30,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Your Ads",
-                                  style: Theme.of(context).textTheme.headline6,
-                                ),
-                              ],
+                          Tab(
+                            child: Text(
+                              "Your Products",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(
+                                    fontSize: 18,
+                                  ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ]),
                     const SizedBox(
                       height: 15,
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      height: MediaQuery.of(context).size.height * 0.5,
+                      height: MediaQuery.of(context).size.height * 0.45,
                       width: double.maxFinite,
                       child: TabBarView(
                         controller: _tabController,
                         children: [
                           ListView.builder(
-                              itemCount: 10,
+                              itemCount: state.data!["userFavProducts"].length,
                               itemBuilder: (_, i) {
                                 return ProductProfileCard(
-                                  imageUrl: 'assets/images/product.jpg',
-                                  price: 120.99,
-                                  productName: "product name",
-                                  inStock: true,
+                                  productOBJ: state.data!["userFavProducts"][i],
                                 );
                               }),
                           ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: 5,
-                              itemBuilder: (_, index) {
+                              itemCount: state.data!["userProducts"].length,
+                              itemBuilder: (_, i) {
                                 return ProductProfileCard(
-                                  imageUrl: 'assets/images/product.jpg',
-                                  price: 120.99,
-                                  productName: "product name",
-                                  inStock: true,
+                                  productOBJ: state.data!["userProducts"][i],
                                 );
                               }),
                         ],
@@ -191,95 +184,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              // child: Scaffold(
-              //   body: Column(
-              //     children: [
-              //       Container(
-              //         padding: const EdgeInsets.all(20),
-              //         height: MediaQuery.of(context).size.height * 0.4,
-              //         child: Column(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: [
-              //             Container(
-              //               width: MediaQuery.of(context).size.width * 0.5,
-              //               decoration: const BoxDecoration(
-              //                 borderRadius:
-              //                     BorderRadius.all(Radius.circular(50)),
-              //               ),
-              //               child: CircleAvatar(
-              //                 radius: 60,
-              //                 child: ClipOval(
-              //                   child: Image.asset(
-              //                     'assets/images/avatar.png',
-              //                   ),
-              //                 ),
-              //                 // backgroundColor: Colors.transparent,
-              //                 // backgroundImage: AssetImage(
-              //                 //   'assets/images/avatar.png',
-              //                 // ),
-              //               ),
-              //             ),
-              //             Column(
-              //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //               children: const [
-              //                 Text("username"),
-              //                 Text('Email'),
-              //                 Text('phone')
-              //               ],
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //       Container(
-              //         height: 50,
-              //         decoration: BoxDecoration(border: Border.all()),
-              //         width: double.infinity,
-              //         margin: const EdgeInsets.only(bottom: 10),
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //           children: [
-              //             Expanded(
-              //               flex: 1,
-              //               child: GestureDetector(
-              //                 child: const Center(child: Text("Fav")),
-              //                 onTap: () {
-              //                   setState(() => fav = true);
-              //                 },
-              //               ),
-              //             ),
-              //             Expanded(
-              //               flex: 1,
-              //               child: GestureDetector(
-              //                 child: const Center(child: Text("Products")),
-              //                 onTap: () {
-              //                   setState(() => fav = false);
-              //                 },
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //       Expanded(
-              //           child: fav
-              //               ? ListView.separated(
-              //                   itemBuilder: (ctx, index) => ProductProfileCard(
-              //                         imageUrl: 'assets/images/product.jpg',
-              //                         price: 120.99,
-              //                         productName: "product name",
-              //                         inStock: true,
-              //                       ),
-              //                   separatorBuilder: (ctx, index) =>
-              //                       const Divider(),
-              //                   itemCount: 50)
-              //               : ListView.separated(
-              //                   itemBuilder: (ctx, index) =>
-              //                       const Center(child: Text("pro")),
-              //                   separatorBuilder: (ctx, index) =>
-              //                       const Divider(),
-              //                   itemCount: 50)),
-              //     ],
-              //   ),
-              // ),
             ),
           );
         } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trade_it/models/user.dart';
 
 import 'onboardPage.dart';
 
@@ -18,21 +19,19 @@ class _OnboardState extends State<Onboard> {
       img: "assets/images/2.png",
     ),
     const OnboardPage(
-      title: "Do you get tired from searching for a specific item or second-hand item ?",
-      description:
-          "With Trade it you can easily find what you looking for",
+      title:
+          "Do you get tired from searching for a specific item or second-hand item ?",
+      description: "With Trade it you can easily find what you looking for",
       img: "assets/images/4.png",
     ),
     const OnboardPage(
       title: "What are you waiting for ?",
-      description:
-          "Deal with sellers and customers from all over the world ",
+      description: "Deal with sellers and customers from all over the world ",
       img: "assets/images/1.png",
     ),
     const OnboardPage(
       title: "Do It",
-      description:
-          "And Finish all your commercial transactions using trade it",
+      description: "And Finish all your commercial transactions using trade it",
       img: "assets/images/3.png",
     ),
   ];
@@ -90,7 +89,8 @@ class _OnboardState extends State<Onboard> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_pageIndex == pages.length - 1) {
-            Navigator.pushNamed(context, "/login");
+            setFirstUse();
+            Navigator.pushReplacementNamed(context, "/login");
           } else {
             _pageController.nextPage(
               duration: const Duration(seconds: 1),
