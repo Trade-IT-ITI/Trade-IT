@@ -12,6 +12,7 @@ export class ProductDetailsComponent implements OnInit {
   productDetails: any | null = null;
   isSold: boolean = false;
   imgIndex: number = 0;
+  isRequestDetailsVisible: boolean = false;
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
@@ -25,5 +26,9 @@ export class ProductDetailsComponent implements OnInit {
   }
   onChooseImage(index: number) {
     this.imgIndex = index
+  }
+  onRequest() {
+    this.isRequestDetailsVisible = true;
+    this.productService.increaseRequestCount(this.id).subscribe(() => { })
   }
 }

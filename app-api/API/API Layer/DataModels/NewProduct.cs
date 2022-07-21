@@ -11,7 +11,7 @@ namespace API_Layer.DataModels
         public int AreaId { get; set; }
         public int SubcategoryId { get; set; }
         public int UserId { get; set; }
-        public int StatusId { get; set; }
+        public int StatusId { get; set; } = 1;
         public IFormFile image { get; set; }
     }
 }

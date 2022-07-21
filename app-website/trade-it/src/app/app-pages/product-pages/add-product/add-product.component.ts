@@ -9,6 +9,7 @@ import { City } from 'src/app/models/city';
 import { subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
 import { CityService } from 'src/app/services/city.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -33,10 +34,12 @@ export class AddProductComponent implements OnInit {
   categories: category[] = []
   subcategories: subcategory[] = []
   isSubcategoriesDisabled: boolean = true;
-  constructor(private cityService: CityService, private categoryService: CategoryService, private productService: ProductService) { }
+  constructor(private cityService: CityService, private categoryService: CategoryService,
+    private productService: ProductService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    let userData = localStorage.getItem('userData');
+    let userData = localStorage.getItem('user');
     let user = userData != null ? JSON.parse(userData) : null
     this.userId = user != null ? user.userId : 0;
     let CitiesParams: HttpParams = new HttpParams();
@@ -82,17 +85,17 @@ export class AddProductComponent implements OnInit {
   //product data
   image: File | null = null;
   fileName = '';
-  
+
   onFileSelected(event: any) {
     this.image = event.target.files[0];
     if (this.image) {
       this.fileName = this.image.name;
-    }else{
-      this.fileName ="";
+    } else {
+      this.fileName = "";
     }
   }
   formData = new FormData();
- async addProduct() {
+  addProduct() {
     this.formData.append('title', this.title);
     this.formData.append('descrioption', this.descrioption);
     this.formData.append('price', this.price.toString());
@@ -101,9 +104,9 @@ export class AddProductComponent implements OnInit {
     this.formData.append('subcategoryId', this.subcategoryId.toString());
     this.formData.append('userId', this.userId.toString());
     this.formData.append("image", this.image!);
-await this.productService.addProduct(this.formData).subscribe((product) => {
-        console.log(product);
-      });
+    this.productService.addProduct(this.formData).subscribe((product) => {
+      this.router.navigate(['/profile'])
+    });
   }
 
 }

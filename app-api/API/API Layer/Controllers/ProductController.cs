@@ -30,14 +30,14 @@ namespace API_Layer.Controllers
             return product != null ? Ok(product) : NotFound();
         }
         //add new Product 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] NewProduct product)
         {
             try
             {
                 await _productRepository.Add(product);
-                return Created("url", product);
+                return Created("url" , product);
             }
 
 
@@ -46,13 +46,26 @@ namespace API_Layer.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPut("increase")]
+        [HttpPut("IncreaseViews")]
         public async Task<IActionResult> IncreaseViews(int id)
         {
             try
             {
+                await _productRepository.IncreaseViews(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
-               await _productRepository.IncreaseViews(id);
+        }
+        [HttpPut("IncreaseRequests")]
+        public async Task<IActionResult> IncreaseRequests(int id)
+        {
+            try
+            {
+                await _productRepository.IncreaseRequrests(id);
                 return Ok();
             }
             catch (Exception ex)
