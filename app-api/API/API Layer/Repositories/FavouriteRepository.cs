@@ -20,6 +20,15 @@ namespace API_Layer.Repositories
             await context.SaveChangesAsync();
         }
 
-        
+        public async Task Delete(Favourite favourite)
+        {
+             context.Remove(favourite);
+            await context.SaveChangesAsync();
+        }
+        public bool findByIDs(int ProductId, int UserId)
+        {
+            Favourite favourite = context.Favourites.SingleOrDefault(f=>f.ProductId==ProductId && f.UserId==UserId);
+            return favourite!=null;
+        }
     }
 }
