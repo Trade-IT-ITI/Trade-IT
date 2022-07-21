@@ -38,6 +38,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
   Widget build(BuildContext context) {
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: widgetList[_bottomNavIndex],
       floatingActionButton: FloatingActionButton(

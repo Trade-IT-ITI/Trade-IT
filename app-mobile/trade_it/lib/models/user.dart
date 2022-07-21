@@ -98,6 +98,7 @@ List<Product> toProductList(
   List<Product> productList = [];
   if (isFav) {
     for (int i = 0; i < objProductList.length; i++) {
+      print(objProductList);
       Product prd = Product.fromJson(objProductList[i]["product"]);
       productList.add(prd);
     }

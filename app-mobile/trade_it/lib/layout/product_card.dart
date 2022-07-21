@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ProductDetails(
-              productID: productOBJ.productId!,
+              product: productOBJ,
             ),
           ),
         );
@@ -49,6 +49,7 @@ class ProductCard extends StatelessWidget {
               width: double.infinity,
               height: 180,
               decoration: BoxDecoration(
+
                 image: DecorationImage(
                   image: image,
                   fit: BoxFit.cover,
@@ -116,22 +117,12 @@ class ProductCard extends StatelessWidget {
                   const SizedBox(
                     height: 3,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "${productOBJ.price!} EGP",
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: const Color.fromARGB(221, 80, 80, 80),
-                              fontSize: 18,
-                            ),
-                      ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.favorite,
-                        size: 25,
-                        color: Colors.grey,
-                      ),
-                    ],
+                  Text(
+                    "${productOBJ.price!} EGP",
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: const Color.fromARGB(221, 80, 80, 80),
+                          fontSize: 18,
+                        ),
                   ),
                   const SizedBox(
                     height: 3,

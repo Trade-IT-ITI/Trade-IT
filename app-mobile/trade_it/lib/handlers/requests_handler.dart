@@ -68,10 +68,7 @@ class RequestHandler {
     return finalURL;
   }
 
-  Future<String> post(String url,
-      {Map<String, String>? headers,
-      required Map<String, dynamic> body,
-      String? bearerToken}) async {
+  Future<http.Response> post(String url, {Map<String, String>? headers, required Map<String, dynamic> body, String? bearerToken}) async {
     try {
       http.Response response =
           await http.post(Uri.parse(url), body: jsonEncode(body), headers: {
@@ -79,14 +76,17 @@ class RequestHandler {
         HttpHeaders.acceptHeader: 'application/json',
         HttpHeaders.authorizationHeader: 'Bearer bearerToken',
       }).timeout(const Duration(seconds: 10));
-
-      if (response.statusCode == 200) {
-        return response.body;
-      } else {
-        throw Error.safeToString("Error With Request Not 200 ");
-      }
+          print(response.statusCode);
+      return response;
     } catch (error) {
-      throw Error.safeToString("Error With Request");
+      throw Error.safeToString(error);
     }
+  }
+
+
+  Future<int> increaseViews(int id)async{
+    http.Response response= await http.put(Uri.parse(baseURL+ "/Product/increase?id=$id"));
+    print(response.statusCode);
+    return response.statusCode;
   }
 }
