@@ -20,24 +20,28 @@ import { RegisterComponent } from "src/app/app-pages/auth/register/register.comp
 import { ProfileComponent } from "src/app/app-pages/user-pages/profile/profile.component";
 import { EditProfileComponent } from "src/app/app-pages/user-pages/edit-profile/edit-profile.component";
 import { AddProductComponent } from "src/app/app-pages/product-pages/add-product/add-product.component";
+import { AuthGuard } from './services/guards/auth-guard.service';
+import { NotAuthGuard } from './services/guards/not-auth-guard.service';
+import { AdminGuard } from './services/guards/admin-guard.service';
+import { NotAccessibleComponent } from './app-pages/not-accessible/not-accessible.component';
 import { UserFavoritesComponent } from 'src/app/app-pages/user-pages/user-favorites/user-favorites.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'product/:id', component: ProductDetailsComponent },
-    { path: 'addProduct', component: AddProductComponent },
+    { path: 'addProduct', component: AddProductComponent, canActivate: [AuthGuard] },
     { path: 'search', component: SearchComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'settings', component: EditProfileComponent },
-    { path: 'favorites', component: UserFavoritesComponent },
-    { path: 'changePassword', component: ChangePasswordComponent },
-   // { path: 'admin', component: AdminComponent },
-    
+    { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'settings', component: EditProfileComponent, canActivate: [AuthGuard] },
+    { path: 'favorites', component: UserFavoritesComponent, canActivate: [AuthGuard] },
+    { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard] },
+
+
     {
-        path: "admin", component: AdminComponent, children: [
+        path: "admin", component: AdminComponent, canActivate: [AuthGuard, AdminGuard], children: [
             { path: "category/add", component: AddCategoryComponent },
             { path: "subcategory/add", component: AddSubcategoryComponent },
             { path: "city/add", component: AddCityComponent },
@@ -47,6 +51,7 @@ const routes: Routes = [
             { path: "categoryInstruction/add", component: CategoryInstructionComponent }
         ]
     },
+    { path: 'not-accessible', component: NotAccessibleComponent },
     { path: 'not-found', component: NotFoundComponent },
     { path: '**', redirectTo: 'not-found' },
 ]

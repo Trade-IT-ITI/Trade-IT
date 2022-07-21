@@ -1,4 +1,10 @@
 class Product {
+  @override
+  bool operator ==(Object obj) => obj is Product && obj.productId == productId;
+
+  @override
+  int get hashCode => productId.hashCode;
+
   int? productId;
   String? title;
   String? descrioption;

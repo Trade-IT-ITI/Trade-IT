@@ -234,7 +234,9 @@ class _LoginPageState extends State<LoginPage> {
         body: 'Your Email or Password is Incorrect',
       );
     } else {
-      user = User.fromJson(jsonDecode(response));
+      Map responseJson = jsonDecode(response);
+      user = User.fromJson(responseJson['user']);
+      String token = responseJson['token'];
       storeUser(user: user);
       successSnackBar(
         context: context,

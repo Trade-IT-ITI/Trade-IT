@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trade_it/models/product.dart';
 
 class User {
   int? userId;
@@ -73,4 +74,21 @@ removeUser() async {
 Future<bool> checkUser() async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.containsKey("user");
+}
+
+List<Product> toProductList(
+    {required List<dynamic> objProductList, bool isFav = false}) {
+  List<Product> productList = [];
+  if (isFav) {
+    for (int i = 0; i < objProductList.length; i++) {
+      Product prd = Product.fromJson(objProductList[i]["product"]);
+      productList.add(prd);
+    }
+  } else {
+    for (int i = 0; i < objProductList.length; i++) {
+      Product prd = Product.fromJson(objProductList[i]);
+      productList.add(prd);
+    }
+  }
+  return productList;
 }

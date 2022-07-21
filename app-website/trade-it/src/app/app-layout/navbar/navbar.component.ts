@@ -11,15 +11,16 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent implements OnInit {
 
   categoriesToggle: boolean = false;
-  isLogged: boolean = false;
+  isAuth: boolean = false;
   isAdmin: boolean = false;
   fullName: string = '';
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.changeEmitted.subscribe(data => {
-      this.isLogged = true;
-      this.isAdmin = data.isAdmin;
+      console.log(data)
       this.fullName = data.fullname;
+      this.isAuth = data.isAuth;
+      this.isAdmin = data.isAdmin;
     })
   }
 
@@ -27,9 +28,9 @@ export class NavbarComponent implements OnInit {
     let userString = localStorage.getItem('user');
     if (userString) {
       let user = JSON.parse(userString);
-      console.log(user)
       if (user) {
-        this.isLogged = true;
+        this.isAdmin = user.type == 0;
+        this.isAuth = true;
         this.fullName = user.firstName + ' ' + user.lastName;
       }
     }
@@ -39,11 +40,10 @@ export class NavbarComponent implements OnInit {
 
   }
   logout() {
-    this.isLogged = false;
+    this.isAuth = false;
     this.isAdmin = false;
     this.fullName = '';
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    this.authService.logout();
     this.router.navigateByUrl('');
   }
 }

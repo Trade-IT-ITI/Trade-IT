@@ -1,7 +1,8 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:trade_it/screens/home/home_ui.dart';
-import 'package:trade_it/screens/profile/profile.dart';
+
+import '../screens/profile/profile_ui.dart';
 
 class NavigationContainer extends StatefulWidget {
   const NavigationContainer({
@@ -26,7 +27,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
     Home(),
     // const Faviorate(),
     // const Notifications(),
-    const Profile(),
+    Profile(),
   ];
   @override
   void initState() {
