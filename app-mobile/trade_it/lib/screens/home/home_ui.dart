@@ -8,6 +8,7 @@ import 'package:trade_it/screens/home/home_bloc.dart';
 import '../../layout/constants.dart';
 import '../../layout/filter_widget.dart';
 import '../../layout/product_card.dart';
+import '../../models/product.dart';
 import '../../models/user.dart';
 import '../search/search_ui.dart';
 
@@ -262,6 +263,7 @@ class Home extends StatelessWidget {
   void printUserName() async {
     User userr = await getUser();
     print("User In Home");
-    print(userr.firstName);
+    List<Product> p = toProductList(objProductList: userr.products!);
+    print(p[0].title);
   }
 }
