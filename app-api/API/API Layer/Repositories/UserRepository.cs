@@ -21,6 +21,7 @@ namespace API_Layer.Repositories
         }
         public async Task Add(User user)
         {
+
             await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
         }
@@ -65,7 +66,7 @@ namespace API_Layer.Repositories
                 configuration["Jwt:Issuer"],
                 configuration["Jwt:Audience"],
                 claims,
-                expires: DateTime.UtcNow.AddMinutes(10),
+                expires: DateTime.UtcNow.AddDays(2),
                 signingCredentials: sign);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

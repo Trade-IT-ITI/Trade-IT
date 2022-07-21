@@ -20,13 +20,19 @@ export class ProductService {
     return this.http.get<ProductData>(`${this.url}/${id}`)
       .pipe(catchError(this.handleError));
   }
-  addProduct(product: any) {
-    return this.http.post<any>(this.url,product)
+  addProduct(product: FormData) {
+    console.log(product.get('userId'));
+    return this.http.post<any>(this.url, product)
       .pipe(catchError(this.handleError));
     ;
   }
-  increaseViewCount(id:number){
-    return this.http.put<any>(`${this.url}/increase`,{},{params:{id}})
+  increaseViewCount(id: number) {
+    return this.http.put<any>(`${this.url}/IncreaseViews`, {}, { params: { id } })
+      .pipe(catchError(this.handleError));
+    ;
+  }
+  increaseRequestCount(id: number) {
+    return this.http.put<any>(`${this.url}/IncreaseRequests`, {}, { params: { id } })
       .pipe(catchError(this.handleError));
     ;
   }
