@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
       await Future.delayed(const Duration(
         seconds: 2,
       ));
-      Navigator.pushNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, "/home");
     }
     return User();
   }

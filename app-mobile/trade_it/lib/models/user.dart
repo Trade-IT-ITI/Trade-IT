@@ -76,6 +76,23 @@ Future<bool> checkUser() async {
   return prefs.containsKey("user");
 }
 
+void setFirstUse() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('first', false);
+}
+
+Future<bool> checkFirstUse() async {
+  final prefs = await SharedPreferences.getInstance();
+  bool? check = await prefs.containsKey('first');
+  return check;
+}
+
+Future<bool?> getFirstUse() async {
+  final prefs = await SharedPreferences.getInstance();
+  bool? firstUse = prefs.getBool('first');
+  return firstUse;
+}
+
 List<Product> toProductList(
     {required List<dynamic> objProductList, bool isFav = false}) {
   List<Product> productList = [];
