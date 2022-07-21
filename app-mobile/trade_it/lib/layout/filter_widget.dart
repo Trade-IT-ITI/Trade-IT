@@ -17,8 +17,8 @@ class FilterWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => FilterWidgetState();
 }
-class FilterWidgetState extends State<FilterWidget>{
 
+class FilterWidgetState extends State<FilterWidget> {
   late List<Category> categories;
   late List<City> cities;
 
@@ -40,11 +40,10 @@ class FilterWidgetState extends State<FilterWidget>{
 
   @override
   Widget build(BuildContext context) {
-
     var screenWidth = MediaQuery.of(context).size.width;
-    return BlocBuilder<AddProductCubit,AddProductState>(
-      builder:(context, state){
-        if( state is AddProductLoading){
+    return BlocBuilder<AddProductCubit, AddProductState>(
+      builder: (context, state) {
+        if (state is AddProductLoading) {
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.98,
             child: const Center(
@@ -53,24 +52,25 @@ class FilterWidgetState extends State<FilterWidget>{
               ),
             ),
           );
-        }
-        else if (state is RequiredDataFailed){
+        } else if (state is RequiredDataFailed) {
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.98,
             child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/error-cloud.gif',width: MediaQuery.of(context).size.width * 0.5,),
-                    Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(state.error.toString())),
-                  ],
-                )),
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/error-cloud.gif',
+                  width: MediaQuery.of(context).size.width * 0.5,
+                ),
+                Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(state.error.toString())),
+              ],
+            )),
           );
-        }
-        else{
+        } else {
           state as RequiredDataLoaded;
           categories = state.categories;
           cities = state.cities;
@@ -128,42 +128,50 @@ class FilterWidgetState extends State<FilterWidget>{
                             });
                           },
                         ),
-                        KDropdownList(label: 'Select SubCategory',
-                            items: List.generate(selectedCategory?.subcategories.length??0, (index) {
-                              return DropdownMenuItem(
-                                child: Text(selectedCategory?.subcategories[index].name??""),
-                                value: selectedCategory?.subcategories[index]??-1,
-                              );
-                            }),
-                            onChanged: (subCategory) {
-                              setState(() {
-                                selectedSubCategory = subCategory;
-
-                              });
-                            },
-                            value: selectedSubCategory,
+                        KDropdownList(
+                          label: 'Select SubCategory',
+                          items: List.generate(
+                              selectedCategory?.subcategories.length ?? 0,
+                              (index) {
+                            return DropdownMenuItem(
+                              child: Text(
+                                  selectedCategory?.subcategories[index].name ??
+                                      ""),
+                              value:
+                                  selectedCategory?.subcategories[index] ?? -1,
+                            );
+                          }),
+                          onChanged: (subCategory) {
+                            setState(() {
+                              selectedSubCategory = subCategory;
+                            });
+                          },
+                          value: selectedSubCategory,
                         ),
                         KDropdownList(
-                            label: "Select City",
-                            items: List.generate(cities.length, (index) {
-                              return DropdownMenuItem(
-                                child: Text(cities[index].name),
-                                value: cities[index],
-                              );
-                            }),
-                            onChanged: (city) {
-                              setState(() {
-                                selectedCity = city;
-                                selectedArea = city.areas[0];
-                              });
-                            },
-                            value: selectedCity,
+                          label: "Select City",
+                          items: List.generate(cities.length, (index) {
+                            return DropdownMenuItem(
+                              child: Text(cities[index].name),
+                              value: cities[index],
+                            );
+                          }),
+                          onChanged: (city) {
+                            setState(() {
+                              selectedCity = city;
+                              selectedArea = city.areas[0];
+                            });
+                          },
+                          value: selectedCity,
                         ),
-                        KDropdownList(label: "Select Area",
-                            items: List.generate(selectedCity?.areas.length??0 , (index) {
+                        KDropdownList(
+                            label: "Select Area",
+                            items: List.generate(
+                                selectedCity?.areas.length ?? 0, (index) {
                               return DropdownMenuItem(
-                                child: Text(selectedCity?.areas[index].name??""),
-                                value: selectedCity?.areas[index]??-1,
+                                child:
+                                    Text(selectedCity?.areas[index].name ?? ""),
+                                value: selectedCity?.areas[index] ?? -1,
                               );
                             }),
                             onChanged: (area) {
@@ -171,7 +179,7 @@ class FilterWidgetState extends State<FilterWidget>{
                                 selectedArea = area;
                               });
                             },
-                            value:selectedArea),
+                            value: selectedArea),
                       ],
                     ),
                   ),
@@ -197,11 +205,11 @@ class FilterWidgetState extends State<FilterWidget>{
                             FilterData filterOBJ = FilterData(
                               maxPrice: maxPriceInput,
                               minPrice: minPriceInput,
-                              city: selectedCity?.id??-1,
-                              area: selectedArea?.id??-1,
-                              category: selectedCategory?.id??-1,
-                              subcategory: selectedSubCategory?.subcategoryId??-1,
-
+                              city: selectedCity?.id ?? -1,
+                              area: selectedArea?.id ?? -1,
+                              category: selectedCategory?.id ?? -1,
+                              subcategory:
+                                  selectedSubCategory?.subcategoryId ?? -1,
                             );
                             filterPage(context, filterOBJ);
                             print(minPriceInput);
