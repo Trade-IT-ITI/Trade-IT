@@ -42,7 +42,7 @@ class TradeITApp extends StatelessWidget {
       child: MaterialApp(
         theme: themeData,
         debugShowCheckedModeBanner: false,
-        initialRoute: "/home",
+        initialRoute: "/login",
         routes: {
           '/onboard': (context) => const Onboard(),
           '/login': (context) => LoginPage(),

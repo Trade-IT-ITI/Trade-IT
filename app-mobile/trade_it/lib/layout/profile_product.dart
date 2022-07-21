@@ -12,6 +12,8 @@ class ProductProfileCard extends StatelessWidget {
   Product productOBJ;
   @override
   Widget build(BuildContext context) {
+    // print("productOBJ.subcategory");
+    // print(productOBJ.status);
     DateTime productDateTime = DateTime.parse(productOBJ.postDateTime ?? "");
     String productDate =
         "${productDateTime.day} - ${productDateTime.month} - ${productDateTime.year}";
@@ -57,6 +59,7 @@ class ProductProfileCard extends StatelessWidget {
                   Text(productOBJ.title ?? ""),
                   Text(
                     "${productOBJ.area == null ? "" : productOBJ.area["name"]} , ${productOBJ.city == null ? "" : productOBJ.city["name"]} ",
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   Text(
@@ -67,9 +70,7 @@ class ProductProfileCard extends StatelessWidget {
                     children: [
                       Chip(
                         label: Text(
-                          productOBJ.status == null
-                              ? ""
-                              : productOBJ.status["name"],
+                          productOBJ.status!['name'],
                           style: const TextStyle(
                             fontSize: 16,
                           ),
