@@ -51,7 +51,6 @@ class ProductCard extends StatelessWidget {
               width: double.infinity,
               height: 180,
               decoration: BoxDecoration(
-
                 image: DecorationImage(
                   image: image,
                   fit: BoxFit.cover,
