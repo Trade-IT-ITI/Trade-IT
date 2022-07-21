@@ -27,7 +27,12 @@ export class ProductService {
     ;
   }
   increaseViewCount(id: number) {
-    return this.http.put<any>(`${this.url}/increase`, {}, { params: { id } })
+    return this.http.put<any>(`${this.url}/IncreaseViews`, {}, { params: { id } })
+      .pipe(catchError(this.handleError));
+    ;
+  }
+  increaseRequestCount(id: number) {
+    return this.http.put<any>(`${this.url}/IncreaseRequests`, {}, { params: { id } })
       .pipe(catchError(this.handleError));
     ;
   }

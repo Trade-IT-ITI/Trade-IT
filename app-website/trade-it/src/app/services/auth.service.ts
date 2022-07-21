@@ -21,25 +21,12 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string, type: number) {
-    let response = this.http.post<UserResponse>(`${this.url}/Login`, { email, password, type });
-    response.subscribe(data => {
-      this.isAuth = true;
-      this.isAdmin = data.user.type == 0;
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token);
-    });
-    return response.pipe(catchError(this.handleError));
+    return this.http.post<UserResponse>(`${this.url}/Login`, { email, password, type })
+      .pipe(catchError(this.handleError));
   }
   register(user: User) {
-    let response = this.http.post<UserResponse>(`${this.url}/Register`, user);
-    response.subscribe(data => {
-      this.isAuth = true;
-      this.isAdmin = false;
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", JSON.stringify(data.token));
-    });
-    return response.pipe(catchError(this.handleError));
-    ;
+    return this.http.post<UserResponse>(`${this.url}/Register`, user)
+      .pipe(catchError(this.handleError));
   }
   checkIsAuth(): boolean { return localStorage.getItem('token') != null }
   checkIsAdmin(): boolean { return (JSON.parse(localStorage.getItem('user') ?? '')).type == 0 }

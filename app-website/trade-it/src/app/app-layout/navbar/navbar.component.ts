@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.changeEmitted.subscribe(data => {
+      console.log(data)
       this.fullName = data.fullname;
       this.isAuth = data.isAuth;
       this.isAdmin = data.isAdmin;

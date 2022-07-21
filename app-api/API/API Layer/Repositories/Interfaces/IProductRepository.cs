@@ -11,6 +11,7 @@ namespace API_Layer.Repositories.Interfaces
         Task Add(NewProduct product);
         Task<ProductData> GetById(int id);
         Task IncreaseViews(int id);
+        Task IncreaseRequrests(int id);
     }
 
 }

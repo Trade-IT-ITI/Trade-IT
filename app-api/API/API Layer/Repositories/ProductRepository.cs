@@ -164,5 +164,15 @@ namespace API_Layer.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task IncreaseRequrests(int id)
+        {
+            Product product = await _context.Products.FindAsync(id);
+            if (product != null)
+            {
+                product.RequestCount++;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

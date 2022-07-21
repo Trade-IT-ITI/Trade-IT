@@ -105,7 +105,6 @@ export class AddProductComponent implements OnInit {
     this.formData.append('userId', this.userId.toString());
     this.formData.append("image", this.image!);
     this.productService.addProduct(this.formData).subscribe((product) => {
-      debugger;
       this.router.navigate(['/profile'])
     });
   }

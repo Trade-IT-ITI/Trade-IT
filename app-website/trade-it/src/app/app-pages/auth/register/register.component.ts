@@ -15,10 +15,12 @@ export class RegisterComponent implements OnInit {
   }
   register() {
     this.authService.register(this.user).subscribe((data) => {
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
       this.authService.emitChange({
         fullname: data.user.firstName + ' ' + data.user.lastName,
-        isAuth: this.authService.isAuth,
-        isAdmin: this.authService.isAdmin,
+        isAuth: true,
+        isAdmin: data.user.type == 0,
       });
       this.router.navigate(["/home"]);
     })

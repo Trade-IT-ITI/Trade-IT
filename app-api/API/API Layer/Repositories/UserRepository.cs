@@ -21,6 +21,7 @@ namespace API_Layer.Repositories
         }
         public async Task Add(User user)
         {
+
             await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
         }
