@@ -22,7 +22,20 @@ namespace API_Layer.Controllers
             try
             {
                 await favouriteRepository.Add(favourite);
-                return Created("url", favourite);
+                 return Created("url", favourite);  
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Favourite favourite)
+        {
+            try
+            {
+                await favouriteRepository.Delete(favourite);
+                return Ok(favourite);
             }
             catch (Exception ex)
             {
