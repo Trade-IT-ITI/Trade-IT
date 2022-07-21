@@ -112,9 +112,9 @@ class _SearchState extends State<Search> {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: gridCount,
-                                  crossAxisSpacing: 0,
-                                  mainAxisSpacing: 5,
-                                  childAspectRatio: 1 / 2,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 8,
+                                  childAspectRatio: .6,
                                 ),
                                 itemCount: state.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
