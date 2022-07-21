@@ -37,13 +37,15 @@ namespace API_Layer.Repositories
             //             where s.UserId == id
             //             select s).FirstOrDefaultAsync();
             //  return await user;
-            return await context.Users.Include(u => u.Products).Include(u => u.Favourites)
-                                                                    .ThenInclude(f => f.Product)
-                                                                     .ThenInclude(p => p.Area)
-                                                                       .ThenInclude(p => p.City)
-                                                                      .Include(u => u.Favourites)
-                                                                      .ThenInclude(f => f.Product)
-                                                                      .ThenInclude(p => p.ProductImages)
+            return await context.Users.Include(u => u.Products)             .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Area).ThenInclude(p => p.City)
+                                                                            .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.ProductImages)
+                                                                            .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Subcategory)
+                                                                            .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Status)
+                                                                            .Include(u => u.Products).ThenInclude(p => p.Area).ThenInclude(p => p.City)
+                                                                            .Include(u => u.Products).ThenInclude(p => p.ProductImages)
+                                                                            .Include(u => u.Products).ThenInclude(p => p.Subcategory)
+                                                                            .Include(u => u.Products).ThenInclude(p => p.Status)
+
                                                                          .FirstOrDefaultAsync(u => u.UserId == id);
 
 
