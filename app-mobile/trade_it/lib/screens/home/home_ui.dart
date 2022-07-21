@@ -140,29 +140,6 @@ class Home extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         children:[
-                            // CarouselSlider(
-                            //   options: CarouselOptions(
-                            //     viewportFraction: .95,
-                            //     enlargeCenterPage: true,
-                            //     height: 200,
-                            //     enableInfiniteScroll: false,
-                            //     autoPlay: true,
-                            //   ),
-                            //   items: imageList
-                            //       .map((img) => ClipRRect(
-                            //             borderRadius: BorderRadius.circular(12),
-                            //             child: Stack(
-                            //               fit: StackFit.expand,
-                            //               children: <Widget>[
-                            //                 Image.asset(
-                            //                   img,
-                            //                   fit: BoxFit.cover,
-                            //                 )
-                            //               ],
-                            //             ),
-                            //           ))
-                            //       .toList(),
-                            // ),
                             Container(
                               height: 60,
                               margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
@@ -286,7 +263,7 @@ class Home extends StatelessWidget {
   void printUserName() async {
     User userr = await getUser();
     print("User In Home");
-    List<Product> p = toProductList(objProductList: userr.products!);
-    print(p[0].title);
+    //List<Product> p = toProductList(objProductList: userr.products!);
+    print(userr.products);
   }
 }

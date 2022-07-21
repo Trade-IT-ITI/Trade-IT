@@ -1,9 +1,7 @@
-class Product {
-  @override
-  bool operator ==(Object obj) => obj is Product && obj.productId == productId;
 
-  @override
-  int get hashCode => productId.hashCode;
+import 'package:trade_it/models/details_product.dart';
+
+class Product {
 
   int? productId;
   String? title;
@@ -48,7 +46,16 @@ class Product {
     this.owner,
     this.userId,
   });
-
+  Product.fromProductDetails(DetailsProduct productDetails){
+    productId = productDetails.productId;
+    title = productDetails.title;
+    descrioption = productDetails.descrioption;
+    postDateTime = productDetails.postDateTime;
+    price = productDetails.price;
+    requestCount = productDetails.requestCount;
+    viewsCount = productDetails.viewsCount;
+    productImages = productDetails.productImages;
+  }
   Product.fromJson(Map<String, dynamic> json) {
     productId = json['productId'];
     title = json['title'];
@@ -96,4 +103,12 @@ class Product {
     data['userId'] = this.userId;
     return data;
   }
+
+
+
+  @override
+  bool operator ==(Object obj) => obj is Product && obj.productId == productId;
+
+  @override
+  int get hashCode => productId.hashCode;
 }

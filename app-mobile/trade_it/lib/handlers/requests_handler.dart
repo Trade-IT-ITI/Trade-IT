@@ -77,13 +77,16 @@ class RequestHandler {
         HttpHeaders.authorizationHeader: 'Bearer bearerToken',
       }).timeout(const Duration(seconds: 10));
           print(response.statusCode);
-      if (response.statusCode == 201 || response.statusCode == 200) {
-        return response;
-      } else {
-        throw Error.safeToString("Error With Request Not 200 ");
-      }
+      return response;
     } catch (error) {
       throw Error.safeToString(error);
     }
+  }
+
+
+  Future<int> increaseViews(int id)async{
+    http.Response response= await http.put(Uri.parse(baseURL+ "/Product/increase?id=$id"));
+    print(response.statusCode);
+    return response.statusCode;
   }
 }

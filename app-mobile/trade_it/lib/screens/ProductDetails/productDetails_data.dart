@@ -16,12 +16,17 @@ class ProductDetailsData {
     return product;
   }
 
-  Future<bool> addProductToFav({required int userId,required int productId})async{
+  Future<int> addProductToFav({required int userId,required int productId})async{
     Map<String,int> body = {
       "userId":userId,
       "productId":productId
     };
     Response response = await reqHandler.post(reqHandler.baseURL+"Favourite", body: body);
-    return response.statusCode == 201;
+    return response.statusCode;
+  }
+
+  Future<int> increaseViews(int id)async{
+    int statusCode = await reqHandler.increaseViews(id);
+    return statusCode;
   }
 }

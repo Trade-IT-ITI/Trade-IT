@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trade_it/models/product.dart';
 import 'package:trade_it/models/user.dart';
 import 'package:trade_it/screens/ProductDetails/productDetails_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,8 +11,9 @@ import '../../models/details_product.dart';
 import '../../models/user.dart';
 
 class ProductDetails extends StatefulWidget {
-  ProductDetails({Key? key, required this.productID}) : super(key: key);
-  final int productID;
+  ProductDetails({Key? key, required this.product}) : super(key: key);
+  final Product product;
+
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
 }
@@ -28,9 +30,10 @@ class _ProductDetailsState extends State<ProductDetails> {
   void initState() {
     productDetailsBloc = ProductDetailsBloc(
       initialState: BlocState(),
-      id: widget.productID,
+      product: widget.product,
     );
     productDetailsBloc.add(ProductDetailsGetDataEvent());
+    productDetailsBloc.add(IncreaseViews());
   }
 
   @override
@@ -380,7 +383,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ]
                   );
-            } else {
+            }
+            else {
               return const Center(
                 child: CircularProgressIndicator(),
               );
