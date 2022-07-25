@@ -20,8 +20,7 @@ The Project Consists of Three Main Parts :
  The Website was developed using Angular Framework
  ##### To run the project :
  open the project in terminal and run these commands :
-  1- `npm install`
-  2- `ng serve`
+  `npm install` and then `ng serve`
   
  ### Mobile App :
  
