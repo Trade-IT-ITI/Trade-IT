@@ -1,0 +1,14 @@
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\bin\Debug\net6.0\DatabaseLayer.deps.json
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\bin\Debug\net6.0\DatabaseLayer.runtimeconfig.json
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\bin\Debug\net6.0\DatabaseLayer.dll
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\bin\Debug\net6.0\DatabaseLayer.pdb
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.csproj.AssemblyReference.cache
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.AssemblyInfoInputs.cache
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.AssemblyInfo.cs
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.csproj.CoreCompileInputs.cache
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.dll
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\refint\DatabaseLayer.dll
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.pdb
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\DatabaseLayer.genruntimeconfig.cache
+E:\ITI\Graduation Project\Project\Trade-IT\app-api\API\DatabaseLayer\obj\Debug\net6.0\ref\DatabaseLayer.dll
