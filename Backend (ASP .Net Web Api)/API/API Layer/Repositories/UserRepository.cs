@@ -37,17 +37,19 @@ namespace API_Layer.Repositories
             //             where s.UserId == id
             //             select s).FirstOrDefaultAsync();
             //  return await user;
-            return await context.Users.Include(u => u.Products)             .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Area).ThenInclude(p => p.City)
-                                                                            .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.ProductImages)
-                                                                            .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Subcategory)
-                                                                            .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Status)
-                                                                            .Include(u => u.Products).ThenInclude(p => p.Area).ThenInclude(p => p.City)
-                                                                            .Include(u => u.Products).ThenInclude(p => p.ProductImages)
-                                                                            .Include(u => u.Products).ThenInclude(p => p.Subcategory)
-                                                                            .Include(u => u.Products).ThenInclude(p => p.Status)
+            //return await context.Users.Include(u => u.Products)             .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Area).ThenInclude(p => p.City)
+            //                                                                .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.ProductImages)
+            //                                                                .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Subcategory)
+            //                                                                .Include(u => u.Favourites).ThenInclude(f => f.Product).ThenInclude(p => p.Status)
+            //                                                                .Include(u => u.Products).ThenInclude(p => p.Area).ThenInclude(p => p.City)
+            //                                                                .Include(u => u.Products).ThenInclude(p => p.ProductImages)
+            //                                                                .Include(u => u.Products).ThenInclude(p => p.Subcategory)
+            //                                                                .Include(u => u.Products).ThenInclude(p => p.Status)
 
-                                                                         .FirstOrDefaultAsync(u => u.UserId == id);
+            //                                                             .FirstOrDefaultAsync(u => u.UserId == id);
 
+            //to remove error and need to be removed agter fixing 
+            return await context.Users.SingleOrDefaultAsync(u => u.Email == "email");
 
         }
 
@@ -59,7 +61,7 @@ namespace API_Layer.Repositories
                 new Claim(JwtRegisteredClaimNames.Sub, configuration["Jwt:Subject"]),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                new Claim("UserId", user.UserId.ToString()),
+               // new Claim("UserId", user.UserId.ToString()),
                 new Claim("Email", user.Email),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
@@ -76,43 +78,43 @@ namespace API_Layer.Repositories
 
         public async Task UpdateUser(EditUserData user)
         {
-            User editUserData = await context.Users.Where(u => u.UserId == user.ID).FirstOrDefaultAsync();
-            if (editUserData != null)
-            {
-                editUserData.FirstName = user.firstName;
-                editUserData.LastName = user.lastName;
-                editUserData.Phone = user.phone;
-                editUserData.Email = user.Email;
+            //User editUserData = await context.Users.Where(u => u.UserId == user.ID).FirstOrDefaultAsync();
+            //if (editUserData != null)
+            //{
+            //    editUserData.FirstName = user.firstName;
+            //    editUserData.LastName = user.lastName;
+            //    editUserData.Phone = user.phone;
+            //    editUserData.Email = user.Email;
 
-                await context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new Exception("There is no such a user");
-            }
+            //    await context.SaveChangesAsync();
+            //}
+            //else
+            //{
+            //    throw new Exception("There is no such a user");
+            //}
 
         }
 
         public async Task ChangePasswrd(NewPasswordData data)
         {
-            User user = await context.Users.FirstOrDefaultAsync(u => u.UserId == data.id);
-            if (user != null)
-            {
-                if (user.Password == data.oldPassword)
-                {
-                    user.Password = data.newPassword;
-                    await context.SaveChangesAsync();
-                }
-                else
-                {
-                    throw new Exception("Wrong Password");
+        //    User user = await context.Users.FirstOrDefaultAsync(u => u.UserId == data.id);
+        //    if (user != null)
+        //    {
+        //        if (user.Password == data.oldPassword)
+        //        {
+        //            user.Password = data.newPassword;
+        //            await context.SaveChangesAsync();
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("Wrong Password");
 
-                }
-            }
-            else
-            {
-                throw new Exception("There is no such a user");
-            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("There is no such a user");
+        //    }
         }
     }
 }

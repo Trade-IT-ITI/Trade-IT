@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddDbContextPool<AppDbContext>(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("app-connection"));
+   // options.UseSqlServer(builder.Configuration.GetConnectionString("app-connection"));
 });
 builder.Services.AddScoped<IProductRepository , ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository , CategoryRepository>();

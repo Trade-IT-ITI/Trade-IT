@@ -35,15 +35,15 @@ namespace API_Layer.Controllers
             if (user == null)
                 return NotFound("no user exists with this email");
 
-            if (user.Password != loginUser.Password.ToLower())
-                return NotFound("wrong password");
+          //  if (user.Password != loginUser.Password.ToLower())
+          //      return NotFound("wrong password");
 
             //need for editing for safe casting 
-            if (user.Type != loginUser.Type)
+          //  if (user.Type != loginUser.Type)
                 return NotFound("There is no such a user");
 
-            User bigUser = await _userRepository.GetById(user.UserId);
-            return Ok(new { user = bigUser, token = _userRepository.GenerateToken(user) });
+          //  User bigUser = await _userRepository.GetById(user.UserId);
+          //  return Ok(new { user = bigUser, token = _userRepository.GenerateToken(user) });
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterData user)
@@ -57,9 +57,9 @@ namespace API_Layer.Controllers
                 Email = user.Email.ToLower(),
                 FirstName = user.firstName,
                 LastName = user.lastName,
-                Password = user.Password,
+                //Password = user.Password,
                 Phone = user.phone,
-                Type = UserType.User
+              //  Type = UserType.User
             };
 
             await _userRepository.Add(newUser);

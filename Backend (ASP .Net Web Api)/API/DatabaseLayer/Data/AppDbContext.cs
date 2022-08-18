@@ -1,10 +1,11 @@
 ﻿using DatabaseLayer.Configurations;
 using DatabaseLayer.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseLayer.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext()
         {
@@ -12,13 +13,13 @@ namespace DatabaseLayer.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-            //optionsBuilder.UseSqlServer("server=.;database=TradeIt;trusted_connection=true;");
-            //base.OnConfiguring(optionsBuilder);
 
-        }*/
+            optionsBuilder.UseSqlServer("server=.;database=TradeIt;trusted_connection=true;");
+            base.OnConfiguring(optionsBuilder);
+
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AdConfiguration());
@@ -34,6 +35,7 @@ namespace DatabaseLayer.Data
             modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
             modelBuilder.ApplyConfiguration(new CityConfiguration());
             modelBuilder.ApplyConfiguration(new AreaConfiguration());
+            base.OnModelCreating(modelBuilder);
 
         }
         public virtual DbSet<Product> Products { get; set; }
@@ -44,10 +46,10 @@ namespace DatabaseLayer.Data
         public virtual DbSet<Instruction> Instructions { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<SliderImage> SliderImages { get; set; }
-        public virtual DbSet<ProductImage> ProductsImages{ get; set; }
+        public virtual DbSet<ProductImage> ProductsImages { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<Subcategory> Subcategories { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+       // public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Area> Areas { get; set; }
     }
