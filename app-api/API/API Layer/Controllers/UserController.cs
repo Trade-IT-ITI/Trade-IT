@@ -24,7 +24,6 @@ namespace API_Layer.Controllers
             return product != null ? Ok(product) : NotFound();
         }
         [HttpPost("Login")]
-        //public async Task<IActionResult> Login( string email ,  string password, int type)
         public async Task<IActionResult> Login(LoginData loginUser)
         {
             if (string.IsNullOrEmpty(loginUser.Email) || string.IsNullOrEmpty(loginUser.Password))
